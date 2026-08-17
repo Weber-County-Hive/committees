@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Room Where It's Decided — Judiciary — Weber County Hive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,500;0,700;0,900;1,600&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1e2a22;
+    --ink-soft:#2c3a30;
+    --paper:#ece5d1;
+    --paper-card:#f7f2e4;
+    --paper-line:#d8cfb2;
+    --water:#2c6e76;
+    --water-soft:#e2eeee;
+    --mineral:#a6552e;
+    --mineral-soft:#f3e3d6;
+    --energy:#b6842a;
+    --energy-soft:#f6ecd6;
+    --ag:#5b6b32;
+    --ag-soft:#e9ecdc;
+    --help:#4c6b3c;
+    --help-soft:#e5ecdb;
+    --harm:#a13f2c;
+    --harm-soft:#f4ded7;
+    --mixed:#b6842a;
+    --mixed-soft:#f6ecd6;
+    --dead:#6b6255;
+    --dead-soft:#e8e2d2;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Spectral',serif;
+    font-size:17px;
+    line-height:1.6;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px;}
+  h1,h2,h3,h4{font-family:'Bitter',serif;margin:0 0 .4em;line-height:1.15;}
+  a{color:var(--water);}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    font-size:.72rem;
+    color:var(--ink-soft);
+    opacity:.75;
+  }
+
+  header.hero{
+    background:
+      linear-gradient(180deg, rgba(30,42,34,.94), rgba(30,42,34,.86)),
+      repeating-linear-gradient(0deg, transparent 0 38px, rgba(236,229,209,.05) 38px 39px);
+    color:var(--paper-card);
+    padding:64px 0 46px;
+    border-bottom:6px solid var(--water);
+  }
+  header.hero .wrap{position:relative;}
+  header.hero .eyebrow{color:var(--energy-soft);opacity:.85;}
+  header.hero h1{
+    font-size:clamp(2rem,5vw,3.1rem);
+    font-weight:900;
+    margin-top:.3em;
+    max-width:13ch;
+  }
+  header.hero .dek{
+    font-size:1.1rem;
+    max-width:56ch;
+    color:#dfe6da;
+    margin-top:1em;
+  }
+  header.hero .stamp-row{
+    margin-top:2em;
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .stamp{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    border:1.5px solid currentColor;
+    padding:5px 10px;
+    border-radius:2px;
+  }
+  .stamp.water{color:#9fd4d8;}
+  .stamp.mineral{color:#e3ac8b;}
+  .stamp.energy{color:#e9cd8e;}
+
+  nav.jump{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:2.2em;
+  }
+  nav.jump button{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.74rem;
+    letter-spacing:.03em;
+    background:rgba(247,242,228,.08);
+    border:1px solid rgba(247,242,228,.35);
+    color:var(--paper-card);
+    padding:8px 12px;
+    border-radius:3px;
+    cursor:pointer;
+    transition:background .15s ease;
+  }
+  nav.jump button:hover,nav.jump button:focus-visible{background:rgba(247,242,228,.22);}
+
+  section{padding:52px 0;}
+  section.alt{background:var(--paper-card);border-top:1px solid var(--paper-line);border-bottom:1px solid var(--paper-line);}
+  .section-head{margin-bottom:1.6em;}
+  .section-head h2{font-size:clamp(1.5rem,3.4vw,2rem);}
+  .section-head .eyebrow{margin-bottom:.5em;display:block;}
+
+  .beginner{
+    background:var(--paper-card);
+    border:1.5px solid var(--paper-line);
+    border-left:6px solid var(--water);
+    border-radius:4px;
+    padding:22px 24px;
+    margin:1.2em 0 2em;
+  }
+  .beginner h3{font-size:1.05rem;color:var(--water);}
+  .beginner p:last-child{margin-bottom:0;}
+
+  .compare{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:1.6em 0;}
+  @media (max-width:760px){.compare{grid-template-columns:1fr;}}
+  .compare-card{
+    background:var(--paper-card);
+    border:1.5px solid var(--paper-line);
+    border-radius:6px;
+    padding:20px 22px;
+  }
+  .compare-card h4{
+    font-family:'IBM Plex Mono',monospace;
+    text-transform:uppercase;
+    font-size:.78rem;
+    letter-spacing:.06em;
+  }
+  .compare-card.house{border-top:5px solid var(--mineral);}
+  .compare-card.senate{border-top:5px solid var(--water);}
+  .compare-card.interim{border-top:5px solid var(--energy);}
+  .compare-card ul{margin:.6em 0 0;padding-left:1.1em;}
+  .compare-card li{margin-bottom:.4em;font-size:.92rem;}
+
+  .roster{width:100%;border-collapse:collapse;margin-top:1.6em;font-size:.94rem;}
+  .roster th{
+    font-family:'IBM Plex Mono',monospace;
+    text-transform:uppercase;
+    font-size:.68rem;
+    letter-spacing:.06em;
+    text-align:left;
+    padding:8px 10px;
+    border-bottom:2px solid var(--ink);
+    color:var(--ink-soft);
+  }
+  .roster td{padding:9px 10px;border-bottom:1px solid var(--paper-line);vertical-align:top;}
+  .roster tr:hover td{background:var(--paper-card);}
+  .flag{
+    display:inline-block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.62rem;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    background:var(--harm-soft);
+    color:var(--harm);
+    padding:2px 6px;
+    border-radius:3px;
+    margin-left:6px;
+  }
+  .badge-both{
+    display:inline-block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.62rem;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    background:var(--water-soft);
+    color:var(--water);
+    padding:2px 6px;
+    border-radius:3px;
+    margin-left:6px;
+  }
+
+  .legend-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:1.4em;}
+  @media (max-width:760px){.legend-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:460px){.legend-grid{grid-template-columns:1fr;}}
+  .legend-item{border-radius:5px;padding:14px 14px 16px;font-size:.86rem;}
+  .legend-item .dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:7px;vertical-align:middle;}
+  .legend-item h5{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;font-size:.72rem;letter-spacing:.05em;margin:0 0 .4em;display:flex;align-items:center;}
+  .legend-item.help{background:var(--help-soft);}
+  .legend-item.help .dot{background:var(--help);}
+  .legend-item.mixed{background:var(--mixed-soft);}
+  .legend-item.mixed .dot{background:var(--mixed);}
+  .legend-item.harm{background:var(--harm-soft);}
+  .legend-item.harm .dot{background:var(--harm);}
+  .legend-item.dead{background:var(--dead-soft);}
+  .legend-item.dead .dot{background:var(--dead);}
+  .dims{margin-top:1.4em;font-size:.88rem;color:var(--ink-soft);}
+  .dims .mono{opacity:.9;}
+
+  .case{background:var(--paper-card);border:1.5px solid var(--paper-line);border-radius:6px;margin-bottom:26px;overflow:hidden;}
+  .case-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:20px 24px 14px;border-bottom:1px dashed var(--paper-line);}
+  .case-head h3{font-size:1.15rem;margin-bottom:.15em;}
+  .case-head .bill-meta{font-family:'IBM Plex Mono',monospace;font-size:.76rem;color:var(--ink-soft);}
+  .verdict{flex-shrink:0;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;font-size:.72rem;letter-spacing:.06em;padding:7px 12px;border-radius:20px;white-space:nowrap;font-weight:600;}
+  .verdict.help{background:var(--help-soft);color:var(--help);border:1px solid var(--help);}
+  .verdict.mixed{background:var(--mixed-soft);color:var(--mixed);border:1px solid var(--mixed);}
+  .verdict.harm{background:var(--harm-soft);color:var(--harm);border:1px solid var(--harm);}
+  .verdict.dead{background:var(--dead-soft);color:var(--dead);border:1px solid var(--dead);}
+  .case-body{padding:16px 24px 22px;}
+  .case-body p{margin:0 0 .9em;}
+  .case-body p:last-child{margin-bottom:0;}
+  .why{display:grid;gap:8px;margin:.8em 0 0;}
+  .why-row{display:grid;grid-template-columns:150px 1fr;gap:10px;font-size:.88rem;padding:8px 10px;border-radius:4px;background:var(--paper);}
+  @media (max-width:560px){.why-row{grid-template-columns:1fr;}}
+  .why-row .dim{font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-soft);}
+  .sponsors{font-size:.82rem;color:var(--ink-soft);margin-top:.6em;}
+  .sponsors b{color:var(--ink);}
+
+  .tally{display:flex;gap:14px;flex-wrap:wrap;margin:1.6em 0;}
+  .tally-item{flex:1;min-width:120px;text-align:center;padding:18px 10px;border-radius:6px;font-family:'IBM Plex Mono',monospace;}
+  .tally-item .n{font-size:2rem;font-weight:600;display:block;}
+  .tally-item .l{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;opacity:.85;}
+  .tally-item.help{background:var(--help-soft);color:var(--help);}
+  .tally-item.mixed{background:var(--mixed-soft);color:var(--mixed);}
+  .tally-item.harm{background:var(--harm-soft);color:var(--harm);}
+  .tally-item.dead{background:var(--dead-soft);color:var(--dead);}
+
+  .gap-box{background:var(--ink);color:var(--paper-card);border-radius:6px;padding:26px 26px 22px;margin:1.6em 0;}
+  .gap-box h3{color:var(--energy-soft);font-size:1.05rem;}
+  .gap-box .mono{color:#c9d6c3;font-size:.86rem;}
+  .gap-box p{margin:.8em 0;}
+  .gap-steps{display:grid;gap:6px;margin-top:1em;font-size:.9rem;}
+  .gap-steps div{padding:8px 12px;background:rgba(247,242,228,.06);border-left:3px solid var(--harm);border-radius:3px;}
+
+  details.q{background:var(--paper-card);border:1px solid var(--paper-line);border-radius:5px;padding:12px 16px;margin-bottom:10px;}
+  details.q summary{cursor:pointer;font-family:'Bitter',serif;font-weight:600;font-size:.98rem;}
+  details.q p{margin:.7em 0 0;font-size:.93rem;}
+
+  footer{background:var(--ink);color:#c9d6c3;padding:36px 0 44px;font-size:.84rem;}
+  footer a{color:var(--energy-soft);}
+  footer .brand{font-family:'Bitter',serif;font-weight:700;color:var(--paper-card);font-size:1.05rem;}
+  footer .fine{opacity:.75;margin-top:1.2em;line-height:1.6;}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow"><a href="weber-hive-committees-board.html" style="color:inherit;">← All committees</a> &nbsp;·&nbsp; The Weber County Hive · Committee Watch</span>
+    <h1>The room where the courts got restructured</h1>
+    <p class="dek">Utah's Judiciary committees — a House standing committee, a Senate standing committee, and a joint interim committee — are where every bill touching court structure, judicial appointments, and judicial transparency gets shaped. In 2026 that included the most significant restructuring of Utah's judiciary in decades. Here's who sits there, what they changed, and whether it helped or hurt the public, scored against our own stated rubric.</p>
+    <div class="stamp-row">
+      <span class="stamp water">Courts</span>
+      <span class="stamp mineral">Judges</span>
+      <span class="stamp energy">Records</span>
+    </div>
+    <nav class="jump">
+      <button data-scroll-to="basics">The basics</button>
+      <button data-scroll-to="overlap">Who sits where</button>
+      <button data-scroll-to="rubric">Our rubric</button>
+      <button data-scroll-to="bills">The 2026 bills</button>
+      <button data-scroll-to="killed">What was killed</button>
+      <button data-scroll-to="conclusion">The pattern</button>
+    </nav>
+  </div>
+</header>
+
+<section id="basics">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">01 — New to this?</span>
+      <h2>Three rooms, one branch of government</h2>
+    </div>
+    <div class="beginner">
+      <h3>In plain language</h3>
+      <p>Every bill touching Utah's court system — how many judges there are, how they're chosen, what records the public can see — moves through one of three committees, all sharing the name "Judiciary." The House and Senate each have their own standing committee that only meets during the roughly three-month general session and votes actual bills. A joint interim committee, with members from both chambers, meets the rest of the year to study issues and pre-draft legislation for the next session.</p>
+      <p>2026 was an unusually consequential year for this committee system: five bills that passed add up to the largest single change to how Utah's courts are staffed, who hears constitutional challenges, how judges are evaluated, and what the public can be held legally accountable for in recent memory — plus at least two more bills on the same subject that were introduced and failed.</p>
+    </div>
+
+    <div class="compare">
+      <div class="compare-card house">
+        <h4>House Judiciary</h4>
+        <ul>
+          <li>Session-only, votes bills</li>
+          <li>Chair: <b>Rep. Karianne Lisonbee</b></li>
+          <li>10 members</li>
+        </ul>
+      </div>
+      <div class="compare-card senate">
+        <h4>Senate Judiciary, Law Enforcement &amp; Criminal Justice</h4>
+        <ul>
+          <li>Session-only, votes bills</li>
+          <li>Chair: <b>Sen. Todd Weiler</b></li>
+          <li>9 members</li>
+        </ul>
+      </div>
+      <div class="compare-card interim">
+        <h4>Judiciary Interim</h4>
+        <ul>
+          <li>Year-round, no bill votes</li>
+          <li>Co-chairs: <b>Sen. Todd Weiler</b> &amp; <b>Rep. Karianne Lisonbee</b></li>
+          <li>16 members, joint body</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="overlap">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">02 — Who sits where</span>
+      <h2>The same two chairs, three committees</h2>
+    </div>
+    <p>Todd Weiler and Karianne Lisonbee chair all three bodies at once — Weiler chairs both the Senate standing committee and co-chairs the interim; Lisonbee chairs both the House standing committee and co-chairs the interim. Five other members sit on more than one of the three, and several already appear in our own campaign-finance and committee-overlap files for unrelated findings.</p>
+
+    <table class="roster">
+      <thead>
+        <tr><th>Name</th><th>Sits on</th><th>Why it matters here</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><b>Sen. Todd Weiler</b></td><td>Senate standing (chair); Interim (co-chair)</td><td>Chairs the room that hears every judiciary bill twice — once in session, once between sessions</td></tr>
+        <tr><td><b>Rep. Karianne Lisonbee</b></td><td>House standing (chair); Interim (co-chair)</td><td>Same dual-chair structure on the House side; also House sponsor of SB 233</td></tr>
+        <tr><td><b>Sen. Brady Brammer</b></td><td>Senate standing; Interim</td><td>Sponsor or floor sponsor on three of the four passed 2026 bills — SB 233, HB 540, and HB 366.</td></tr>
+        <tr><td><b>Sen. Kirk A. Cullimore</b></td><td>Senate standing; Interim</td><td>Sponsored Utah's 2023 data privacy law and sits on the Governing Board that oversees implementation of the same law — one of 19 committee and confirmation-committee seats he holds across the Senate.</td></tr>
+        <tr><td><b>Sen. Luz Escamilla</b></td><td>Senate standing; Interim</td><td>Senate Minority Leader.</td></tr>
+        <tr><td>Sen. Michael K. McKell</td><td>Senate standing</td><td>Senate sponsor of both HB 392 and HB 366 (below).</td></tr>
+        <tr><td>Sen. Lincoln Fillmore</td><td>Senate standing</td><td>No additional finding beyond standing committee membership.</td></tr>
+        <tr><td>Rep. Nelson T. Abbott, Rep. Cheryl K. Acton, Rep. Tiara Auxier, Rep. Stephanie Gricius, Rep. Anthony E. Loubet, Rep. Verona Mauga, Rep. Grant Amjad Miller, Rep. Jason E. Thompson</td><td>House standing; Interim</td><td>Full overlap between the two House-side bodies</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="rubric">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">03 — Our method</span>
+      <h2>Same rubric, same four questions</h2>
+    </div>
+    <p>As with every committee on this board, we're not scoring whether a bill's stated goal sounds reasonable — almost all of them do. We're scoring whether it increases or decreases the public's actual ability to see what's happening in the judiciary and hold someone accountable for it.</p>
+
+    <div class="legend-grid">
+      <div class="legend-item help"><h5><span class="dot"></span>Help</h5>Net gain for public transparency, accountability, or protection.</div>
+      <div class="legend-item mixed"><h5><span class="dot"></span>Mixed</h5>Genuine provisions pull in different directions.</div>
+      <div class="legend-item harm"><h5><span class="dot"></span>Harm</h5>Net reduction in transparency, standing, or independent checks.</div>
+      <div class="legend-item dead"><h5><span class="dot"></span>Killed</h5>Introduced but never became law — included for the record of what was attempted.</div>
+    </div>
+
+    <div class="dims">
+      Each bill is checked against: <span class="mono">Transparency</span> (can the public see what happened), <span class="mono">Enforcement / Independence</span> (does a check on power get stronger or weaker), <span class="mono">Conflicts of Interest</span> (who gains power, and did they help write it), and <span class="mono">Public Participation</span> (did the process include the public or route around them).
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="bills">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">04 — Case files</span>
+      <h2>The five bills that passed</h2>
+    </div>
+    <p>All four became law in 2026 and are designed to work together. Verdicts are our own editorial assessment, built from the bills' own text, floor votes, and public reporting — sourcing noted on each.</p>
+
+    <div class="case">
+      <div class="case-head">
+        <div>
+          <h3>S.B. 134 — Court Amendments</h3>
+          <div class="bill-meta">Signed 1/31/2026, effective immediately · Wilson (S) / Snider (H)</div>
+        </div>
+        <span class="verdict harm">Harm</span>
+      </div>
+      <div class="case-body">
+        <p>Expands the Utah Supreme Court from 5 to 7 justices and the Court of Appeals from 7 to 9 judges, plus new district court seats. On its own, adding capacity to a court system serving 3.4 million people is a defensible response to caseload growth. But the bill pairs that expansion with a structural change: it moves selection of the Chief Justice from a peer vote among sitting justices to a governor's appointment confirmed by the Senate, on an 8-year term. Combined with the new seats, one governor gains the ability to appoint a majority of the Supreme Court in a single term.</p>
+        <div class="why">
+          <div class="why-row"><span class="dim">Independence</span> Chief Justice selection moves from judicial peers to the executive branch.</div>
+          <div class="why-row"><span class="dim">Conflicts</span> The same governor who appoints new justices also gains appointment authority over who leads them.</div>
+        </div>
+        <p class="sponsors">Senate sponsor <b>Chris Wilson</b>; House sponsor <b>Casey Snider</b> — neither currently sits on the Judiciary committees themselves.</p>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="case-head">
+        <div>
+          <h3>H.B. 392 &amp; H.B. 366 — District Court / Three-Judge Panel Amendments</h3>
+          <div class="bill-meta">Signed 2/13/2026 · MacPherson (H) / McKell (S)</div>
+        </div>
+        <span class="verdict harm">Harm</span>
+      </div>
+      <div class="case-body">
+        <p>Creates a 3-judge panel, randomly drawn from different districts, to hear civil cases challenging the constitutionality of state law — publicly framed as ending "forum shopping." But the right to move a case to that panel is asymmetric: the Attorney General, the Legislature, and the Governor can invoke it, including on cases already in progress; private plaintiffs and defendants cannot. HB 366 adds a $1,500 fee to file the request and a backup "Constitutional Court" structure that automatically activates if the panel system itself is struck down. The Legislature used this mechanism within weeks, moving a pending redistricting case away from the judge originally assigned to it.</p>
+        <div class="why">
+          <div class="why-row"><span class="dim">Public Participation</span> Only state actors can redirect a case; private parties challenging the state cannot use the same tool.</div>
+          <div class="why-row"><span class="dim">Independence</span> The state can reassign a case already in progress, before the judge originally assigned to it rules.</div>
+        </div>
+        <p class="sponsors">Senate sponsor on both bills is <b>Michael K. McKell</b>, who sits on the Senate standing committee. Constitutional challenges are pending; oral arguments scheduled 9/9/2026.</p>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="case-head">
+        <div>
+          <h3>S.B. 233 — Judicial Performance Evaluation Amendments</h3>
+          <div class="bill-meta">Signed 2026 · Brammer (S) / Lisonbee (H)</div>
+        </div>
+        <span class="verdict mixed">Mixed</span>
+      </div>
+      <div class="case-body">
+        <p>Sets statutory timeliness standards for appellate judges and directs the Judicial Performance Evaluation Commission to study whether a judge's rate of being reversed on appeal for "abuse of discretion" should count toward their public performance rating. Timeliness standards are a defensible, measurable accountability tool. But tying performance scores to reversal rates risks pressuring judges toward rulings less likely to be appealed, rather than rulings that are simply correct — a subtle shift with real consequences for judicial independence, not yet resolved since it's still at the study stage.</p>
+        <div class="why">
+          <div class="why-row"><span class="dim">Transparency</span> Adds a new, trackable public metric for individual judges.</div>
+          <div class="why-row"><span class="dim">Watch</span> Whether reversal-rate scoring is actually adopted, and how, will determine if this tips toward help or harm.</div>
+        </div>
+        <p class="sponsors">House sponsor <b>Karianne Lisonbee</b> chairs both the House standing and interim committees; Senate sponsor <b>Brady Brammer</b> sits on both bodies too.</p>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="case-head">
+        <div>
+          <h3>H.B. 540 — Judicial Transparency and Information Access Amendments</h3>
+          <div class="bill-meta">Signed 3/2026 · Monson (H) / Brammer (S)</div>
+        </div>
+        <span class="verdict help">Help</span>
+      </div>
+      <div class="case-body">
+        <p>The clearest net gain of the four. Requires a single, free public website for all court records — up to 50 searches per month with no account or fee. Requires judges and court commissioners to file the same public financial and conflict-of-interest disclosures elected candidates already file. Bars retired Supreme Court justices from appearing before the court they served on for two years. Requires free audio streaming of public court proceedings and posts hearing recordings within three business days.</p>
+        <div class="why">
+          <div class="why-row"><span class="dim">Transparency</span> Court records, judge financial disclosures, and hearing audio all become searchable and public.</div>
+          <div class="why-row"><span class="dim">Conflicts</span> Closes a specific revolving-door gap for justices appearing before their former court.</div>
+        </div>
+        <p class="sponsors">House sponsor <b>Logan Monson</b> — same Monson documented on the Natural Resources committee page, and a same-day $98,942.90 Meta independent-expenditure recipient in his 2026 primary, unrelated to this bill.</p>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="case-head">
+        <div>
+          <h3>H.B. 222 — Limitation of Actions Amendments</h3>
+          <div class="bill-meta">Signed 3/23/2026, effective 5/6/2026 · Albrecht (H) / Balderree (S) · Heard in Senate Judiciary, not a courts-structure bill on its face</div>
+        </div>
+        <span class="verdict harm">Harm</span>
+      </div>
+      <div class="case-body">
+        <p>Creates near-total civil and criminal immunity for greenhouse gas emissions — shielding anyone, anywhere (the bill dropped a prior requirement that the defendant reside or do business in Utah), from lawsuits "regardless of cause of action or type of relief sought." To overcome the shield, a plaintiff must prove by "clear and convincing evidence" — the highest civil standard, close to the criminal threshold — that a defendant violated an enforceable statutory limit or specific permit term, and that the harm was "unavoidable and identifiable." Utah has few enforceable statutory GHG limits, and climate harms are notoriously diffuse and multi-caused, making that burden close to impossible to meet in practice.</p>
+        <p>This is a judiciary-committee bill in substance, not just venue: it doesn't regulate emissions, it closes off the courts as a venue for anyone harmed by them. It passed roughly three months after Utah's Supreme Court revived a youth constitutional-climate lawsuit against the state (Natalie R. v. State), giving the plaintiffs the chance to refile — several of whom did. The bill's sponsor, Rep. Carl Albrecht, co-presented it in committee alongside a lobbyist for the Utah Mining Association who is also Rocky Mountain Power's former VP of Government Affairs — the same utility separately named as a bill backer.</p>
+        <div class="why">
+          <div class="why-row"><span class="dim">Enforcement</span> Closes off civil and criminal liability for an entire category of harm, for anyone anywhere, not just Utah residents or businesses.</div>
+          <div class="why-row"><span class="dim">Conflicts</span> Presented jointly by the sponsor and an industry lobbyist with a director-level past role at one of the bill's named corporate backers.</div>
+        </div>
+        <p class="sponsors">House committee vote 9-1-2 (sole no: Rep. Rosalba Dominguez); Senate Judiciary committee vote 4-1-4, with senators Cullimore, Escamilla, Fillmore, and McKell all absent for the entire meeting — not just this bill — keeping them from a recorded vote either way.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="killed">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">05 — What didn't pass</span>
+      <h2>The same session's failed judiciary bills</h2>
+    </div>
+    <p>The five bills above didn't represent the full scope of 2026's judiciary push. One legislator introduced three additional bills on judicial selection and removal, all in the same direction as SB 134 — none of them passed.</p>
+
+    <div class="case">
+      <div class="case-head">
+        <div>
+          <h3>HJR 5 + H.B. 424 — Judicial Nominating Commission Bypass</h3>
+          <div class="bill-meta">Killed via floor procedural strike, 3/6/2026 · Kyle (H)</div>
+        </div>
+        <span class="verdict dead">Killed</span>
+      </div>
+      <div class="case-body">
+        <p>Paired constitutional amendment and implementing bill that would have let the governor appoint any judicial candidate even without nomination by the Judicial Nominating Commission, made the commission's certified list "advisory only," and removed the chief justice's backstop authority to fill a vacancy if the governor didn't act. The Utah State Bar formally opposed HB 424 by name — a rare step — calling it a direct conflict with the Utah Constitution's judicial-selection safeguards. Both bills died the same way HB 468 died in 2025: the enacting clause was struck at 11:59 PM on the session's final night, with no recorded floor debate explaining why.</p>
+        <div class="why">
+          <div class="why-row"><span class="dim">Transparency</span> Killed procedurally, with no floor debate on the record explaining the decision.</div>
+        </div>
+        <p class="sponsors">Sponsored by <b>Jason Kyle</b> (HD 8), who voted yes on both SB 134 and HB 392 — the two bills from this same push that did pass.</p>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="case-head">
+        <div>
+          <h3>H.B. 262 — Judicial Retention Amendments</h3>
+          <div class="bill-meta">Introduced, not passed, 2026 · Kyle (H)</div>
+        </div>
+        <span class="verdict dead">Killed</span>
+      </div>
+      <div class="case-body">
+        <p>Would have raised the bar for a judge to keep their seat in a retention election from a simple majority "yes" to 67% "yes" — meaning a judge winning 60% of the vote, a clear majority, would still lose. Retention elections typically see low turnout and no organized opposition; a 67% threshold means a modestly funded, targeted campaign — not a majority of voters — could remove a judge who has genuine majority public support.</p>
+        <div class="why">
+          <div class="why-row"><span class="dim">Independence</span> Lowers the effective bar for removing a sitting judge from just-over-50% opposition to just-over-33%.</div>
+        </div>
+        <p class="sponsors">Same sponsor as HJR 5/HB 424, <b>Jason Kyle</b> — read together, a coherent push to make it easier to install a governor-favored judge and easier to remove one who draws mobilized opposition, regardless of majority support.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="conclusion">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">06 — The pattern</span>
+      <h2>Seven bills, one committee system</h2>
+    </div>
+
+    <div class="tally">
+      <div class="tally-item harm"><span class="n">3</span><span class="l">Harm</span></div>
+      <div class="tally-item mixed"><span class="n">1</span><span class="l">Mixed</span></div>
+      <div class="tally-item help"><span class="n">1</span><span class="l">Help</span></div>
+      <div class="tally-item dead"><span class="n">2</span><span class="l">Killed</span></div>
+    </div>
+
+    <p>Of the seven bills reviewed here, three narrowed the public's ability to check power through the courts — moving Chief Justice selection to the governor, giving only state actors the ability to redirect pending constitutional cases, and closing off civil and criminal liability for an entire category of harm regardless of who's affected. One was a genuine, if incomplete, transparency win: court records, judge financial disclosures, and hearing audio all became public by law. One is still unresolved, pending how a new performance metric actually gets used. And two more, in the same direction as the harmful group, were introduced and killed — not on a recorded floor vote, but by the same midnight procedural strike this Hive has already documented killing other accountability-relevant bills.</p>
+
+    <p>The same two legislators — Todd Weiler and Karianne Lisonbee — chair every room this moves through, in session and between sessions. That's not itself evidence of anything improper; someone has to chair these committees. What's notable is how much of the substantive work happened in bills that were paired and mutually reinforcing — expanded appointment power paired with a case-reassignment tool paired with a new performance metric — passed together in a single session, while the transparency provisions arrived in a separate bill that reads, on its own, as a genuine improvement.</p>
+
+    <details class="q">
+      <summary>Does sitting on this committee, by itself, mean a conflict of interest?</summary>
+      <p>No — same answer as our Natural Resources page. Committee assignments are normal. The findings above are about what specific bills did, not about who sits on the committee.</p>
+    </details>
+    <details class="q">
+      <summary>Could the SB 233 verdict change?</summary>
+      <p>Yes — it's marked "mixed" specifically because the reversal-rate performance metric is still at the study stage. If it's adopted in a way that pressures judges toward less-appealable rulings, this verdict should move toward harm; if it's implemented narrowly with real safeguards, it could move toward help.</p>
+    </details>
+    <details class="q">
+      <summary>Where does this data come from?</summary>
+      <p>Bill text, floor votes, and committee rosters come directly from le.utah.gov. Poll figures and public reporting are cited to their original outlets. Sponsors were not contacted for comment; this page relies on the public record only.</p>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand">THE WEBER COUNTY HIVE</div>
+    <p style="margin-top:.6em;">Accountability journalism for Weber County and Utah state government.</p>
+    <p class="fine">Verdicts on this page reflect the Hive's own editorial assessment, built from bill text, floor votes, and committee minutes obtained from the Utah State Legislature's public website (le.utah.gov). Sponsors were not contacted for comment; this page relies on the public record only. Corrections welcome.</p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('[data-scroll-to]').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const el=document.getElementById(btn.getAttribute('data-scroll-to'));
+      if(el){el.scrollIntoView({behavior:'smooth',block:'start'});}
+    });
+  });
+</script>
+
+</body>
+</html>
