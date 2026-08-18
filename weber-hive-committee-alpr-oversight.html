@@ -65,8 +65,16 @@
 
   .roster-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:8px; margin-bottom:18px; }
   .roster-chip{ font-size:13px; padding:8px 12px; background:var(--paper); border:1px solid var(--line); border-radius:8px; }
+  .roster-chip.money{ border-left:3px solid var(--brass); background:linear-gradient(90deg, rgba(169,129,47,0.06), transparent 40%); }
   .roster-chip .role{ font-family:"IBM Plex Mono",monospace; font-size:9.5px; text-transform:uppercase; color:var(--brass-dark); display:block; margin-bottom:2px; }
   .roster-chip .why{ font-size:11.5px; color:var(--muted); margin-top:3px; display:block; }
+
+  .cross-callout{ background:linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%); border-radius:14px; padding:28px 30px; margin:28px 0; color:#efe9d8; }
+  .cross-callout .eyebrow{ color:var(--brass-bright); margin-bottom:12px; }
+  .cross-callout h3{ font-family:"Fraunces",serif; font-weight:700; font-size:1.25rem; margin:0 0 12px; color:#faf6ea; }
+  .cross-callout p{ font-size:14.5px; color:#c9c3ae; margin:0 0 10px; }
+  .cross-callout .funder-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+  .cross-callout .funder-chip{ font-family:"IBM Plex Mono",monospace; font-size:11.5px; background:rgba(214,184,105,0.12); border:1px solid rgba(214,184,105,0.3); border-radius:20px; padding:6px 14px; color:var(--brass-bright); }
 
   .bill-row{ border-top:1px dashed var(--line); padding-top:16px; margin-top:16px; }
   .bill-head{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:8px; }
@@ -162,6 +170,17 @@
       <h2 class="section-title">Who sat on each one</h2>
       <p class="section-sub">2025 rosters, current as of the sessions these bills were heard. Where a member has their own file elsewhere in this investigation, that connection is noted directly &mdash; self-contained, no cross-file lookup required.</p>
 
+      <div class="cross-callout">
+        <div class="eyebrow">One Funder, Two Committees</div>
+        <h3>The same out-of-state donor reaches two of these three committees</h3>
+        <p>Howard S. Rich, a Bala Cynwyd, Pennsylvania-based national libertarian donor already documented elsewhere in this investigation funding Utah's 2024 sovereignty-bill sponsors, gave directly to two legislators sitting on committees covered by this page: Calvin R. Musselman (Senate Judiciary) and Kay J. Christofferson (House Transportation, who also received $1,194.64 from Citizens for Self Governance, a national Article V convention-advocacy group). Ronald M. Winterton, the senator who chaired the 2024 hearing where the Blouin amendment disappeared, is separately described in this investigation as part of the broader donor network Rich funds &mdash; but no direct Rich contribution appears in Winterton's own itemized record, so that connection is not claimed here.</p>
+        <div class="funder-row">
+          <span class="funder-chip">Howard S. Rich &rarr; Musselman</span>
+          <span class="funder-chip">Howard S. Rich &rarr; Christofferson</span>
+          <span class="funder-chip">Citizens for Self Governance &rarr; Christofferson</span>
+        </div>
+      </div>
+
       <div class="committee-card">
         <div class="committee-head">
           <div>
@@ -171,18 +190,18 @@
           <div class="committee-chamber">House &middot; Standing</div>
         </div>
         <div class="roster-grid">
-          <div class="roster-chip"><span class="role">Chair</span>Kay J. Christofferson (R)</div>
-          <div class="roster-chip"><span class="role">Vice Chair</span>Ariel Defay (R)<span class="why">Chief sponsor of HB 273; own campaign-finance file in this investigation.</span></div>
+          <div class="roster-chip money"><span class="role">Chair</span>Kay J. Christofferson (R)<span class="why">Civil engineer and VP/President at Horrocks Engineers, a heavy civil construction firm, while chairing the committee with jurisdiction over transportation legislation. Floor-sponsored SB0197 through the House — the bill that rewrites how sales-tax increment is distributed to HTRZ, RDA, and other zones statewide, and where a House floor amendment moved the fund's base year with no named mover in the record. Chief sponsor of HB 57, separately flagged elsewhere in this investigation for a possible Election Hive/Stratos connection.</span></div>
+          <div class="roster-chip money"><span class="role">Vice Chair</span>Ariel Defay (R)<span class="why">Chief sponsor of HB 273; own campaign-finance file in this investigation.</span></div>
           <div class="roster-chip">Kristen Chevrier (R)<span class="why">Sponsored both H.B. 468 (2025) and H.B. 327 (2026) &mdash; the author of every recent ALPR reform attempt.</span></div>
-          <div class="roster-chip">Rosalba Dominguez (D)</div>
-          <div class="roster-chip">Ken Ivory (R)</div>
-          <div class="roster-chip">Ashlee Matthews (D)</div>
-          <div class="roster-chip">Clinton D. Okerlund (R)</div>
-          <div class="roster-chip">Michael J. Petersen (R)</div>
-          <div class="roster-chip">Calvin Roberts (R)<span class="why">HD 46; own campaign-finance file, sponsor of H.B. 475 elsewhere in this investigation.</span></div>
-          <div class="roster-chip">Angela Romero (D)</div>
-          <div class="roster-chip">Jake Sawyer (R)</div>
-          <div class="roster-chip">Norman K. Thurston (R)</div>
+          <div class="roster-chip money">Rosalba Dominguez (D)<span class="why">Also sits on Public Utilities &amp; Energy Committee; sponsored HB 504 (Political Advertising Modifications).</span></div>
+          <div class="roster-chip money">Ken Ivory (R)<span class="why">Chief architect of HB 78 (Nuclear Regulatory Amendments) and sponsor of HB 546 (Bears Ears uranium access); paid $46,763 by Veracity Enterprises before the related Water Rights Amendments vote.</span></div>
+          <div class="roster-chip money">Ashlee Matthews (D)<span class="why">Also sits on House Rules Committee; floor-sponsored SB 38 for Sen. Weiler.</span></div>
+          <div class="roster-chip money">Clinton D. Okerlund (R)<span class="why">New to the Legislature Jan. 2025; co-sponsored HB 76 (Data Center Water Transparency); received $7,500 from House Speaker Leadership PAC.</span></div>
+          <div class="roster-chip money">Michael J. Petersen (R)<span class="why">Received contributions from RAI Services (Reynolds American/tobacco).</span></div>
+          <div class="roster-chip money">Calvin Roberts (R)<span class="why">HD 46; own campaign-finance file, sponsor of H.B. 475 elsewhere in this investigation.</span></div>
+          <div class="roster-chip money">Angela Romero (D)<span class="why">House Minority Leader; received Lincoln Hill Partners PAC money in two separate cycles (2023 and 2026) and $3,500 from UINPAC.</span></div>
+          <div class="roster-chip money">Jake Sawyer (R)<span class="why">Northern Utah Legislative PAC funded him twice ($5,000 in 2024, $5,000 in 2026); shares a vendor network (Politix LLC, In The Field LLC) with the Gibson/Utah Forward PAC network.</span></div>
+          <div class="roster-chip money">Norman K. Thurston (R)<span class="why">Own disclosures show a mass deletion of 17 contribution entries during the active 2026 session, plus a separately deleted $2,000 McKell in-kind gift.</span></div>
         </div>
         <div class="bill-row">
           <div class="bill-head">
@@ -209,14 +228,14 @@
           <div class="committee-chamber">Senate &middot; Standing</div>
         </div>
         <div class="roster-grid">
-          <div class="roster-chip"><span class="role">Chair</span>Wayne A. Harper (R)</div>
-          <div class="roster-chip">J. Stuart Adams (R)<span class="why">Senate President.</span></div>
-          <div class="roster-chip">Don L. Ipson (R)</div>
-          <div class="roster-chip">Karen Kwan (D)</div>
-          <div class="roster-chip">Ann Millner (R)<span class="why">Controls Northern Utah Legislative PAC (NUPAC); own network file in this investigation.</span></div>
-          <div class="roster-chip">Kathleen A. Riebe (D)</div>
-          <div class="roster-chip">Chris H. Wilson (R)<span class="why">"Friends of Chris Wilson Inc." PAC; own network file in this investigation.</span></div>
-          <div class="roster-chip">Ronald M. Winterton (R)</div>
+          <div class="roster-chip money"><span class="role">Chair</span>Wayne A. Harper (R)<span class="why">Sole Senate sponsor of five consecutive HTRZ bills since 2022; own campaign-finance file in this investigation.</span></div>
+          <div class="roster-chip money">J. Stuart Adams (R)<span class="why">Senate President; lost his June 2026 GOP primary amid Stratos data-center backlash but remains in office through January 2027. Own campaign-finance file in this investigation documents $208,300 in contributions received after his concession.</span></div>
+          <div class="roster-chip money">Don L. Ipson (R)<span class="why">Chairs UDOT's Motor Carrier Advisory Board; own campaign-finance file in this investigation.</span></div>
+          <div class="roster-chip money">Karen Kwan (D)<span class="why">Senate Minority Whip; own campaign-finance file in this investigation.</span></div>
+          <div class="roster-chip money">Ann Millner (R)<span class="why">Controls Northern Utah Legislative PAC (NUPAC); own network file in this investigation.</span></div>
+          <div class="roster-chip money">Kathleen A. Riebe (D)<span class="why">Minority Caucus Manager; own campaign-finance file in this investigation.</span></div>
+          <div class="roster-chip money">Chris H. Wilson (R)<span class="why">"Friends of Chris Wilson Inc." PAC; own network file in this investigation.</span></div>
+          <div class="roster-chip money">Ronald M. Winterton (R)<span class="why">Chaired the 2024 SB 57 committee hearing where the Blouin amendment disappeared; own campaign-finance file in this investigation.</span></div>
         </div>
         <div class="bill-row">
           <div class="bill-head">
@@ -244,14 +263,14 @@
         </div>
         <div class="roster-grid">
           <div class="roster-chip"><span class="role">Chair</span>Todd Weiler (R)<span class="why">Sponsored the original 2013/2014 ALPR statutes (S.B. 196, S.B. 222) that created this legal framework in the first place.</span></div>
-          <div class="roster-chip">Heidi Balderree (R)</div>
-          <div class="roster-chip">Brady Brammer (R)<span class="why">SD 21; own campaign-finance file in this investigation.</span></div>
+          <div class="roster-chip money">Heidi Balderree (R)<span class="why">SD 22; co-sponsored HB 222 (GHG/emissions liability immunity), which received Energy Solutions donations tied to ALEC dues.</span></div>
+          <div class="roster-chip money">Brady Brammer (R)<span class="why">SD 21; own campaign-finance file in this investigation.</span></div>
           <div class="roster-chip">Kirk A. Cullimore (R)<span class="why">SD 19; own full committee-footprint file in this investigation.</span></div>
-          <div class="roster-chip">Luz Escamilla (D)<span class="why">Senate Minority Leader; own campaign-finance file in this investigation.</span></div>
-          <div class="roster-chip">Lincoln Fillmore (R)<span class="why">Chairs Senate Rules Committee &mdash; the body every one of these dead bills passed through on the way to being killed.</span></div>
-          <div class="roster-chip">Michael K. McKell (R)<span class="why">Majority Assistant Whip; own campaign-finance file in this investigation.</span></div>
-          <div class="roster-chip">Calvin R. Musselman (R)</div>
-          <div class="roster-chip">Stephanie Pitcher (D)</div>
+          <div class="roster-chip money">Luz Escamilla (D)<span class="why">Senate Minority Leader; own campaign-finance file in this investigation.</span></div>
+          <div class="roster-chip money">Lincoln Fillmore (R)<span class="why">Chairs Senate Rules Committee &mdash; the body every one of these dead bills passed through on the way to being killed.</span></div>
+          <div class="roster-chip money">Michael K. McKell (R)<span class="why">Majority Assistant Whip; own campaign-finance file in this investigation.</span></div>
+          <div class="roster-chip money">Calvin R. Musselman (R)<span class="why">SD 4; Senate floor sponsor of H.B. 82; own campaign-finance file in this investigation.</span></div>
+          <div class="roster-chip">Stephanie Pitcher (D)<span class="why">Co-sponsored three of the four Stratos-enabling water bills (HB 410, HB 348, HB 076) elsewhere in this investigation.</span></div>
         </div>
         <div class="bill-row">
           <div class="bill-head">
@@ -297,11 +316,11 @@
           <div class="committee-chamber">Executive &amp; Legislative &middot; Advisory</div>
         </div>
         <div class="roster-grid">
-          <div class="roster-chip"><span class="role">Chair</span>Marvin Dodge (Governor Designee)</div>
-          <div class="roster-chip">Tina M. Cannon <span class="why">State Auditor.</span></div>
+          <div class="roster-chip"><span class="role">Chair</span>Marvin Dodge (Governor Designee)<span class="why">Commissioner of the Department of Government Operations since April 2023 &mdash; the same department SEDI is housed inside.</span></div>
+          <div class="roster-chip">Tina M. Cannon <span class="why">Elected November 2024, took office January 6, 2025; still serving as State Auditor.</span></div>
           <div class="roster-chip">Rep. David Shallenberger <span class="why">House Speaker Designee; also sponsored HB 450 (Data Privacy Amendments, 2026), floor-sponsored by Cullimore.</span></div>
           <div class="roster-chip">Sen. Kirk Cullimore <span class="why">Senate Majority Whip, Senate President Designee. Wrote the GDPA that created this board, chief-sponsored SB 275 (SEDI) and HB 220 (Public Safety Data Amendments), floor-sponsored HB 320 (Office of AI Policy) &mdash; and sits on the board that oversees the office implementing the law he wrote.</span></div>
-          <div class="roster-chip">John Dougall <span class="why">Attorney General Designee &mdash; the same office SEDI's enforcement mechanism runs through.</span></div>
+          <div class="roster-chip">John Dougall <span class="why">Attorney General Designee. Former State Auditor (Jan. 2013&ndash;Jan. 2025) &mdash; the same office GDPA names, alongside the Attorney General, as one of only two enforcement mechanisms for privacy violations. Now serves as Administrator on AG Derek Brown's Executive Team, per the office's own staff page &mdash; placing him inside the second of those two enforcement offices after leaving the first.</span></div>
         </div>
         <div class="bill-row">
           <div class="bill-head">
@@ -345,12 +364,16 @@
     <strong style="color:var(--ink);">Sources &amp; methodology</strong>
     <ul class="sources-list">
       <li>Utah Legislature committee rosters, le.utah.gov (House Transportation, Senate Transportation, Senate Judiciary/Law Enforcement/Criminal Justice, 2025)</li>
-      <li>Bill status and vote history: H.B. 468 (2025), S.B. 138 (2025), H.B. 327 (2026), S.B. 250 (2023) &mdash; le.utah.gov and FastDemocracy bill tracking</li>
-      <li>Senate Committee Assignments 2025&ndash;2026, senate.utah.gov</li>
+      <li>Bill status and vote history: H.B. 468 (2025), S.B. 138 (2025), H.B. 327 (2026), S.B. 250 (2023), S.B. 197 (2026) &mdash; le.utah.gov and FastDemocracy bill tracking</li>
+      <li>Senate and House Committee Assignments 2025&ndash;2026, senate.utah.gov and le.utah.gov, including individual legislator "Bills &mdash; by Legislator" sponsor lists</li>
       <li>House Law Enforcement and Criminal Justice Committee report on H.B. 327, pf.utleg.gov</li>
       <li>Citizen Portal, "House approves bill setting statewide rules for automatic license-plate readers," Feb. 27, 2025</li>
       <li>S.B. 275, State-Endorsed Digital Identity Program Amendments (2026 General Session), enrolled text, le.utah.gov; Libertas Institute and CSG West coverage of the 2026 SEDI Summit</li>
       <li>Utah Privacy Governing Board meeting minutes, Dec. 15, 2025, Senate Building Rm 220</li>
+      <li>Office of the Utah Attorney General, "About The Executive Team" staff page (accessed Aug. 2026) &mdash; John Dougall title and tenure</li>
+      <li>Office of the Utah State Auditor, "Meet Auditor Tina M. Cannon," and Ballotpedia, "Tina Cannon (Utah)" &mdash; election date and current term</li>
+      <li>Itemized campaign-finance disclosures, disclosures.utah.gov DEX exports, individually pulled for each committee member with a "why" note referencing a specific dollar figure or donor &mdash; Wayne Harper, Don Ipson, Karen Kwan, Kathleen Riebe, Ronald Winterton, Calvin Musselman, Kay Christofferson, J. Stuart Adams, and others already on file elsewhere in this investigation</li>
+      <li>Wayne Harper campaign-finance file, this investigation &mdash; S.B. 197 base-year amendment history and the open question of who moved House Amendment 2 on 3/6/2026</li>
     </ul>
     <p style="margin-top:16px;">This page does not allege that any individual legislator acted to block ALPR oversight for an improper reason. It documents the recorded committee and floor history of each bill and notes where the same individuals or structures recur, without inferring motive beyond what the record shows.</p>
   </div>
