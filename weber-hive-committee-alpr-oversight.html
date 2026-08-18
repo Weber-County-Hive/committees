@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Committees That Decide Whether ALPR Gets Oversight — Weber County Hive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2430; --ink-2:#262f3f;
+    --paper:#f6f2e6; --paper-card:#fffdf8;
+    --text:#211e19; --muted:#5c574c;
+    --brass:#a9812f; --brass-bright:#d6b869; --brass-dark:#7c5f22;
+    --line:#dcd2b7;
+    --help:#3f5d45; --help-bg:#e9efe7;
+    --mixed:#8a6a1f; --mixed-bg:#f4ecd6;
+    --harm:#8a3b2e; --harm-bg:#f3e5e0;
+    --dead:#4a4438; --dead-bg:#e8e1cc;
+    --shadow: 0 10px 30px rgba(28,36,48,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{ margin:0; background:var(--paper); color:var(--text); font-family:"Source Serif 4", Georgia, serif; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,.display{ font-family:"Fraunces", Georgia, serif; font-weight:700; letter-spacing:-0.01em; }
+  .mono{ font-family:"IBM Plex Mono", monospace; letter-spacing:0.02em; }
+  a{ color:var(--brass-dark); }
+  .wrap{ max-width:1000px; margin:0 auto; padding:0 24px; }
+  .skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:10px 16px;z-index:100;}
+  .skip-link:focus{left:16px;top:16px;}
+
+  header.hero{
+    background: radial-gradient(1100px 380px at 12% -10%, rgba(214,184,105,0.20), transparent 60%), linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+    color:#efe9d8; padding:56px 0 44px;
+  }
+  .breadcrumb{ font-family:"IBM Plex Mono",monospace; font-size:12px; color:#a9a290; margin-bottom:14px; }
+  .breadcrumb a{ color:#a9a290; }
+  .kicker{ font-family:"IBM Plex Mono", monospace; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--brass-bright); margin-bottom:18px; }
+  header.hero h1{ font-size:clamp(1.9rem, 4.4vw, 2.9rem); line-height:1.12; margin:0 0 18px; color:#faf6ea; }
+  .subhead{ font-size:1.06rem; color:#c9c3ae; max-width:700px; margin:0 0 30px; }
+  .hero-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(214,184,105,0.25); border:1px solid rgba(214,184,105,0.25); border-radius:10px; overflow:hidden; }
+  .hero-stat{ background:rgba(20,26,36,0.65); padding:16px 14px; }
+  .hero-stat .num{ font-family:"Fraunces",serif; font-weight:700; font-size:1.5rem; color:var(--brass-bright); }
+  .hero-stat .lbl{ font-size:11.5px; color:#a9a290; margin-top:4px; line-height:1.4; }
+  @media (max-width:680px){ .hero-stats{ grid-template-columns:repeat(2,1fr); } }
+
+  main{ padding:52px 0 40px; }
+  section{ margin-bottom:56px; }
+  h2.section-title{ font-size:clamp(1.4rem,2.8vw,1.9rem); margin:0 0 8px; color:var(--ink); }
+  .section-sub{ color:var(--muted); font-size:1.0rem; max-width:700px; margin:0 0 24px; }
+  .eyebrow{ font-family:"IBM Plex Mono", monospace; font-size:11.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--brass-dark); margin-bottom:10px; }
+  .card{ background:var(--paper-card); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); padding:24px; }
+
+  .finding-block{ border-left:4px solid var(--brass); background:var(--paper-card); padding:20px 24px; border-radius:0 10px 10px 0; box-shadow:var(--shadow); margin:32px 0; }
+  .finding-block .q{ font-family:"Fraunces",serif; font-weight:600; font-size:1.15rem; margin:0 0 8px; }
+  .finding-block p{ margin:0; font-size:14.5px; color:var(--muted); }
+
+  /* Committee profile cards */
+  .committee-card{ background:var(--paper-card); border:1px solid var(--line); border-radius:12px; padding:24px; margin-bottom:20px; }
+  .committee-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:16px; margin-bottom:14px; flex-wrap:wrap; }
+  .committee-name{ font-family:"Fraunces",serif; font-weight:700; font-size:1.3rem; color:var(--ink); }
+  .committee-chamber{ font-family:"IBM Plex Mono",monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.05em; color:var(--brass-dark); background:var(--paper); border:1px solid var(--line); padding:4px 10px; border-radius:12px; white-space:nowrap; }
+  .committee-controls{ font-size:14px; color:var(--muted); margin-bottom:16px; }
+
+  .roster-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(220px,1fr)); gap:8px; margin-bottom:18px; }
+  .roster-chip{ font-size:13px; padding:8px 12px; background:var(--paper); border:1px solid var(--line); border-radius:8px; }
+  .roster-chip .role{ font-family:"IBM Plex Mono",monospace; font-size:9.5px; text-transform:uppercase; color:var(--brass-dark); display:block; margin-bottom:2px; }
+  .roster-chip .why{ font-size:11.5px; color:var(--muted); margin-top:3px; display:block; }
+
+  .bill-row{ border-top:1px dashed var(--line); padding-top:16px; margin-top:16px; }
+  .bill-head{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:8px; }
+  .bill-name{ font-family:"Fraunces",serif; font-weight:600; font-size:1.05rem; }
+  .verdict-pill{ font-family:"IBM Plex Mono",monospace; font-size:10px; text-transform:uppercase; font-weight:700; padding:4px 10px; border-radius:12px; }
+  .verdict-pill.help{ background:var(--help-bg); color:var(--help); }
+  .verdict-pill.mixed{ background:var(--mixed-bg); color:var(--mixed); }
+  .verdict-pill.harm{ background:var(--harm-bg); color:var(--harm); }
+  .verdict-pill.dead{ background:var(--dead-bg); color:var(--dead); }
+  .bill-desc{ font-size:14.5px; margin-bottom:10px; }
+  .vote-strip{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+  .vote-chip{ font-family:"IBM Plex Mono",monospace; font-size:12px; background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:5px 10px; }
+  .vote-chip b{ color:var(--brass-dark); }
+  .rubric-row{ display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:8px; margin-top:10px; }
+  .rubric-item{ font-size:12.5px; background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:8px 10px; }
+  .rubric-item .dim{ font-family:"IBM Plex Mono",monospace; font-size:9.5px; text-transform:uppercase; color:var(--muted); display:block; margin-bottom:3px; }
+
+  /* Timeline */
+  .timeline{ position:relative; padding-left:28px; }
+  .timeline::before{ content:""; position:absolute; left:9px; top:6px; bottom:6px; width:2px; background:var(--line); }
+  .tl-item{ position:relative; padding-bottom:22px; }
+  .tl-item::before{ content:""; position:absolute; left:-28px; top:4px; width:12px; height:12px; border-radius:50%; background:var(--brass); border:2px solid var(--paper-card); }
+  .tl-item.dead::before{ background:var(--harm); }
+  .tl-date{ font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--brass-dark); font-weight:700; }
+  .tl-desc{ font-size:14px; margin-top:2px; }
+
+  .takeaway{ background:linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%); color:#efe9d8; border-radius:14px; padding:36px 30px; text-align:center; }
+  .takeaway .eyebrow{ color:var(--brass-bright); }
+  .takeaway p.big{ font-family:"Fraunces",serif; font-weight:600; font-size:clamp(1.2rem,2.8vw,1.55rem); max-width:720px; margin:0 auto; line-height:1.45; }
+
+  footer{ border-top:1px solid var(--line); padding:28px 0 56px; font-size:13px; color:var(--muted); }
+  footer a{ color:var(--brass-dark); }
+  .sources-list{ margin-top:10px; padding-left:18px; }
+  .sources-list li{ margin-bottom:4px; }
+  ::selection{ background:var(--brass-bright); color:var(--ink); }
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="weber-hive-committees-board.html">&larr; All committees</a></div>
+    <div class="kicker">The Weber County Hive · Committee Watch</div>
+    <h1>The Committees That Decide Whether ALPR Gets Oversight</h1>
+    <p class="subhead">Three committees, two chambers, three sessions. Every ALPR reform bill that reached any of them died the same way &mdash; and one never even got a hearing. 2026's newest privacy body follows the identical shape.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">3</div><div class="lbl">committees with ALPR jurisdiction since 2025</div></div>
+      <div class="hero-stat"><div class="num">4</div><div class="lbl">ALPR reform bills in three sessions</div></div>
+      <div class="hero-stat"><div class="num">0</div><div class="lbl">of them became law</div></div>
+      <div class="hero-stat"><div class="num">2</div><div class="lbl">died the identical way, the same day</div></div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+
+    <div class="finding-block">
+      <p class="q">Who actually controls whether Utah gets audit and reporting requirements for ALPR systems?</p>
+      <p>Not one committee. The bills that would have closed the GRAMA gap have moved through House Transportation, Senate Transportation, and Senate Judiciary, Law Enforcement &amp; Criminal Justice in three different sessions &mdash; and every one has been stopped after committee, not in it.</p>
+    </div>
+
+    <section id="timeline">
+      <div class="eyebrow">The Pattern, In Order</div>
+      <h2 class="section-title">Four bills, three sessions, one outcome</h2>
+      <p class="section-sub">Read top to bottom. Notice how the exit point is always the same &mdash; Rules Committee, then a floor strike, most often in the session's final days.</p>
+      <div class="card">
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-date">2023 &mdash; S.B. 250, Public Surveillance Amendments</div>
+            <div class="tl-desc">The only ALPR bill in this set that became law. Created the crime-type and incident-number recordkeeping requirement (&sect; 41-6a-2005(6)) and the UDOT permitting system. Passed as amended.</div>
+          </div>
+          <div class="tl-item dead">
+            <div class="tl-date">Jan 23 &ndash; Mar 7, 2025 &mdash; S.B. 138, License Plate Reader Amendments</div>
+            <div class="tl-desc">Referred to Senate Judiciary, Law Enforcement &amp; Criminal Justice on Jan. 23. Marked "Not Considered" on Jan. 28 &mdash; the committee scheduled it and did not take it up. Sat for five weeks, then returned to Rules on March 4. Enacting clause struck March 7. It never received a single committee vote, favorable or otherwise.</div>
+          </div>
+          <div class="tl-item dead">
+            <div class="tl-date">Feb 18 &ndash; Mar 7, 2025 &mdash; H.B. 468, Automatic License Plate Reader Amendments</div>
+            <div class="tl-desc">Approved 10&ndash;0&ndash;2 in House Transportation (Feb. 18), passed the House floor 64&ndash;2 (Feb. 27), approved 6&ndash;0&ndash;2 in Senate Transportation (Mar. 4). Never got a Senate floor vote. Enacting clause struck 11:59 p.m., March 7 &mdash; the same day, the same mechanism, as S.B. 138.</div>
+          </div>
+          <div class="tl-item dead">
+            <div class="tl-date">Jan 22 &ndash; Mar 6, 2026 &mdash; H.B. 327, License Plate Reader Amendments</div>
+            <div class="tl-desc">Sponsored again by Rep. Kristen Chevrier, this time routed to House Law Enforcement and Criminal Justice rather than Transportation &mdash; the third different committee to claim jurisdiction over this subject in three sessions. Returned to Rules and filed as not passed, March 6, 2026.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="committees">
+      <div class="eyebrow">The Committees, By Roster</div>
+      <h2 class="section-title">Who sat on each one</h2>
+      <p class="section-sub">2025 rosters, current as of the sessions these bills were heard. Where a member has their own file elsewhere in this investigation, that connection is noted directly &mdash; self-contained, no cross-file lookup required.</p>
+
+      <div class="committee-card">
+        <div class="committee-head">
+          <div>
+            <div class="committee-name">House Transportation Committee</div>
+            <div class="committee-controls">Standing committee, 12 members. Reviewed H.B. 468 (2025).</div>
+          </div>
+          <div class="committee-chamber">House &middot; Standing</div>
+        </div>
+        <div class="roster-grid">
+          <div class="roster-chip"><span class="role">Chair</span>Kay J. Christofferson (R)</div>
+          <div class="roster-chip"><span class="role">Vice Chair</span>Ariel Defay (R)<span class="why">Chief sponsor of HB 273; own campaign-finance file in this investigation.</span></div>
+          <div class="roster-chip">Kristen Chevrier (R)<span class="why">Sponsored both H.B. 468 (2025) and H.B. 327 (2026) &mdash; the author of every recent ALPR reform attempt.</span></div>
+          <div class="roster-chip">Rosalba Dominguez (D)</div>
+          <div class="roster-chip">Ken Ivory (R)</div>
+          <div class="roster-chip">Ashlee Matthews (D)</div>
+          <div class="roster-chip">Clinton D. Okerlund (R)</div>
+          <div class="roster-chip">Michael J. Petersen (R)</div>
+          <div class="roster-chip">Calvin Roberts (R)<span class="why">HD 46; own campaign-finance file, sponsor of H.B. 475 elsewhere in this investigation.</span></div>
+          <div class="roster-chip">Angela Romero (D)</div>
+          <div class="roster-chip">Jake Sawyer (R)</div>
+          <div class="roster-chip">Norman K. Thurston (R)</div>
+        </div>
+        <div class="bill-row">
+          <div class="bill-head">
+            <div class="bill-name">H.B. 468, Automatic License Plate Reader Amendments</div>
+            <span class="verdict-pill dead">Killed after passing</span>
+          </div>
+          <div class="bill-desc">Would have required annual audits, standardized reporting to the State Commission on Criminal and Juvenile Justice, a 150-day statewide purge cap, and an explicit ban on attaching facial recognition to ALPR hardware.</div>
+          <div class="vote-strip"><span class="vote-chip">Committee: <b>10&ndash;0&ndash;2</b>, Feb. 18, 2025</span></div>
+          <div class="rubric-row">
+            <div class="rubric-item"><span class="dim">Transparency</span>Would have required public annual reports &mdash; unanimously approved, then never enacted</div>
+            <div class="rubric-item"><span class="dim">Enforcement</span>Would have created the state's first external audit body for ALPR &mdash; killed before that could take effect</div>
+            <div class="rubric-item"><span class="dim">Conflicts of Interest</span>No committee member has a disclosed financial interest in ALPR vendors found in this investigation</div>
+            <div class="rubric-item"><span class="dim">Public Participation</span>Committee hearing was open and recorded; the kill was not</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="committee-card">
+        <div class="committee-head">
+          <div>
+            <div class="committee-name">Senate Transportation, Public Utilities, Energy &amp; Technology Committee</div>
+            <div class="committee-controls">Standing committee, 8 members. Reviewed H.B. 468 (2025).</div>
+          </div>
+          <div class="committee-chamber">Senate &middot; Standing</div>
+        </div>
+        <div class="roster-grid">
+          <div class="roster-chip"><span class="role">Chair</span>Wayne A. Harper (R)</div>
+          <div class="roster-chip">J. Stuart Adams (R)<span class="why">Senate President.</span></div>
+          <div class="roster-chip">Don L. Ipson (R)</div>
+          <div class="roster-chip">Karen Kwan (D)</div>
+          <div class="roster-chip">Ann Millner (R)<span class="why">Controls Northern Utah Legislative PAC (NUPAC); own network file in this investigation.</span></div>
+          <div class="roster-chip">Kathleen A. Riebe (D)</div>
+          <div class="roster-chip">Chris H. Wilson (R)<span class="why">"Friends of Chris Wilson Inc." PAC; own network file in this investigation.</span></div>
+          <div class="roster-chip">Ronald M. Winterton (R)</div>
+        </div>
+        <div class="bill-row">
+          <div class="bill-head">
+            <div class="bill-name">H.B. 468, Automatic License Plate Reader Amendments</div>
+            <span class="verdict-pill dead">Approved 6&ndash;0&ndash;2, then killed on the floor</span>
+          </div>
+          <div class="bill-desc">Same bill as above &mdash; this committee's approval was the bill's last recorded vote of any kind before it died.</div>
+          <div class="vote-strip"><span class="vote-chip">Committee: <b>6&ndash;0&ndash;2</b>, Mar. 4, 2025</span><span class="vote-chip">Killed: <b>11:59 p.m., Mar. 7, 2025</b></span></div>
+          <div class="rubric-row">
+            <div class="rubric-item"><span class="dim">Transparency</span>Last body to vote on the bill's substance &mdash; unanimously in favor</div>
+            <div class="rubric-item"><span class="dim">Enforcement</span>Had no role in, and left no record explaining, the subsequent floor kill</div>
+            <div class="rubric-item"><span class="dim">Conflicts of Interest</span>No disclosed vendor ties found among these members in this investigation</div>
+            <div class="rubric-item"><span class="dim">Public Participation</span>Public committee vote; the strike three days later was not a recorded floor vote</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="committee-card">
+        <div class="committee-head">
+          <div>
+            <div class="committee-name">Senate Judiciary, Law Enforcement &amp; Criminal Justice Committee</div>
+            <div class="committee-controls">Standing committee, 9 members. Was assigned S.B. 138 (2025) &mdash; and never heard it.</div>
+          </div>
+          <div class="committee-chamber">Senate &middot; Standing</div>
+        </div>
+        <div class="roster-grid">
+          <div class="roster-chip"><span class="role">Chair</span>Todd Weiler (R)<span class="why">Sponsored the original 2013/2014 ALPR statutes (S.B. 196, S.B. 222) that created this legal framework in the first place.</span></div>
+          <div class="roster-chip">Heidi Balderree (R)</div>
+          <div class="roster-chip">Brady Brammer (R)<span class="why">SD 21; own campaign-finance file in this investigation.</span></div>
+          <div class="roster-chip">Kirk A. Cullimore (R)<span class="why">SD 19; own full committee-footprint file in this investigation.</span></div>
+          <div class="roster-chip">Luz Escamilla (D)<span class="why">Senate Minority Leader; own campaign-finance file in this investigation.</span></div>
+          <div class="roster-chip">Lincoln Fillmore (R)<span class="why">Chairs Senate Rules Committee &mdash; the body every one of these dead bills passed through on the way to being killed.</span></div>
+          <div class="roster-chip">Michael K. McKell (R)<span class="why">Majority Assistant Whip; own campaign-finance file in this investigation.</span></div>
+          <div class="roster-chip">Calvin R. Musselman (R)</div>
+          <div class="roster-chip">Stephanie Pitcher (D)</div>
+        </div>
+        <div class="bill-row">
+          <div class="bill-head">
+            <div class="bill-name">S.B. 138, License Plate Reader Amendments</div>
+            <span class="verdict-pill dead">Never considered</span>
+          </div>
+          <div class="bill-desc">Sponsored by Sen. Derrin R. Owens. Would have prohibited selling captured plate data, required crime-type and incident-number recordkeeping preserved five years, and created a court-order process for obtaining data from non-governmental ALPR operators &mdash; provisions substantially overlapping with what H.B. 468 proposed the same session.</div>
+          <div class="vote-strip"><span class="vote-chip">Referred: <b>Jan. 23, 2025</b></span><span class="vote-chip">Not Considered: <b>Jan. 28, 2025</b></span><span class="vote-chip">Returned to Rules: <b>Mar. 4, 2025</b></span><span class="vote-chip">Killed: <b>Mar. 7, 2025</b></span></div>
+          <div class="rubric-row">
+            <div class="rubric-item"><span class="dim">Transparency</span>No hearing means no public record of why this committee declined to take it up</div>
+            <div class="rubric-item"><span class="dim">Enforcement</span>N/A &mdash; never reached a vote of any kind</div>
+            <div class="rubric-item"><span class="dim">Conflicts of Interest</span>Chair Fillmore's separate role chairing Senate Rules is the one structural overlap worth flagging: the same body that controls what gets a hearing also controls what gets struck</div>
+            <div class="rubric-item"><span class="dim">Public Participation</span>Lowest of the four bills in this set &mdash; the public got no hearing to attend at all</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <section id="sedi">
+      <div class="eyebrow">The Newest Entry In The Same Pattern</div>
+      <h2 class="section-title">2026's new governance body: SEDI</h2>
+      <p class="section-sub">Not a legislative committee &mdash; a new statutory program, created this session, that puts real oversight machinery on the books and then defers almost all of it. Same personnel, same shape as the ALPR story above.</p>
+      <div class="card">
+        <p style="margin-bottom:14px;"><strong>S.B. 275, State-Endorsed Digital Identity Program Amendments</strong> passed the Senate 25&ndash;0 and the House unanimously, signed by Gov. Cox, effective May 6, 2026. Chief sponsor Sen. Kirk Cullimore &mdash; the same senator who sits on the Privacy Governing Board, floor-sponsored HB 220 (Public Safety Data Amendments) and HB 320 (Office of Artificial Intelligence Policy Amendments), and appears throughout this investigation's committee footprint. House sponsor Rep. Paul Cutler.</p>
+        <p style="margin-bottom:14px;">The bill creates the State-Endorsed Digital Identity (SEDI) Program inside the Department of Government Operations, along with a "digital identity bill of rights": the right to use a physical ID instead, the right not to be compelled to use a digital one, selective disclosure of only what a transaction requires, and a stated right to be free from surveillance and tracking through the system itself.</p>
+        <p style="margin-bottom:14px;">Enforcement runs through the same two channels every other privacy structure in this investigation already relies on: complaints to the Data Privacy Ombudsperson, and civil actions the Attorney General may choose to bring. There is no new independent auditor and no new committee with a standing oversight role. The bill's own external check &mdash; a comprehensive audit by the Office of the Legislative Auditor General &mdash; does not begin until <strong>January 2028</strong>, nearly two years after the program takes effect.</p>
+        <div class="rubric-row">
+          <div class="rubric-item"><span class="dim">Transparency</span>Codifies an explicit anti-surveillance right in statute &mdash; a real, citable protection</div>
+          <div class="rubric-item"><span class="dim">Enforcement</span>Complaint- and AG-driven only until 2028; no standing committee or independent auditor exists before then</div>
+          <div class="rubric-item"><span class="dim">Conflicts of Interest</span>Same sponsor (Cullimore) who sits on the Privacy Governing Board that oversees adjacent privacy infrastructure</div>
+          <div class="rubric-item"><span class="dim">Public Participation</span>Passed unanimously with wide stakeholder input (Libertas, ACLU, Utah Blockchain Coalition among those consulted) &mdash; the most publicly vetted bill in this set</div>
+        </div>
+        <p style="margin-top:14px; margin-bottom:0;">The throughline: whether the subject is license plate cameras or a new statewide digital ID, the legislature keeps building the same shape &mdash; real rights and rules written into statute, paired with an oversight mechanism that doesn't start checking those rules for months or years, if it exists at all yet.</p>
+      </div>
+
+      <div class="committee-card" style="margin-top:20px;">
+        <div class="committee-head">
+          <div>
+            <div class="committee-name">Utah Privacy Governing Board</div>
+            <div class="committee-controls">Advisory body, 5 members, meets at least twice a year. Approves the Privacy Commission's agenda, evaluates ODP's structure and authority, and recommends privacy-policy funding &mdash; this is the body with standing oversight of the whole SEDI/ODP apparatus described above.</div>
+          </div>
+          <div class="committee-chamber">Executive &amp; Legislative &middot; Advisory</div>
+        </div>
+        <div class="roster-grid">
+          <div class="roster-chip"><span class="role">Chair</span>Marvin Dodge (Governor Designee)</div>
+          <div class="roster-chip">Tina M. Cannon <span class="why">State Auditor.</span></div>
+          <div class="roster-chip">Rep. David Shallenberger <span class="why">House Speaker Designee; also sponsored HB 450 (Data Privacy Amendments, 2026), floor-sponsored by Cullimore.</span></div>
+          <div class="roster-chip">Sen. Kirk Cullimore <span class="why">Senate Majority Whip, Senate President Designee. Wrote the GDPA that created this board, chief-sponsored SB 275 (SEDI) and HB 220 (Public Safety Data Amendments), floor-sponsored HB 320 (Office of AI Policy) &mdash; and sits on the board that oversees the office implementing the law he wrote.</span></div>
+          <div class="roster-chip">John Dougall <span class="why">Attorney General Designee &mdash; the same office SEDI's enforcement mechanism runs through.</span></div>
+        </div>
+        <div class="bill-row">
+          <div class="bill-head">
+            <div class="bill-name">Structural role, not a single bill</div>
+            <span class="verdict-pill mixed">Oversees, but doesn't audit</span>
+          </div>
+          <div class="bill-desc">The board's powers are consultative and approval-based &mdash; recommending policy, approving what the Privacy Commission puts on its own agenda, evaluating ODP's authority. It has no independent audit function of its own; SEDI's one external audit doesn't begin until January 2028, and nothing in the board's own powers accelerates that.</div>
+          <div class="rubric-row">
+            <div class="rubric-item"><span class="dim">Transparency</span>Meetings are public-noticed, minutes posted &mdash; the most visible body in this whole set</div>
+            <div class="rubric-item"><span class="dim">Enforcement</span>Advisory only; no statutory audit or enforcement power of its own</div>
+            <div class="rubric-item"><span class="dim">Conflicts of Interest</span>The senator who wrote the law sits on the board overseeing its implementation, and floor-sponsors adjacent bills the same board's designees have interests in</div>
+            <div class="rubric-item"><span class="dim">Public Participation</span>Meets only twice yearly minimum &mdash; the lowest meeting cadence of any body on this page</div>
+          </div>
+          <p style="margin-top:12px; font-size:14px;">The board's own Dec. 15, 2025 minutes record a public commenter, a private citizen who had worked directly with the ODP Ombudsperson on a prior complaint, telling the board he did not know who ultimately controls shared personal data once it leaves the originating entity, or how it gets used afterward &mdash; the same structural question the 5.1-million-search dataset above answers empirically. The minutes show no board follow-up or assigned action on that comment. The same meeting reported the Ombudsperson's office fielded 21 complaints in FY2026 (up from 19 in FY2025), with the most common categories being data collection, lack of transparency, unauthorized disclosure, and compliance failures &mdash; and confirmed Rep. Shallenberger's seat began that day, replacing Jefferson Moss.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="rules-overlap">
+      <div class="eyebrow">The Common Thread</div>
+      <h2 class="section-title">Every path runs through the same room</h2>
+      <p class="section-sub">Three different committees heard these bills on the merits &mdash; two of them unanimously in favor. None of that mattered once the bill reached Senate Rules with the session's final days closing in.</p>
+      <div class="card">
+        <p style="margin-bottom:14px;">Senate Rules Committee, chaired by Sen. Lincoln Fillmore, is the body every one of these bills passed through immediately before dying. It decides which bills reach the floor for a final vote and which get returned there to expire. Fillmore also sits on the Senate Judiciary, Law Enforcement &amp; Criminal Justice Committee &mdash; the same committee that scheduled S.B. 138 for a hearing and then never took it up.</p>
+        <p style="margin-bottom:0;">This is not unique to ALPR bills. The identical sequence &mdash; committee approval or scheduling, a return to Rules with days left in the session, an 11:59 p.m. enacting-clause strike on the final night &mdash; also killed S.B. 318 (data-center transparency, 2026) and H.B. 286 (AI Transparency Act, 2026). Whoever moved each individual strike is not established in the record reviewed for this piece. What is established is the choke point: not the committee that hears the bill, but whatever happens to it in Rules afterward.</p>
+      </div>
+    </section>
+
+    <section id="takeaway">
+      <div class="takeaway">
+        <div class="eyebrow">Primary Takeaway</div>
+        <p class="big">Every committee with real jurisdiction over ALPR oversight has, at some point, voted for it. None of that has mattered. The bills that would close Utah's GRAMA gap keep dying in the same room, after the committees are done with them.</p>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong style="color:var(--ink);">Sources &amp; methodology</strong>
+    <ul class="sources-list">
+      <li>Utah Legislature committee rosters, le.utah.gov (House Transportation, Senate Transportation, Senate Judiciary/Law Enforcement/Criminal Justice, 2025)</li>
+      <li>Bill status and vote history: H.B. 468 (2025), S.B. 138 (2025), H.B. 327 (2026), S.B. 250 (2023) &mdash; le.utah.gov and FastDemocracy bill tracking</li>
+      <li>Senate Committee Assignments 2025&ndash;2026, senate.utah.gov</li>
+      <li>House Law Enforcement and Criminal Justice Committee report on H.B. 327, pf.utleg.gov</li>
+      <li>Citizen Portal, "House approves bill setting statewide rules for automatic license-plate readers," Feb. 27, 2025</li>
+      <li>S.B. 275, State-Endorsed Digital Identity Program Amendments (2026 General Session), enrolled text, le.utah.gov; Libertas Institute and CSG West coverage of the 2026 SEDI Summit</li>
+      <li>Utah Privacy Governing Board meeting minutes, Dec. 15, 2025, Senate Building Rm 220</li>
+    </ul>
+    <p style="margin-top:16px;">This page does not allege that any individual legislator acted to block ALPR oversight for an improper reason. It documents the recorded committee and floor history of each bill and notes where the same individuals or structures recur, without inferring motive beyond what the record shows.</p>
+  </div>
+</footer>
+
+</body>
+</html>
