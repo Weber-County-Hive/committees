@@ -44,6 +44,16 @@ const COMMITTEES = [
     summary: "Seven voting seats, three tied to project geography with an automatic-vacancy rule — and one seat, the chairmanship, with no equivalent rule at all as its holder heads into a lost election.",
     page: "weber-hive-committee-mida-board.html",
     status: "live"
+  },
+  {
+    id: "federalism",
+    name: "Federalism Commission",
+    short: "FED",
+    chambers: "Senate interim · House interim · Joint body",
+    controls: "Federal-state relations research, recommended legislation, national coordination infrastructure",
+    summary: "A body established in 2013 was rebuilt across three 2025 bills into something with real machinery: a university-housed institute tasked by statute with building a 50-state network, a PR contract that helped fund an actual lawsuit, and a pipeline that routes every federal guidance letter received by any state agency to its chairs. Its public record shows no engagement when the target moved from federal land to federal AI policy.",
+    page: "weber-hive-committee-federalism.html",
+    status: "live"
   }
   // Next committee goes here, e.g.:
   // {
