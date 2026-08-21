@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Federalism Commission — Weber County Hive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,500;0,700;0,900;1,600&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1e2a22;
+    --ink-soft:#2c3a30;
+    --paper:#ece5d1;
+    --paper-card:#f7f2e4;
+    --paper-line:#d8cfb2;
+    --water:#2c6e76;
+    --mineral:#a6552e;
+    --energy:#b6842a;
+    --federal:#5a3e8a;
+    --federal-soft:#e9e1f4;
+    --help:#4c6b3c; --help-soft:#e5ecdb;
+    --mixed:#b6842a; --mixed-soft:#f6ecd6;
+    --harm:#a13f2c; --harm-soft:#f4ded7;
+    --dead:#6b6255; --dead-soft:#e8e2d2;
+    --planned:#8a8271; --planned-soft:#e8e2d2;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Spectral',serif;line-height:1.6;}
+  h1,h2,h3{font-family:'Bitter',serif;color:var(--ink);margin:0 0 .3em;}
+  .mono{font-family:'IBM Plex Mono',monospace;letter-spacing:.03em;}
+  a{color:var(--water);}
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px;}
+
+  header.hero{border-bottom:6px solid var(--federal);background:var(--paper-card);padding:56px 0 40px;}
+  .badge{display:inline-block;background:var(--federal);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:.78rem;font-weight:600;letter-spacing:.08em;padding:5px 12px;border-radius:3px;margin-bottom:16px;}
+  header.hero h1{font-size:2.5rem;font-weight:900;margin-bottom:8px;}
+  .chambers{font-family:'IBM Plex Mono',monospace;font-size:.85rem;color:var(--ink-soft);letter-spacing:.02em;margin-bottom:18px;}
+  .dek{font-size:1.15rem;color:var(--federal);font-weight:600;font-style:italic;max-width:680px;margin-bottom:14px;}
+  .summary{font-size:1.05rem;max-width:680px;color:var(--ink-soft);}
+
+  nav.jump{background:var(--ink);padding:14px 0;position:sticky;top:0;z-index:10;}
+  nav.jump .wrap{display:flex;flex-wrap:wrap;gap:8px;}
+  nav.jump button{font-family:'IBM Plex Mono',monospace;font-size:.75rem;letter-spacing:.03em;background:transparent;color:#e8e2cf;border:1px solid #445044;padding:6px 12px;border-radius:20px;cursor:pointer;}
+  nav.jump button:hover{background:var(--federal);border-color:var(--federal);color:#fff;}
+
+  section{padding:52px 0;border-bottom:1px solid var(--paper-line);}
+  section .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--federal);margin-bottom:10px;}
+  section h2{font-size:1.7rem;margin-bottom:18px;}
+  section p{max-width:720px;}
+
+  .card{background:var(--paper-card);border:1px solid var(--paper-line);border-radius:8px;padding:20px 22px;margin:14px 0;}
+  .card h3{font-size:1.05rem;margin-bottom:6px;}
+  .card .meta{font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--ink-soft);margin-bottom:8px;}
+
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px;}
+  @media (max-width:720px){.split{grid-template-columns:1fr;}}
+  .col-used{border-left:5px solid var(--help);background:var(--help-soft);border-radius:0 8px 8px 0;padding:18px 20px;}
+  .col-notused{border-left:5px solid var(--harm);background:var(--harm-soft);border-radius:0 8px 8px 0;padding:18px 20px;}
+  .col-used h3{color:#2f4a24;}
+  .col-notused h3{color:#7a2c1c;}
+  .split ul{padding-left:20px;margin:0;}
+  .split li{margin-bottom:12px;}
+
+
+  .roster-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-top:18px;}
+  @media (max-width:820px){.roster-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:520px){.roster-grid{grid-template-columns:1fr;}}
+
+  .flip-card{background:transparent;height:220px;perspective:1200px;cursor:pointer;}
+  .flip-card-inner{position:relative;width:100%;height:100%;text-align:left;transition:transform .55s cubic-bezier(.4,.2,.2,1);transform-style:preserve-3d;}
+  .flip-card.is-flipped .flip-card-inner{transform:rotateY(180deg);}
+  .flip-card-front, .flip-card-back{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:8px;border:1px solid var(--paper-line);padding:18px 18px;overflow:hidden;display:flex;flex-direction:column;}
+  .flip-card-front{background:var(--paper-card);justify-content:space-between;}
+  .flip-card-back{background:var(--ink);color:#e8e2cf;transform:rotateY(180deg);overflow-y:auto;}
+  .flip-card .name{font-family:'Bitter',serif;font-weight:700;font-size:1.05rem;line-height:1.25;}
+  .flip-card .role{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--ink-soft);margin-top:6px;line-height:1.4;}
+  .flip-card .flip-hint{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--federal);letter-spacing:.06em;margin-top:auto;padding-top:10px;}
+  .flip-card-back .back-label{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:#b7a8e0;margin-bottom:8px;}
+  .flip-card-back p{font-family:'Spectral',serif;font-size:.85rem;line-height:1.5;margin:0;color:#e8e2cf;}
+  .flip-card-back .flip-hint{color:#b7a8e0;font-family:'IBM Plex Mono',monospace;font-size:.66rem;margin-top:auto;padding-top:10px;}
+
+  .timeline{border-left:3px solid var(--federal);margin-left:8px;padding-left:22px;}
+  .tl-item{position:relative;margin-bottom:22px;}
+  .tl-item::before{content:'';position:absolute;left:-28px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--federal);}
+  .tl-date{font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--federal);font-weight:600;}
+
+  .pull{font-family:'Bitter',serif;font-style:italic;font-size:1.25rem;color:var(--federal);border-left:4px solid var(--federal);padding:6px 0 6px 20px;margin:24px 0;max-width:680px;}
+
+  details{background:var(--paper-card);border:1px solid var(--paper-line);border-radius:8px;padding:14px 18px;margin:10px 0;}
+  summary{cursor:pointer;font-weight:600;font-family:'IBM Plex Mono',monospace;font-size:.85rem;}
+  details p{margin:10px 0 0;}
+
+  table.tally{width:100%;border-collapse:collapse;margin-top:14px;font-size:.92rem;}
+  table.tally th, table.tally td{border:1px solid var(--paper-line);padding:8px 10px;text-align:left;}
+  table.tally th{background:var(--ink);color:#f0ead9;font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.05em;}
+
+  footer{background:var(--ink);color:#cfc7ae;padding:40px 0;}
+  footer .brand{font-family:'IBM Plex Mono',monospace;letter-spacing:.1em;font-weight:600;color:#f0ead9;}
+  footer .fine{font-size:.8rem;color:#a39c86;max-width:680px;margin-top:8px;}
+  footer a{color:#d8cfb2;}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="badge">FED</span>
+    <h1>Federalism Commission</h1>
+    <div class="chambers">Senate interim &middot; House interim &middot; joint body &middot; established 2013, rebuilt 2025</div>
+    <div class="dek">Studies and recommends legislation on federal&ndash;state relations &mdash; but the statute doesn&rsquo;t stop there: it tasks a public university with designing a national organization and recruiting private-sector help to sell it to other states.</div>
+    <p class="summary">A body established in 2013 was rebuilt across three 2025 bills into something with real machinery: a university-housed institute tasked by statute with building a 50-state network, a PR contract that helped fund an actual lawsuit, and a pipeline that routes every federal guidance letter received by any state agency to its chairs. Its public record shows no engagement when the target moved from federal land to federal AI policy.</p>
+  </div>
+</header>
+
+<nav class="jump">
+  <div class="wrap">
+    <button data-scroll-to="who">Who&rsquo;s On It</button>
+    <button data-scroll-to="machinery">The Machinery</button>
+    <button data-scroll-to="usedit">Used It / Didn&rsquo;t</button>
+    <button data-scroll-to="aistory">The AI Story</button>
+    <button data-scroll-to="network">The National Network</button>
+    <button data-scroll-to="quotes">In Their Own Words</button>
+    <button data-scroll-to="open">Open Questions</button>
+  </div>
+</nav>
+
+<section id="who">
+  <div class="wrap">
+    <div class="eyebrow">Movement One</div>
+    <h2>Who Sits On It</h2>
+    <p>Fourteen voting members &mdash; five senators, nine representatives &mdash; plus a long bench of nonvoting advisors that includes three former U.S. Representatives from both parties.</p>
+
+    <h3 style="margin-top:28px;font-size:1rem;">Chairs</h3>
+    <div class="roster-grid">
+      <div class="flip-card" tabindex="0" role="button" aria-label="Sen. Keven J. Stratton, tap for more">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div><div class="name">Sen. Keven J. Stratton (R)</div><div class="role">Senate Chair</div></div>
+            <div class="flip-hint">TAP FOR MORE &rarr;</div>
+          </div>
+          <div class="flip-card-back">
+            <div class="back-label">Also connects to</div>
+            <p>Personally participated in UVU CCS&rsquo;s &ldquo;Functional Federalism Academy&rdquo; programming alongside a sitting Hawaii state representative &mdash; direct evidence the chair of Utah&rsquo;s own Commission is also a working part of the university network built to run it.</p>
+            <div class="flip-hint">&larr; TAP TO FLIP BACK</div>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card" tabindex="0" role="button" aria-label="Rep. Ken Ivory, tap for more">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div><div class="name">Rep. Ken Ivory (R)</div><div class="role">House Chair</div></div>
+            <div class="flip-hint">TAP FOR MORE &rarr;</div>
+          </div>
+          <div class="flip-card-back">
+            <div class="back-label">Also connects to</div>
+            <p>Founder of the American Lands Council, a separate privately-funded federal-land-transfer advocacy group. House sponsor of SB 57. Personally welcomed CFI director Troy Smith&rsquo;s appointment, calling it &ldquo;the academic cornerstone of Utah&rsquo;s National Federalism Initiative.&rdquo;</p>
+            <div class="flip-hint">&larr; TAP TO FLIP BACK</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:28px;font-size:1rem;">Voting members</h3>
+    <div class="roster-grid">
+      <div class="flip-card" tabindex="0" role="button" aria-label="Sen. David P. Hinkins, tap for more">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div><div class="name">Sen. David P. Hinkins (R)</div><div class="role">Voting member &middot; Senate sponsor, HB 5 &amp; HCR 1</div></div>
+            <div class="flip-hint">TAP FOR MORE &rarr;</div>
+          </div>
+          <div class="flip-card-back">
+            <div class="back-label">Also connects to</div>
+            <p>Senate sponsor of HB 5 and HCR 1, part of a coordinated nuclear-reprocessing water bill package. Received $5,800 from Lincoln Hill Partners across the 2024&ndash;2026 cycles. Chaired the March 6, 2026 conference committee that voted 6&ndash;0 to remove a $5 million DNR litigation-fund appropriation from HB 125 while keeping the bill&rsquo;s water-policy provisions intact.</p>
+            <div class="flip-hint">&larr; TAP TO FLIP BACK</div>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card" tabindex="0" role="button" aria-label="Sen. Karen Kwan, tap for more">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div><div class="name">Sen. Karen Kwan (D)</div><div class="role">Voting member &middot; Senate Minority Whip</div></div>
+            <div class="flip-hint">TAP FOR MORE &rarr;</div>
+          </div>
+          <div class="flip-card-back">
+            <div class="back-label">Also connects to</div>
+            <p>Sits on 16 committees total, more than any other legislator in this tracker &mdash; including Executive Appropriations, Rules, and both the Economic Development &amp; Workforce Services standing and confirmation committees. Raised $328,004.66 across 1,191 contributions in her 2024&ndash;2026 disclosures (partial 2026 data) &mdash; the largest total of any legislator in the Hive&rsquo;s campaign-finance tracker.</p>
+            <div class="flip-hint">&larr; TAP TO FLIP BACK</div>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card" tabindex="0" role="button" aria-label="Sen. Derrin R. Owens, tap for more">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div><div class="name">Sen. Derrin R. Owens (R)</div><div class="role">Voting member &middot; chairs Senate NRAE</div></div>
+            <div class="flip-hint">TAP FOR MORE &rarr;</div>
+          </div>
+          <div class="flip-card-back">
+            <div class="back-label">Also connects to</div>
+            <p>Chairs the Senate Natural Resources, Agriculture and Environment Committee &mdash; already documented on this site as the committee behind the failed S.B. 250 attempt to move $200 million from WIRA to the Great Salt Lake.</p>
+            <div class="flip-hint">&larr; TAP TO FLIP BACK</div>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card" tabindex="0" role="button" aria-label="Sen. Ronald M. Winterton, tap for more">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div><div class="name">Sen. Ronald M. Winterton (R)</div><div class="role">Voting member</div></div>
+            <div class="flip-hint">TAP FOR MORE &rarr;</div>
+          </div>
+          <div class="flip-card-back">
+            <div class="back-label">Also connects to</div>
+            <p>Chaired the Senate Natural Resources Committee hearing where SB 57&rsquo;s Blouin amendment was never brought to a vote. Senate sponsor of HB 379, the bill expanding this Commission&rsquo;s own reach.</p>
+            <div class="flip-hint">&larr; TAP TO FLIP BACK</div>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card" tabindex="0" role="button" aria-label="Rep. Carl R. Albrecht, tap for more">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div><div class="name">Rep. Carl R. Albrecht (R)</div><div class="role">Voting member</div></div>
+            <div class="flip-hint">TAP FOR MORE &rarr;</div>
+          </div>
+          <div class="flip-card-back">
+            <div class="back-label">Also connects to</div>
+            <p>Chief sponsor of HCR 1 (advanced nuclear manufacturing resolution) and HB 222 (greenhouse-gas liability shield, co-presented with Utah Mining Association lobbyist Jon Cox). Received $2,000 from Lincoln Hill Partners on 9/12/2024 and a combined $46,326 across 2024&ndash;2026. Also sits on the Federalism Commission alongside Sen. David Hinkins, HCR 1&rsquo;s Senate sponsor &mdash; combined with Rep. Stewart Barlow, the three received $182,772 total from an overlapping donor base of energy and development PACs.</p>
+            <div class="flip-hint">&larr; TAP TO FLIP BACK</div>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card" tabindex="0" role="button" aria-label="Rep. Rob Bishop, tap for more">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div><div class="name">Rep. Rob Bishop (R)</div><div class="role">Voting member &middot; former U.S. Congressman</div></div>
+            <div class="flip-hint">TAP FOR MORE &rarr;</div>
+          </div>
+          <div class="flip-card-back">
+            <div class="back-label">Also connects to</div>
+            <p>A sitting state representative AND a formal voting Commissioner &mdash; not merely an advisor. Longtime anti-federal-lands crusader in Congress before returning to state office. Presented to the Commission on federal involvement in education.</p>
+            <div class="flip-hint">&larr; TAP TO FLIP BACK</div>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card" tabindex="0" role="button" aria-label="Rep. Kay J. Christofferson, tap for more">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div><div class="name">Rep. Kay J. Christofferson (R)</div><div class="role">Voting member &middot; chairs House Transportation</div></div>
+            <div class="flip-hint">TAP FOR MORE &rarr;</div>
+          </div>
+          <div class="flip-card-back">
+            <div class="back-label">Also connects to</div>
+            <p>VP/President at Horrocks Engineers (heavy civil construction) while chairing the House committee with jurisdiction over transportation legislation &mdash; the same industry-regulator overlap pattern documented elsewhere on this site.</p>
+            <div class="flip-hint">&larr; TAP TO FLIP BACK</div>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card" tabindex="0" role="button" aria-label="Rep. Jennifer Dailey-Provost, tap for more">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div><div class="name">Rep. Jennifer Dailey-Provost (D)</div><div class="role">Voting member &middot; House Minority Whip</div></div>
+            <div class="flip-hint">TAP FOR MORE &rarr;</div>
+          </div>
+          <div class="flip-card-back">
+            <div class="back-label">Also connects to</div>
+            <p>Spoke at the Sept. 2025 NFI Summit at the Grand America Hotel alongside Gov. Cox and Speaker Schultz &mdash; a Democratic leader lending bipartisan visibility to the Commission&rsquo;s national-outreach effort.</p>
+            <div class="flip-hint">&larr; TAP TO FLIP BACK</div>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card" tabindex="0" role="button" aria-label="Rep. Rosalba Dominguez, tap for more">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div><div class="name">Rep. Rosalba Dominguez (D)</div><div class="role">Voting member</div></div>
+            <div class="flip-hint">TAP FOR MORE &rarr;</div>
+          </div>
+          <div class="flip-card-back">
+            <div class="back-label">Also connects to</div>
+            <p>Sole dissenting vote (9-1-2) on HB 222, the greenhouse-gas liability shield, House Public Utilities &amp; Energy Committee, 1/29/2026 &mdash; the bill Federalism Commission colleague Rep. Carl Albrecht chief-sponsored. The bill went on to pass the House floor 63-8-4.</p>
+            <div class="flip-hint">&larr; TAP TO FLIP BACK</div>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card" tabindex="0" role="button" aria-label="Rep. Michael J. Petersen, tap for more">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div><div class="name">Rep. Michael J. Petersen (R)</div><div class="role">Voting member</div></div>
+            <div class="flip-hint">TAP FOR MORE &rarr;</div>
+          </div>
+          <div class="flip-card-back">
+            <div class="back-label">Also connects to</div>
+            <p>2026 Convention report shows $500 each from Howard S. Rich TTEE and Arthur Dantchik, both listed at the same Bala Cynwyd, PA address &mdash; the seventh Commission-adjacent legislator on file with a Howard Rich contribution. His campaign contributions dropped from $13,900 in 2024 to $260.54 for all of 2025, most of it credit-union dividend interest under $1 per transaction.</p>
+            <div class="flip-hint">&larr; TAP TO FLIP BACK</div>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card" tabindex="0" role="button" aria-label="Rep. Calvin Roberts, tap for more">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div><div class="name">Rep. Calvin Roberts (R)</div><div class="role">Voting member</div></div>
+            <div class="flip-hint">TAP FOR MORE &rarr;</div>
+          </div>
+          <div class="flip-card-back">
+            <div class="back-label">Also connects to</div>
+            <p>House sponsor of H.B. 475, which created the Economic Development Council. Sits on the House Business, Labor &amp; Commerce and House Rules committees, and on the Federalism Commission simultaneously.</p>
+            <div class="flip-hint">&larr; TAP TO FLIP BACK</div>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card" tabindex="0" role="button" aria-label="Rep. Jason E. Thompson, tap for more">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div><div class="name">Rep. Jason E. Thompson (R)</div><div class="role">Voting member</div></div>
+            <div class="flip-hint">TAP FOR MORE &rarr;</div>
+          </div>
+          <div class="flip-card-back">
+            <div class="back-label">Also connects to</div>
+            <p>Sold Fox Pest Control to Rollins, Inc. eight months before running for office, then self-funded roughly half his $190,000 war chest (single contributions of $50,000 on 1/11/2024 and $40,000 on 9/18/2024). His two largest campaign expenditures &mdash; $31,461 to Election Hive and $20,509 to In the Field LLC &mdash; are the same Matthew Lusty/Hayden Richardson vendor pair that recurs across campaign spending by legislators in Speaker Schultz&rsquo;s donor and vendor network. Also received $500 from Howard S. Rich TTEE on 1/9/2026, the sixth Commission-adjacent legislator on file with a contribution from that donor.</p>
+            <div class="flip-hint">&larr; TAP TO FLIP BACK</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:28px;font-size:1rem;">Nonvoting members (partial)</h3>
+    <div class="roster-grid">
+      <div class="flip-card" tabindex="0" role="button" aria-label="Jason Chaffetz, tap for more">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div><div class="name">Jason Chaffetz</div><div class="role">Nonvoting &middot; former U.S. Congressman</div></div>
+            <div class="flip-hint">TAP FOR MORE &rarr;</div>
+          </div>
+          <div class="flip-card-back">
+            <div class="back-label">Also connects to</div>
+            <p>Senior Adviser at American Global Strategies LLC, founded by Robert O&rsquo;Brien (Trump&rsquo;s former National Security Advisor). Doing paid consulting work tied to the Stratos data center project. Fox News contributor; fellow at Heritage Foundation and the Government Accountability Institute. Rumored 2028 Utah governor candidate. Not a registered lobbyist himself, but several of his former congressional staffers now are.</p>
+            <div class="flip-hint">&larr; TAP TO FLIP BACK</div>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card" tabindex="0" role="button" aria-label="Ben McAdams, tap for more">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div><div class="name">Ben McAdams</div><div class="role">Nonvoting &middot; former U.S. Congressman (D) &amp; SLC Mayor</div></div>
+            <div class="flip-hint">TAP FOR MORE &rarr;</div>
+          </div>
+          <div class="flip-card-back">
+            <div class="back-label">On this Commission</div>
+            <p>One of three former U.S. Representatives sitting as nonvoting advisors &mdash; the only Democrat of the three, alongside Republicans Chaffetz and Stewart. Worth checking for any current lobbying, consulting, or board roles paralleling Chaffetz&rsquo;s Stratos work.</p>
+            <div class="flip-hint">&larr; TAP TO FLIP BACK</div>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card" tabindex="0" role="button" aria-label="Chris Stewart, tap for more">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div><div class="name">Chris Stewart</div><div class="role">Nonvoting &middot; former U.S. Congressman</div></div>
+            <div class="flip-hint">TAP FOR MORE &rarr;</div>
+          </div>
+          <div class="flip-card-back">
+            <div class="back-label">Also connects to</div>
+            <p>Senior Advisor at Kyle House Group, a Washington, D.C. government-relations and lobbying firm (per OpenSecrets, the firm reported $1,770,000 from 9 clients in 2025). Also former President/CEO of the Shipley Group, an energy and environmental consulting firm, and a 14-year Air Force pilot who flew rescue helicopters and the B-1B bomber.</p>
+            <div class="flip-hint">&larr; TAP TO FLIP BACK</div>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card" tabindex="0" role="button" aria-label="Jim Moss (James Moss Jr.), tap for more">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div><div class="name">Jim Moss (James Moss Jr.)</div><div class="role">Professional in Residence, Herbert Institute</div></div>
+            <div class="flip-hint">TAP FOR MORE &rarr;</div>
+          </div>
+          <div class="flip-card-back">
+            <div class="back-label">Also connects to</div>
+            <p>Represented Utah State Board of Education District 12, 2021&ndash;2025 (lost re-election, April 2024 GOP convention). BYU BA/JD, USC EdD; 25 years as an employment lawyer. Confirmed a different person from Jefferson Moss (GOED Commissioner/Nucleus Institute CEO) &mdash; no overlap in career, degrees, or institutions.</p>
+            <div class="flip-hint">&larr; TAP TO FLIP BACK</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:14px;font-size:.9rem;color:var(--ink-soft);">Rob Bishop and Jim Moss both hold formal &ldquo;Commissioner&rdquo; status, not merely advisory seats &mdash; per the Commission&rsquo;s own August 2025 meeting agenda. <strong>Jim Moss is confirmed, via UVU&rsquo;s own CFI staff page and independently via Ballotpedia, to be a distinct person from Jefferson Moss</strong> (GOED Commissioner/Nucleus Institute CEO). Full legal name James Moss Jr. &mdash; BA/JD from BYU, EdD from USC, 25 years practicing employment law at Payne &amp; Fears LLP, represented Utah State Board of Education District 12 (2021&ndash;2025, lost re-election at the April 2024 GOP convention), lives in Midway, Utah. No overlap with Jefferson Moss&rsquo;s documented energy/economic-development career.</p>
+  </div>
+</section>
+
+<section id="machinery">
+  <div class="wrap">
+    <div class="eyebrow">Movement Two</div>
+    <h2>The Machinery Built Since 2025</h2>
+    <p>Three bills in one year turned a study body into something with statutory teeth and a funding line.</p>
+
+    <div class="card">
+      <h3>HB 379 (2025)</h3>
+      <div class="meta">Expanded the Commission&rsquo;s reach</div>
+      <p>Let the Commission add nonvoting members and provide &ldquo;assistance&rdquo; to interim committees on federalism-related bills &mdash; the procedural hook that lets it help push sovereignty legislation through committees it doesn&rsquo;t sit on.</p>
+    </div>
+
+    <div class="card">
+      <h3>HB 488 (2025) &mdash; Utah Code &sect; 53H-4-703 / -704</h3>
+      <div class="meta">The one that matters most</div>
+      <p>Statutorily tasks Utah Valley University&rsquo;s Center for Constitutional Studies and the Herbert Institute for Public Policy to: train government employees in sovereignty doctrine; convene an annual multi-state conference; <strong>study and design a state-led national federalism organization</strong>; and <strong>coordinate with private-sector actors to conduct out-of-state outreach</strong> building political support in other states. This is not aspirational language &mdash; it is the verbatim statute.</p>
+    </div>
+
+    <div class="card">
+      <h3>SB 198 (2025) &mdash; Federal Guidance Letter Amendments</h3>
+      <div class="meta">A live surveillance pipeline</div>
+      <p>Requires every state agency to forward any federal guidance letter it receives to the Commission chairs and Legislative Management Committee within 15 days. The Commission built a review protocol with the Sutherland Institute and maintains a tracking spreadsheet flagging letters that &ldquo;appear to violate the principles of federalism.&rdquo;</p>
+    </div>
+
+    <div class="card">
+      <h3>SB 100 (2026) &mdash; Federalism Revisions</h3>
+      <div class="meta">Chief Sponsor Sen. Keven J. Stratton, House Sponsor Rep. Ken Ivory</div>
+      <p>Extends the SB 198 federal-guidance-letter reporting requirement to certain education entities; requires agencies to submit an electronic report to the Commission recommending how to handle each letter; requires the Commission to report annually to the Legislative Management Committee; and provides for &ldquo;the registration and use of certain federalism related trademarks.&rdquo;</p>
+    </div>
+
+    <div class="pull">&ldquo;Coordinate with private sector actors who agree to conduct out-of-state outreach to build national support for the commission&rsquo;s federalism efforts.&rdquo; &mdash; Utah Code &sect; 53H-4-703(4), verbatim</div>
+  </div>
+</section>
+
+<section id="usedit">
+  <div class="wrap">
+    <div class="eyebrow">Movement Three</div>
+    <h2>Where It Used Its Authority &mdash; And Where It Didn&rsquo;t</h2>
+    <p>The pattern holds every time it&rsquo;s checked: real, funded, staffed machinery whenever the target is outward &mdash; federal jurisdiction, other states&rsquo; legislatures. Silence, with no recorded explanation, on the two moments that would have added accountability to the Commission&rsquo;s own use of power.</p>
+
+    <div class="split">
+      <div class="col-used">
+        <h3>Used it</h3>
+        <ul>
+          <li><strong>HB3002</strong> (June 2024 special session) put $2.14M into a &ldquo;Federal Overreach Restricted Account,&rdquo; which became a $2.6M PR contract (Penna Powers) that helped fund Utah&rsquo;s actual lawsuit seeking ~18.5M acres of BLM land.</li>
+          <li><strong>SB 158</strong> (2025) forced PLPCO to produce a full audit of its own federal land applications, 2014&ndash;2024.</li>
+          <li>Commissioned a reanalysis of the 1957 Eisenhower jurisdiction study, finding 96%+ of federally controlled Utah land carries no asserted federal governing claim &mdash; built explicitly to support 2026 legislation.</li>
+          <li><strong>SB 198</strong>&rsquo;s 15-day letter pipeline, described above, is live and staffed.</li>
+        </ul>
+      </div>
+      <div class="col-notused">
+        <h3>Didn&rsquo;t use it</h3>
+        <ul>
+          <li>Sen. Nate Blouin&rsquo;s proposed federal-funds accountability amendment to SB 57 was never brought to a formal vote. No committee record on file explains why.</li>
+          <li>The Commission&rsquo;s own requested bill for the 2027 session, &ldquo;Public Lands Planning Amendments,&rdquo; shows: <strong>Requested: Yes &middot; Recommended: No.</strong> They asked for their own bill, then declined to send it forward.</li>
+          <li>After a November 2025 briefing finding federal funds make up ~30% of Utah&rsquo;s budget &mdash; its single largest funding source &mdash; the Commission&rsquo;s output was a vote to &ldquo;open a bill file&rdquo; for a federal-funds risk dashboard. No dashboard has been built or funded since.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="aistory">
+  <div class="wrap">
+    <div class="eyebrow">Movement Four</div>
+    <h2>When the Pressure Ran the Other Way</h2>
+    <p>HB 286, the AI Transparency Act, is the inverse of every case above: federal <em>deregulatory</em> pressure killing a state <em>regulation</em>. It is also the one case where the Commission&rsquo;s public record shows no engagement at all.</p>
+
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-date">Jan 27, 2026</div>Committee passes HB 286 8&ndash;0&ndash;2: tiered civil penalties, whistleblower protections, child-safety chatbot rules, frontier-model risk disclosure.</div>
+      <div class="tl-item"><div class="tl-date">Feb 5, 2026</div>Circled on the House floor by voice vote &mdash; pulled from an immediate vote, no explanation on the record.</div>
+      <div class="tl-item"><div class="tl-date">Feb 12, 2026</div>White House Office of Intergovernmental Affairs sends a one-sentence letter to Sen. Kirk Cullimore. David Sacks named by multiple outlets as driving the opposition. White House officials also spoke with sponsor Doug Fiefia directly, telling him no changes would satisfy them.</div>
+      <div class="tl-item"><div class="tl-date">Feb&ndash;Mar 2026</div>26-day stall. No floor action.</div>
+      <div class="tl-item"><div class="tl-date">Mar 3, 2026</div>Sent from the 3rd Reading Calendar back to House Rules &mdash; three days before session end.</div>
+      <div class="tl-item"><div class="tl-date">Mar 6, 2026, 11:59 PM</div>Enacting clause struck. Filed among bills not passed &mdash; the identical kill mechanism documented for HB 468 one session earlier.</div>
+      <div class="tl-item"><div class="tl-date">Mar 20, 2026</div>Six weeks later, the White House releases its own &ldquo;National Policy Framework for Artificial Intelligence,&rdquo; asking Congress for child-safety AI rules with no timeline attached.</div>
+    </div>
+
+    <div class="pull">The administration killed a state bill that already had child-safety protections ready to sign, then six weeks later asked Congress for a federal version with no timeline attached.</div>
+
+    <details>
+      <summary>Why didn&rsquo;t the Federalism Commission get involved?</summary>
+      <p>No discussion of HB 286 appears anywhere in the Commission&rsquo;s publicly available agendas or minutes. Utah&rsquo;s own institutional posture was conciliatory, not defensive: Speaker Mike Schultz said lawmakers would &ldquo;continue studying the legislation&rdquo; and that he understood the administration&rsquo;s concerns. Senate leadership had told reporters in January &mdash; before the letter even arrived &mdash; that they believed Utah had already won over the Trump administration through its 2023 AI regulatory sandbox approach.</p>
+      <p>One possible reading: the Commission&rsquo;s leadership and programming &mdash; Ivory, Stratton, PLPCO, the ALEC/SPN-adjacent events &mdash; are built around fighting federal <em>regulatory</em> overreach on land, guns, and funding strings. HB 286 was the opposite case, and defending it would have meant invoking federalism against the same White House the Commission&rsquo;s own coalition is broadly aligned with on deregulation. Not a missed opportunity so much as a mismatch of ideology.</p>
+    </details>
+  </div>
+</section>
+
+<section id="network">
+  <div class="wrap">
+    <div class="eyebrow">Movement Five</div>
+    <h2>The National Network</h2>
+    <p>HB 488&rsquo;s mandate isn&rsquo;t theoretical &mdash; the infrastructure it called for already exists and is running.</p>
+
+    <table class="tally">
+      <tr><th>Entity</th><th>Role</th><th>Confirmed link</th></tr>
+      <tr><td>UVU Center for Constitutional Studies</td><td>Training, curriculum, designs the national organization</td><td>Statutory duty under &sect; 53H-4-703</td></tr>
+      <tr><td>Gary R. Herbert Institute for Public Policy</td><td>Liaison + out-of-state private-sector outreach</td><td>Statutory duty under &sect; 53H-4-704; founding gifts from Larry H. &amp; Gail Miller Family Foundation and America First Credit Union</td></tr>
+      <tr><td>ALEC</td><td>Model-legislation network</td><td>Karla Jones, ALEC&rsquo;s Senior Director of its Federalism Task Force, spoke at a UVU Federalism Index event on transferring federal land to states</td></tr>
+      <tr><td>State Policy Network (SPN)</td><td>Think-tank coordination</td><td>Named partner in the Commission&rsquo;s own Dec. 2025 Interim Report; SPN and ALEC are documented sister organizations</td></tr>
+      <tr><td>Sutherland Institute</td><td>Policy review help</td><td>Named partner; helped build the SB 198 letter-review protocol</td></tr>
+    </table>
+
+    <p style="margin-top:20px;">The Commission&rsquo;s own December 2025 Interim Report describes two messaging tracks: a &ldquo;red state capacitation&rdquo; track sharing Utah&rsquo;s model with states seeking hard federal limits, and a &ldquo;blue state capacitation&rdquo; track framing the same infrastructure as protecting state policy autonomy from federal intrusion &mdash; both converging toward a planned 2027 national convocation, per the report&rsquo;s own language.</p>
+  </div>
+</section>
+
+<section id="quotes">
+  <div class="wrap">
+    <div class="eyebrow">Movement Six</div>
+    <h2>In Their Own Words</h2>
+    <p>What the Commission&rsquo;s own members and allies have said on the record about why this exists.</p>
+
+    <div class="card">
+      <h3>Rep. Ken Ivory, House Chair</h3>
+      <div class="meta">KSL.com, March 10, 2025</div>
+      <p>&ldquo;The national government, the federal government, is a government of limited jurisdiction. It can only do the things that were specifically delegated to it. The state government is a government of general jurisdiction.&rdquo;</p>
+    </div>
+
+    <div class="card">
+      <h3>Rep. Ken Ivory, House Chair</h3>
+      <div class="meta">Deseret News, March 8, 2025</div>
+      <p>&ldquo;It&rsquo;s a big deal because only by maintaining the balance in that state-federal relationship do people have their greatest governing voice&hellip; their governing voice is at the state level.&rdquo;</p>
+    </div>
+
+    <div class="card">
+      <h3>Senate President Stuart Adams (not a Commission member)</h3>
+      <div class="meta">KSL.com, March 10, 2025 &mdash; asked why federalism was such a big focus of the session</div>
+      <p>&ldquo;Probably because we love the state of Utah, and we think we do things a lot better than our federal government does.&rdquo;</p>
+    </div>
+
+    <div class="card">
+      <h3>Former Gov. Gary Herbert (Herbert Institute namesake)</h3>
+      <div class="meta">Deseret News, Feb. 24, 2025, on HB 488</div>
+      <p>&ldquo;We need to have a return to the federalism. It means a relationship between the states and the federal government as equal partners, and things have evolved to the point where if we&rsquo;re even thought about it all as a partner it&rsquo;s as a junior partner &mdash; and that&rsquo;s not the way the Founding Fathers envisioned it.&rdquo;</p>
+    </div>
+
+    <div class="card">
+      <h3>Sen. Keven J. Stratton, Senate Chair</h3>
+      <div class="meta">Declare, Jan. 14, 2026</div>
+      <p>&ldquo;Who governs, if anyone?&rdquo; &mdash; the framing question Stratton uses to introduce Utah&rsquo;s approach in outside presentations, per the outlet&rsquo;s direct quote.</p>
+    </div>
+
+    <p style="margin-top:10px;font-size:.9rem;color:var(--ink-soft);">Separately, the University of Utah announced its own, independent federalism/American governance initiative on Jan. 27, 2026 &mdash; advised by former WVU President Gordon Gee and former Harvard professor Arthur Brooks &mdash; expanding this network beyond UVU&rsquo;s Center for Constitutional Studies and Herbert Institute to a second Utah university.</p>
+  </div>
+</section>
+
+<section id="open">
+  <div class="wrap">
+    <div class="eyebrow">Still Open</div>
+    <h2>What&rsquo;s Not Yet Resolved</h2>
+    <details>
+      <summary>Does SPN or ALEC provide direct funding to UVU&rsquo;s Center for Constitutional Studies?</summary>
+      <p>Confirmed: SPN is a named partner in the Commission&rsquo;s own report, and SPN and ALEC are documented &ldquo;sister organizations.&rdquo; Not yet confirmed: any direct dollar figure flowing from either organization to CCS, the Herbert Institute, or the Commission itself.</p>
+    </details>
+    <details>
+      <summary>Why did Blouin&rsquo;s amendment and the Commission&rsquo;s own 2027 bill both go nowhere?</summary>
+      <p>Neither has an on-record explanation. Worth a direct records request to the Senate Natural Resources Committee (Blouin&rsquo;s amendment) and to the Commission&rsquo;s own staff (the bill-request decision) before publishing a causal claim.</p>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand">THE WEBER COUNTY HIVE</div>
+    <p style="margin-top:.6em;">Accountability journalism for Weber County and Utah state government.</p>
+    <p class="fine">This page reflects the Hive&rsquo;s own editorial assessment, built from Utah Code, the Commission&rsquo;s own public reports and meeting minutes, and public reporting. Commission members were not contacted for comment; this page relies on the public record only. Corrections welcome.</p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('[data-scroll-to]').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const el=document.getElementById(btn.getAttribute('data-scroll-to'));
+      if(el){el.scrollIntoView({behavior:'smooth',block:'start'});}
+    });
+  });
+
+  document.querySelectorAll('.flip-card').forEach(card=>{
+    const toggle=()=>card.classList.toggle('is-flipped');
+    card.addEventListener('click',toggle);
+    card.addEventListener('keydown',(e)=>{
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}
+    });
+  });
+</script>
+
+</body>
+</html>
