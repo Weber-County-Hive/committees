@@ -24,6 +24,26 @@ const COMMITTEES = [
     tally: { help: 1, mixed: 1, harm: 3, dead: 2 },
     page: "weber-hive-committee-judiciary.html",
     status: "live"
+  },
+  {
+    id: "alpr-oversight",
+    name: "ALPR Oversight",
+    short: "ALPR",
+    chambers: "Three committees · two chambers · three sessions",
+    controls: "License-plate-reader surveillance, data retention, law-enforcement oversight",
+    summary: "Three committees with ALPR jurisdiction since 2025, four reform bills in three sessions, zero became law — two of them killed the identical way, on the same day. 2026's newest privacy body follows the same shape.",
+    page: "weber-hive-committee-alpr-oversight.html",
+    status: "live"
+  },
+  {
+    id: "mida-board",
+    name: "Military Installation Development Authority — Board",
+    short: "MIDA",
+    chambers: "Governor (5 seats) · Senate President (1) · House Speaker (1) · Nonvoting (1)",
+    controls: "Zoning, bonding, and tax increment across MIDA project areas statewide",
+    summary: "Seven voting seats, three tied to project geography with an automatic-vacancy rule — and one seat, the chairmanship, with no equivalent rule at all as its holder heads into a lost election.",
+    page: "weber-hive-committee-mida-board.html",
+    status: "live"
   }
   // Next committee goes here, e.g.:
   // {
