@@ -2,26 +2,585 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="0; url=weber-hive-committees-board.html">
-<title>Committees Board — Weber County Hive</title>
-<link rel="canonical" href="weber-hive-committees-board.html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Seat That Moves — Weber County Hive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,500;0,700;0,900;1,600&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  :root{
+    --ink:#1e2a22;
+    --ink-soft:#2c3a30;
+    --paper:#ece5d1;
+    --paper-card:#f7f2e4;
+    --paper-line:#d8cfb2;
+    --water:#2c6e76;
+    --water-soft:#e2eeee;
+    --mineral:#a6552e;
+    --mineral-soft:#f3e3d6;
+    --energy:#b6842a;
+    --energy-soft:#f6ecd6;
+    --ag:#5b6b32;
+    --ag-soft:#e9ecdc;
+    --help:#4c6b3c;
+    --help-soft:#e5ecdb;
+    --harm:#a13f2c;
+    --harm-soft:#f4ded7;
+    --mixed:#b6842a;
+    --mixed-soft:#f6ecd6;
+    --dead:#6b6255;
+    --dead-soft:#e8e2d2;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
   body{
     margin:0;
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#1e2a22;
-    color:#f7f2e4;
-    font-family:Georgia, serif;
-    text-align:center;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Spectral',serif;
+    font-size:17px;
+    line-height:1.6;
   }
-  a{color:#e9cd8e;}
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px;}
+  h1,h2,h3,h4{font-family:'Bitter',serif;margin:0 0 .4em;line-height:1.15;}
+  a{color:var(--water);}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    font-size:.72rem;
+    color:var(--ink-soft);
+    opacity:.75;
+  }
+
+  /* ===== HERO ===== */
+  header.hero{
+    background:
+      linear-gradient(180deg, rgba(30,42,34,.94), rgba(30,42,34,.86)),
+      repeating-linear-gradient(0deg, transparent 0 38px, rgba(236,229,209,.05) 38px 39px);
+    color:var(--paper-card);
+    padding:64px 0 46px;
+    border-bottom:6px solid var(--mineral);
+  }
+  header.hero .wrap{position:relative;}
+  header.hero .eyebrow{color:var(--energy-soft);opacity:.85;}
+  header.hero h1{
+    font-size:clamp(2rem,5vw,3.1rem);
+    font-weight:900;
+    margin-top:.3em;
+    max-width:11.5ch;
+  }
+  header.hero .dek{
+    font-size:1.1rem;
+    max-width:56ch;
+    color:#dfe6da;
+    margin-top:1em;
+  }
+  header.hero .stamp-row{
+    margin-top:2em;
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .stamp{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    border:1.5px solid currentColor;
+    padding:5px 10px;
+    border-radius:2px;
+  }
+  .stamp.water{color:#9fd4d8;}
+  .stamp.mineral{color:#e3ac8b;}
+  .stamp.energy{color:#e9cd8e;}
+
+  nav.jump{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:2.2em;
+  }
+  nav.jump button{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.74rem;
+    letter-spacing:.03em;
+    background:rgba(247,242,228,.08);
+    border:1px solid rgba(247,242,228,.35);
+    color:var(--paper-card);
+    padding:8px 12px;
+    border-radius:3px;
+    cursor:pointer;
+    transition:background .15s ease;
+  }
+  nav.jump button:hover,nav.jump button:focus-visible{background:rgba(247,242,228,.22);}
+
+  /* ===== SECTIONS ===== */
+  section{padding:52px 0;}
+  section.alt{background:var(--paper-card);border-top:1px solid var(--paper-line);border-bottom:1px solid var(--paper-line);}
+  .section-head{margin-bottom:1.6em;}
+  .section-head h2{font-size:clamp(1.5rem,3.4vw,2rem);}
+  .section-head .eyebrow{margin-bottom:.5em;display:block;}
+
+  /* Beginner box */
+  .beginner{
+    background:var(--paper-card);
+    border:1.5px solid var(--paper-line);
+    border-left:6px solid var(--water);
+    border-radius:4px;
+    padding:22px 24px;
+    margin:1.2em 0 2em;
+  }
+  .beginner h3{font-size:1.05rem;color:var(--water);}
+  .beginner p:last-child{margin-bottom:0;}
+
+  /* Standing vs interim compare */
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:1.6em 0;}
+  @media (max-width:640px){.compare{grid-template-columns:1fr;}}
+  .compare-card{
+    background:var(--paper-card);
+    border:1.5px solid var(--paper-line);
+    border-radius:6px;
+    padding:20px 22px;
+  }
+  .compare-card h4{
+    font-family:'IBM Plex Mono',monospace;
+    text-transform:uppercase;
+    font-size:.8rem;
+    letter-spacing:.06em;
+  }
+  .compare-card.standing{border-top:5px solid var(--mineral);}
+  .compare-card.interim{border-top:5px solid var(--water);}
+  .compare-card ul{margin:.6em 0 0;padding-left:1.1em;}
+  .compare-card li{margin-bottom:.4em;}
+
+  /* Overlap diagram */
+  .venn-wrap{
+    position:relative;
+    height:420px;
+    margin:2.4em auto 1em;
+    max-width:560px;
+  }
+  .venn-ring{
+    position:absolute;
+    border-radius:50%;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.68rem;
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    padding-top:14px;
+    mix-blend-mode:multiply;
+  }
+  .venn-ring.house{
+    width:330px;height:330px;left:10px;top:20px;
+    background:var(--mineral-soft);
+    border:2px solid var(--mineral);
+    color:var(--mineral);
+  }
+  .venn-ring.senate{
+    width:330px;height:330px;right:10px;top:20px;
+    background:var(--water-soft);
+    border:2px solid var(--water);
+    color:var(--water);
+  }
+  .venn-ring.interim{
+    width:300px;height:300px;left:50%;top:100px;transform:translateX(-50%);
+    background:var(--energy-soft);
+    border:2px solid var(--energy);
+    color:var(--energy);
+    align-items:flex-end;
+    padding-bottom:14px;
+    padding-top:0;
+  }
+  .venn-tags{
+    position:absolute;inset:0;
+  }
+  .tag{
+    position:absolute;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.7rem;
+    background:var(--ink);
+    color:var(--paper-card);
+    padding:3px 7px;
+    border-radius:3px;
+    white-space:nowrap;
+    box-shadow:0 2px 4px rgba(0,0,0,.18);
+  }
+  .tag.overlap{background:var(--harm);}
+  .venn-caption{
+    text-align:center;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.78rem;
+    color:var(--ink-soft);
+    max-width:44ch;
+    margin:.4em auto 0;
+  }
+
+  /* Roster table */
+  .roster{width:100%;border-collapse:collapse;margin-top:1.6em;font-size:.94rem;}
+  .roster th{
+    font-family:'IBM Plex Mono',monospace;
+    text-transform:uppercase;
+    font-size:.68rem;
+    letter-spacing:.06em;
+    text-align:left;
+    padding:8px 10px;
+    border-bottom:2px solid var(--ink);
+    color:var(--ink-soft);
+  }
+  .roster td{padding:9px 10px;border-bottom:1px solid var(--paper-line);vertical-align:top;}
+  .roster tr:hover td{background:var(--paper-card);}
+  .flag{
+    display:inline-block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.62rem;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    background:var(--harm-soft);
+    color:var(--harm);
+    padding:2px 6px;
+    border-radius:3px;
+    margin-left:6px;
+  }
+
+  /* Rubric legend */
+  .legend-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:1.4em;}
+  @media (max-width:760px){.legend-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:460px){.legend-grid{grid-template-columns:1fr;}}
+  .legend-item{
+    border-radius:5px;
+    padding:14px 14px 16px;
+    font-size:.86rem;
+  }
+  .legend-item .dot{
+    display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:7px;
+    vertical-align:middle;
+  }
+  .legend-item h5{
+    font-family:'IBM Plex Mono',monospace;
+    text-transform:uppercase;
+    font-size:.72rem;
+    letter-spacing:.05em;
+    margin:0 0 .4em;
+    display:flex;align-items:center;
+  }
+  .legend-item.help{background:var(--help-soft);}
+  .legend-item.help .dot{background:var(--help);}
+  .legend-item.mixed{background:var(--mixed-soft);}
+  .legend-item.mixed .dot{background:var(--mixed);}
+  .legend-item.harm{background:var(--harm-soft);}
+  .legend-item.harm .dot{background:var(--harm);}
+  .legend-item.dead{background:var(--dead-soft);}
+  .legend-item.dead .dot{background:var(--dead);}
+  .dims{
+    margin-top:1.4em;
+    font-size:.88rem;
+    color:var(--ink-soft);
+  }
+  .dims .mono{opacity:.9;}
+
+  /* Bill case files */
+  .case{
+    background:var(--paper-card);
+    border:1.5px solid var(--paper-line);
+    border-radius:6px;
+    margin-bottom:26px;
+    overflow:hidden;
+  }
+  .case-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:16px;
+    padding:20px 24px 14px;
+    border-bottom:1px dashed var(--paper-line);
+  }
+  .case-head h3{font-size:1.15rem;margin-bottom:.15em;}
+  .case-head .bill-meta{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.76rem;
+    color:var(--ink-soft);
+  }
+  .verdict{
+    flex-shrink:0;
+    font-family:'IBM Plex Mono',monospace;
+    text-transform:uppercase;
+    font-size:.72rem;
+    letter-spacing:.06em;
+    padding:7px 12px;
+    border-radius:20px;
+    white-space:nowrap;
+    font-weight:600;
+  }
+  .verdict.help{background:var(--help-soft);color:var(--help);border:1px solid var(--help);}
+  .verdict.mixed{background:var(--mixed-soft);color:var(--mixed);border:1px solid var(--mixed);}
+  .verdict.harm{background:var(--harm-soft);color:var(--harm);border:1px solid var(--harm);}
+  .verdict.dead{background:var(--dead-soft);color:var(--dead);border:1px solid var(--dead);}
+  .case-body{padding:16px 24px 22px;}
+  .case-body p{margin:0 0 .9em;}
+  .case-body p:last-child{margin-bottom:0;}
+  .why{
+    display:grid;
+    gap:8px;
+    margin:.8em 0 0;
+  }
+  .why-row{
+    display:grid;
+    grid-template-columns:150px 1fr;
+    gap:10px;
+    font-size:.88rem;
+    padding:8px 10px;
+    border-radius:4px;
+    background:var(--paper);
+  }
+  @media (max-width:560px){.why-row{grid-template-columns:1fr;}}
+  .why-row .dim{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.7rem;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+    color:var(--ink-soft);
+  }
+  .sponsors{
+    font-size:.82rem;
+    color:var(--ink-soft);
+    margin-top:.6em;
+  }
+  .sponsors b{color:var(--ink);}
+
+  /* Tally */
+  .tally{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    margin:1.6em 0;
+  }
+  .tally-item{
+    flex:1;
+    min-width:120px;
+    text-align:center;
+    padding:18px 10px;
+    border-radius:6px;
+    font-family:'IBM Plex Mono',monospace;
+  }
+  .tally-item .n{font-size:2rem;font-weight:600;display:block;}
+  .tally-item .l{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;opacity:.85;}
+  .tally-item.help{background:var(--help-soft);color:var(--help);}
+  .tally-item.mixed{background:var(--mixed-soft);color:var(--mixed);}
+  .tally-item.harm{background:var(--harm-soft);color:var(--harm);}
+  .tally-item.dead{background:var(--dead-soft);color:var(--dead);}
+
+  /* Gap callout */
+  .gap-box{
+    background:var(--ink);
+    color:var(--paper-card);
+    border-radius:6px;
+    padding:26px 26px 22px;
+    margin:1.6em 0;
+  }
+  .gap-box h3{color:var(--energy-soft);font-size:1.05rem;}
+  .gap-box .mono{color:#c9d6c3;font-size:.86rem;}
+  .gap-box p{margin:.8em 0;}
+  .gap-steps{
+    display:grid;
+    gap:6px;
+    margin-top:1em;
+    font-size:.9rem;
+  }
+  .gap-steps div{
+    padding:8px 12px;
+    background:rgba(247,242,228,.06);
+    border-left:3px solid var(--harm);
+    border-radius:3px;
+  }
+
+  details.q{
+    background:var(--paper-card);
+    border:1px solid var(--paper-line);
+    border-radius:5px;
+    padding:12px 16px;
+    margin-bottom:10px;
+  }
+  details.q summary{
+    cursor:pointer;
+    font-family:'Bitter',serif;
+    font-weight:600;
+    font-size:.98rem;
+  }
+  details.q p{margin:.7em 0 0;font-size:.93rem;}
+
+  footer{
+    background:var(--ink);
+    color:#c9d6c3;
+    padding:36px 0 44px;
+    font-size:.84rem;
+  }
+  footer a{color:var(--energy-soft);}
+  footer .brand{font-family:'Bitter',serif;font-weight:700;color:var(--paper-card);font-size:1.05rem;}
+  footer .fine{opacity:.75;margin-top:1.2em;line-height:1.6;}
 </style>
-<script>window.location.replace("weber-hive-committees-board.html");</script>
 </head>
 <body>
-  <p>Loading the Committees Board… if nothing happens, <a href="weber-hive-committees-board.html">click here</a>.</p>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow"><a href="weber-hive-committees-board.html" style="color:inherit;">← All committees</a> &nbsp;·&nbsp; The Weber County Hive · Board Watch</span>
+    <h1>MIDA's board: seven seats, three that move with the project</h1>
+    <p class="dek">The Military Installation Development Authority zones land, issues bonds, and levies taxes across project areas from Clearfield to Box Elder County — with a seven-member board no one elects. Utah statute ties three of those seats to whichever local officials happen to sit near an active project area. Here's the current roster, the appointing authority behind each seat, and the one seat with no rotation mechanism at all.</p>
+    <div class="stamp-row">
+      <span class="stamp water">Governance</span>
+      <span class="stamp mineral">Appointments</span>
+      <span class="stamp energy">Vacancy Gap</span>
+    </div>
+    <nav class="jump">
+      <button data-scroll-to="basics">The basics</button>
+      <button data-scroll-to="roster">The roster</button>
+      <button data-scroll-to="rotation">The rotating seat</button>
+      <button data-scroll-to="gap">The Adams question</button>
+      <button data-scroll-to="conclusion">The pattern</button>
+    </nav>
+  </div>
+</header>
+
+<section id="basics">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">01 — New to this?</span>
+      <h2>A board built to move with the map</h2>
+    </div>
+    <div class="beginner">
+      <h3>In plain language</h3>
+      <p>MIDA's board has seven voting members. Under Utah Code § 63H-1-302, the governor appoints five, the president of the Senate appoints one, and the speaker of the House appoints one. An eighth, nonvoting seat can be added by the board itself.</p>
+      <p>Three of the governor's five appointments aren't fixed offices — they belong to whoever holds local elected office "adjacent or in close proximity" to an active MIDA project area. As MIDA opens new project areas in new counties, or a local official leaves office, that seat is designed to change hands. It isn't a loophole; it's how the statute is written. What it means in practice is that MIDA's board composition shifts with where MIDA is currently developing land — not with any electoral check from the people living there.</p>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="roster">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">02 — The current board</span>
+      <h2>Who holds each seat, and who appointed them</h2>
+    </div>
+    <p>Confirmed via MIDA's own board-member disclosures (midaut.org/board-members) and public reporting, current as of August 2026.</p>
+
+    <table class="roster">
+      <thead>
+        <tr><th>Member</th><th>Position</th><th>Appointing authority</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><b>Mark Shepherd</b></td><td>Mayor, Clearfield City</td><td>Governor — mayor/legislative body near a project area (Falcon Hill, Davis Co.)</td></tr>
+        <tr><td><b>Erik Rowland</b></td><td>Wasatch County Council, Seat C</td><td>Governor — mayor/legislative body near a project area (Jordanelle/Deer Valley); appointed May 2026</td></tr>
+        <tr><td><b>Gage Froerer</b></td><td>Weber County Commission</td><td>Governor — mayor/legislative body near a project area; on the board since 2019 <span class="flag">cross-file</span></td></tr>
+        <tr><td><b>Gary Harter</b></td><td>Exec. Director, Utah Dept. of Veterans &amp; Military Affairs</td><td>Governor — executive branch/military-affairs seat</td></tr>
+        <tr><td><b>Mike Ostermiller</b></td><td>Partner, Kyler, Kohler, Ostermiller &amp; Sorensen LLP</td><td>Governor — "interested in military efforts" seat; on the board since 2008</td></tr>
+        <tr><td><b>Sen. Stuart Adams</b></td><td>President, Utah State Senate</td><td>Senate President's seat — currently self-appointed <span class="flag">see below</span></td></tr>
+        <tr><td>Sen. Jerry Stevenson</td><td>Utah Senate District 6; MIDA Vice Chair</td><td>Presumed House Speaker's seat, inferred by elimination — not directly confirmed on state records <span class="flag">unconfirmed</span></td></tr>
+        <tr><td>Jeff Moss <i>(nonvoting)</i></td><td>Exec. Director, Governor's Office of Economic Opportunity</td><td>Appointed by board resolution; seat tracks the GOEO director's office, not a fixed person</td></tr>
+      </tbody>
+    </table>
+    <p class="venn-caption" style="max-width:none;">Adams and Stevenson are the only two current members whose tenure predates the project-dependent rotation entirely — both have chaired or vice-chaired the board since its creation in 2007-2008.</p>
+  </div>
+</section>
+
+<section id="rotation">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">03 — The rotating seat, documented</span>
+      <h2>Three people, one seat, under two years</h2>
+    </div>
+    <p>The clearest example of the project-dependent design sits in Wasatch County, tied to MIDA's Military Recreation Facility project area — the Jordanelle/Deer Valley expansion.</p>
+
+    <div class="compare">
+      <div class="compare-card standing">
+        <h4>Jan. 7, 2025</h4>
+        <ul>
+          <li><b>Steve Farrell</b>, Wasatch County Council Member, formally thanked and retired via board resolution tied specifically to "the Military Recreation Facility Project Area"</li>
+          <li><b>Karl McMillan</b>, also a Wasatch County Council Member, welcomed as his replacement at the same meeting</li>
+        </ul>
+      </div>
+      <div class="compare-card interim">
+        <h4>May 2026</h4>
+        <ul>
+          <li><b>Erik Rowland</b>, Wasatch County Council Seat C, appointed to the board</li>
+          <li>Replaces McMillan — the same seat, its third occupant in under two years</li>
+        </ul>
+      </div>
+    </div>
+    <p>None of these are removals for cause. This is the statute working as written: the seat belongs to whoever holds a particular local office while that project area is active, and it changes hands as the officeholder changes.</p>
+    <p>Gage Froerer's seat works the same way — appointed in 2019 as the Weber County Commission's representative. Froerer is separately documented in our reporting on the Nordic Village PID for a sworn Weber Basin Water Conservancy District conflict-of-interest disclosure, signed January 15, 2026, that listed only two board memberships — and did not list MIDA.</p>
+  </div>
+</section>
+
+<section class="alt" id="gap">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">04 — The seat with no rotation mechanism</span>
+      <h2>What happens when the chairman loses his election</h2>
+    </div>
+    <p>Not every seat on the board works this way — and the exception is where the accountability gap actually sits.</p>
+    <p>Sen. Stuart Adams has chaired MIDA's board since 2008, two years before he was elected to the Utah House. His original appointment came from then-Gov. Jon Huntsman Jr. Today, Utah's own boards and commissions records list him as "self-appointed" to the Senate President's seat — a function of his holding that office, not a fixed personal appointment.</p>
+    <p>Adams lost his Republican primary in June 2026. His Senate District 7 seat ends at the close of the year. Senate Republicans won't select a new Senate President until a closed-door caucus vote after the November 3, 2026 general election.</p>
+
+    <div class="gap-box">
+      <h3>The gap, plainly</h3>
+      <p class="mono">Utah law gives the incoming Senate President the authority to name Adams's replacement on MIDA's board. Nothing in statute requires it.</p>
+      <div class="gap-steps">
+        <div>Board members serve at the pleasure of their appointing authority and can be removed at any time.</div>
+        <div>Service does NOT automatically end when an appointee leaves elected office — except for the mayor/local-legislative-body seats, which are explicitly tied to holding that local office.</div>
+        <div>The Senate President's seat is not in that category.</div>
+        <div>Unless the next Senate President affirmatively acts, Adams could keep voting on MIDA's project areas after leaving elected office entirely.</div>
+      </div>
+    </div>
+
+    <p>In practical terms: the mechanism that swaps a Wasatch County Council member as project areas shift doesn't apply to the seat currently held by the board's own chairman. That seat could sit with someone no longer holding any elected office at all — for however long it takes a new Senate President to decide otherwise.</p>
+  </div>
+</section>
+
+<section id="conclusion">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">05 — The pattern</span>
+      <h2>Accountability that moves — except where it matters most</h2>
+    </div>
+    <p>Three of MIDA's seats are designed to rotate with the map: as project areas open and close, the local officials sitting on the board change with them. That's a real, working mechanism — Wasatch County's seat alone has had three occupants in under two years.</p>
+    <p>But the board's two legislative seats — including the chairmanship, held continuously since 2008 — carry no equivalent mechanism. They rotate only when the appointing authority chooses to act. For one of those seats, the appointing authority itself won't exist in its current form until sometime after November 3, 2026.</p>
+
+    <details class="q">
+      <summary>Does this mean Adams is doing something improper by staying on the board?</summary>
+      <p>No — nothing here alleges wrongdoing. The point is structural: Utah law simply does not require a board seat to change hands when its holder leaves the elected office that seat is nominally tied to, for this particular category of appointment. Whether Adams stays or is replaced is entirely up to the next Senate President.</p>
+    </details>
+    <details class="q">
+      <summary>Is Stevenson's appointing authority confirmed?</summary>
+      <p>Not directly. By elimination — the board's other five seats are independently identified as governor appointees (Shepherd, Rowland, Froerer, Harter, Ostermiller), and Adams is confirmed as the Senate President's seat — Stevenson's seat is the only one that can logically be the House Speaker's. But that's inference, not a record. Utah's own boards-and-commissions site (boards.utah.gov) blocks automated access, so this wasn't confirmed by pulling the record directly, and no source found states outright that Stevenson was appointed by the Speaker. Treat this line as unconfirmed pending a direct records check.</p>
+    </details>
+    <details class="q">
+      <summary>Where does this come from?</summary>
+      <p>Utah Code § 63H-1-302; MIDA's own board-member page and disclosure statements (midaut.org/board-members); MIDA board resolutions and meeting minutes filed with Utah's Public Notice Website (utah.gov/pmn); and public reporting on the 2026 Senate District 7 primary. No board member was contacted for comment; this page relies on the public record only.</p>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand">THE WEBER COUNTY HIVE</div>
+    <p style="margin-top:.6em;">Accountability journalism for Weber County and Utah state government.</p>
+    <p class="fine">This page reflects the Hive's own editorial assessment, built from Utah Code, MIDA's own public disclosures, board resolutions, and public reporting. Board members were not contacted for comment; this page relies on the public record only. Corrections welcome.</p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('[data-scroll-to]').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const el=document.getElementById(btn.getAttribute('data-scroll-to'));
+      if(el){el.scrollIntoView({behavior:'smooth',block:'start'});}
+    });
+  });
+</script>
+
 </body>
 </html>
