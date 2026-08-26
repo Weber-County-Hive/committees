@@ -46,6 +46,16 @@ const COMMITTEES = [
     status: "live"
   },
   {
+    id: "mida-disclosures",
+    name: "COI of MIDA",
+    short: "MIDA",
+    chambers: "8 voting/nonvoting seats · 5 Public Infrastructure Districts · 2 Development Review Committees",
+    controls: "Conflict-of-interest disclosure across MIDA's main board and its subsidiary bodies",
+    summary: "Nine people, nine forms, five different disclosure regimes — one member's role is paid, another's identical role is unpaid, one form is checked \"nothing to report,\" and one is left entirely blank beside a bio naming exactly what should have been on it.",
+    page: "weber-hive-committee-mida-disclosures.html",
+    status: "live"
+  },
+  {
     id: "federalism",
     name: "Federalism Commission",
     short: "FED",

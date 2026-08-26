@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Below The Line — The Weber County Hive</title>
+<style>
+  :root{
+    --paper:#f2ede2;
+    --ink:#20241f;
+    --ink-soft:#4a4f45;
+    --line:#c9c0a8;
+    --rule:#8a8265;
+    --flag:#8a2e1f;
+    --flag-soft:#f4e2dc;
+    --gold:#8a6a1f;
+    --gold-soft:#f4ecdc;
+    --serif:"Iowan Old Style","Georgia","Times New Roman",serif;
+    --sans:"Helvetica Neue",Arial,sans-serif;
+    --mono:"Courier New",Courier,monospace;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);line-height:1.6;}
+  .sheet{max-width:780px;margin:0 auto;padding:56px 28px 120px;}
+
+  .masthead{display:flex;justify-content:space-between;align-items:baseline;border-bottom:3px double var(--rule);padding-bottom:14px;margin-bottom:6px;}
+  .masthead .name{font-family:var(--sans);font-weight:700;letter-spacing:0.14em;text-transform:uppercase;font-size:12px;color:var(--ink-soft);}
+  .masthead .date{font-family:var(--mono);font-size:11px;letter-spacing:0.04em;color:var(--ink-soft);}
+  .file-tag{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;color:var(--gold);margin-top:18px;text-transform:uppercase;}
+
+  h1{font-family:var(--serif);font-size:clamp(2rem, 5vw, 2.9rem);line-height:1.12;font-weight:400;margin:14px 0 6px;letter-spacing:-0.01em;}
+  .dek{font-family:var(--sans);font-size:1.08rem;color:var(--ink-soft);max-width:60ch;margin:0 0 24px;}
+
+  .related{
+    font-family:var(--sans);font-size:12px;color:var(--ink-soft);
+    border:1px solid var(--line);background:#eae4d4;padding:10px 16px;margin-bottom:14px;
+  }
+  .related a{color:var(--flag);font-weight:700;text-decoration:none;border-bottom:1px solid var(--flag);}
+
+  .byline-row{display:flex;gap:22px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;color:var(--ink-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 0;margin-bottom:32px;}
+  .byline-row span b{color:var(--ink);font-weight:700;}
+
+  .start-here{border:2px solid var(--gold);background:var(--gold-soft);margin-bottom:44px;}
+  .start-here-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;cursor:pointer;user-select:none;}
+  .start-here-head h2{margin:0;padding:0;border:none;font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);}
+  .start-here-head .sub{font-family:var(--sans);font-size:11.5px;color:var(--ink-soft);margin-top:3px;font-weight:400;text-transform:none;letter-spacing:0;}
+  .start-here-toggle{font-family:var(--mono);font-size:13px;color:var(--gold);border:1px solid var(--gold);border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .2s ease;}
+  .start-here.open .start-here-toggle{transform:rotate(45deg);}
+  .start-here-body{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+  .start-here.open .start-here-body{max-height:2400px;}
+  .start-here-inner{padding:4px 20px 22px;border-top:1px solid var(--line);}
+
+  .step-list{list-style:none;margin:16px 0 0;padding:0;}
+  .step-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px dashed var(--line);font-family:var(--sans);}
+  .step-item:last-child{border-bottom:none;}
+  .step-num{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--paper);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+  .step-text{font-size:13.5px;color:var(--ink);padding-top:2px;}
+
+  blockquote{margin:0 0 34px;border-left:3px solid var(--flag);background:var(--flag-soft);padding:16px 20px;}
+  blockquote p{font-family:var(--serif);font-style:italic;font-size:1.12rem;line-height:1.5;margin:0 0 6px;color:var(--ink);}
+  blockquote cite{font-family:var(--sans);font-style:normal;font-size:11px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink-soft);}
+
+  .accordion{border-top:2px solid var(--gold);}
+  .acc-item{border-bottom:1px solid var(--line);}
+  .acc-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 2px;cursor:pointer;user-select:none;}
+  .acc-head h2{margin:0;padding:0;border:none;font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:var(--gold);}
+  .acc-toggle{font-family:var(--mono);font-size:14px;color:var(--gold);flex-shrink:0;transition:transform .2s ease;}
+  .acc-item.open .acc-toggle{transform:rotate(45deg);}
+  .acc-body{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+  .acc-item.open .acc-body{max-height:5000px;}
+  .acc-inner{padding:0 2px 22px;}
+  .acc-inner p{font-size:1.04rem;margin:0 0 18px;}
+  .acc-inner p:last-child{margin-bottom:0;}
+
+  .stat-strip{display:flex;gap:12px;margin:20px 0;flex-wrap:wrap;}
+
+  .timeline{list-style:none;margin:16px 0;padding:0;border-left:2px solid var(--line);}
+  .tl-item{position:relative;padding:2px 0 18px 20px;font-family:var(--sans);}
+  .tl-item::before{content:"";position:absolute;left:-6px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--gold);}
+  .tl-item.clash::before{background:var(--flag);}
+  .tl-date{font-family:var(--mono);font-size:11px;color:var(--gold);letter-spacing:0.03em;display:block;margin-bottom:2px;}
+  .tl-item.clash .tl-date{color:var(--flag);}
+  .tl-text{font-size:13.5px;color:var(--ink);}
+  .stat{flex:1;min-width:120px;border:1px solid var(--line);background:#fff;padding:14px 12px;text-align:center;}
+  .stat .num{font-family:var(--serif);font-size:1.65rem;color:var(--gold);line-height:1;}
+  .stat .label{font-family:var(--sans);font-size:10px;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink-soft);margin-top:6px;}
+
+  .matrix-wrap{overflow-x:auto;margin:20px 0;border:1px solid var(--line);background:#fff;}
+  table.matrix{border-collapse:collapse;width:100%;font-family:var(--sans);font-size:12px;}
+  table.matrix th, table.matrix td{border:1px solid var(--line);padding:8px 6px;text-align:center;}
+  table.matrix th{background:var(--gold-soft);font-weight:700;color:var(--ink);font-size:11px;}
+  table.matrix td.name{text-align:left;font-weight:700;white-space:nowrap;}
+  table.matrix td.check{color:var(--flag);font-weight:700;font-size:14px;}
+  table.matrix tr.highlight td{background:#f9f5ea;}
+
+  .compare-strip{display:flex;gap:14px;margin:20px 0;flex-wrap:wrap;}
+
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:20px 0;}
+  .person-card{border:1px solid var(--line);background:#fff;padding:16px 18px;border-top:4px solid var(--gold);}
+  .person-card.blank{border-top-color:var(--flag);}
+  .pc-name{font-family:var(--serif);font-size:1.15rem;color:var(--ink);margin-bottom:2px;}
+  .pc-role{font-family:var(--sans);font-size:10.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px;}
+  .pc-regime{display:inline-block;font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:var(--gold);background:var(--gold-soft);border:1px solid var(--gold);border-radius:3px;padding:3px 8px;margin-bottom:10px;}
+  .person-card.blank .pc-regime{color:var(--flag);background:var(--flag-soft);border-color:var(--flag);}
+  .pc-finding{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);}
+  .pc-finding b{color:var(--ink);}
+  .compare-box{flex:1;min-width:220px;border:1px solid var(--line);background:#fff;padding:16px 18px;}
+  .compare-box .cname{font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+  .compare-box .cstatus{font-family:var(--serif);font-size:1.3rem;margin-bottom:8px;}
+  .compare-box.paid .cstatus{color:var(--flag);}
+  .compare-box.unpaid .cstatus{color:#3c4a3e;}
+  .compare-box p{font-family:var(--sans);font-size:12.5px;color:var(--ink-soft);margin:0;}
+
+  .caveat{background:#eae4d4;border:1px solid var(--line);padding:18px 20px;margin:24px 0 0;font-family:var(--sans);font-size:13px;color:var(--ink-soft);}
+  .caveat b{color:var(--ink);}
+  .caveat.caveat--first{margin-top:0;}
+
+  footer{margin-top:44px;padding-top:16px;border-top:3px double var(--rule);font-family:var(--sans);font-size:11px;color:var(--ink-soft);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+
+  @media (max-width:560px){
+    .byline-row{flex-wrap:wrap;gap:10px 20px;}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="masthead">
+    <div class="name">The Weber County Hive</div>
+    <div class="date">August 2026</div>
+  </div>
+
+  <div class="file-tag">MIDA / Institutional Structure</div>
+  <h1>Below The Line</h1>
+  <p class="dek">MIDA's seven-member board has to disclose its conflicts of interest every year. The people actually running its individual project areas, on five separate subsidiary boards, mostly don't have to disclose anything at all &mdash; and MIDA's own website says so, in plain language.</p>
+
+  <div class="related">Companion pieces: <a href="weber-hive-committee-mida-board.html">The Seats That Move (And the One That Doesn't)</a> &mdash; how these same seats get appointed and vacated &mdash; and <a href="weber-hive-sb233.html">The Foundation</a> (S.B. 233, 2021) and <a href="weber-hive-sb169.html">The Backfill</a> (S.B. 169, 2024).</div>
+
+  <div class="byline-row">
+    <span>Sources: <b>midaut.org, MIDA disclosure forms (2026)</b></span>
+    <span>Method: <b>Public records only, no comment requested</b></span>
+  </div>
+
+  <div class="start-here" id="startHere">
+    <div class="start-here-head" onclick="document.getElementById('startHere').classList.toggle('open')">
+      <div>
+        <h2>Start Here &mdash; the 60-second version</h2>
+        <div class="sub">New to this story? Click to open a plain-language walkthrough.</div>
+      </div>
+      <div class="start-here-toggle">+</div>
+    </div>
+    <div class="start-here-body">
+      <div class="start-here-inner">
+        <ol class="step-list">
+          <li class="step-item"><div class="step-num">1</div><div class="step-text">MIDA's seven voting board members have to file an annual conflict-of-interest disclosure. State law requires it.</div></li>
+          <li class="step-item"><div class="step-num">2</div><div class="step-text">Below that board, MIDA runs five separate Public Infrastructure District boards and two Development Review Committees &mdash; the bodies that actually approve individual project decisions.</div></li>
+          <li class="step-item"><div class="step-num">3</div><div class="step-text">MIDA's own website states plainly: PID board members don't have to file a disclosure if the district's budget is under $10 million. Development Review Committee members never have to file, no matter the budget.</div></li>
+          <li class="step-item"><div class="step-num">4</div><div class="step-text">Two people &mdash; Gary Harter and Mike Ostermiller &mdash; each sit on the main board plus all five PID boards, six seats apiece. MIDA's own Chief Operating Officer, Derek Brenchley, sits on four of the five subsidiary boards himself.</div></li>
+          <li class="step-item"><div class="step-num">5</div><div class="step-text">All nine disclosures &mdash; every voting member plus the nonvoting seat &mdash; are now on record. No two tell quite the same story: unpaid vs. paid on identical seats, a form with no field for MIDA, a form checked "nothing to report," and a form left entirely blank.</div></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <p style="font-size:1.06rem;">Nobody hid this. It's on MIDA's own website, in the same paragraph that lists the board members' names. The gap isn't a secret &mdash; it's just not the kind of thing anyone reads twice.</p>
+
+  <div class="accordion" id="accordion">
+
+    <div class="acc-item open">
+      <div class="acc-head"><h2>What MIDA's Own Site Says</h2><div class="acc-toggle">+</div></div>
+      <div class="acc-body"><div class="acc-inner">
+        <p>MIDA's board-members page carries two sentences, unremarkable in placement, that describe the entire structure this piece is about:</p>
+        <blockquote>
+          <p>"Board members of public infrastructure districts are not required to file a disclosure if a district's annual budget is less than $10 million. Board members of development review committees are not required to file a disclosure."</p>
+          <cite>midaut.org/board-members, citing Utah Code &sect;67-16-3(16)</cite>
+        </blockquote>
+        <p>MIDA runs an eight-member board &mdash; seven voting, one nonvoting &mdash; that does have to disclose. But the board doesn't run the individual project areas directly. It created five separate Public Infrastructure Districts and two Development Review Committees to do that, and populated them with its own people. Those bodies are where the granular decisions actually happen &mdash; and per MIDA's own stated rule, most of the people on them don't have to say what else they're connected to.</p>
+      </div></div>
+    </div>
+
+    <div class="acc-item open">
+      <div class="acc-head"><h2>The Matrix</h2><div class="acc-toggle">+</div></div>
+      <div class="acc-body"><div class="acc-inner">
+        <p>Five names account for nearly every seat across MIDA's subsidiary boards. Two of them &mdash; Gary Harter and Mike Ostermiller &mdash; sit on literally everything.</p>
+
+        <div class="stat-strip">
+          <div class="stat"><div class="num">6</div><div class="label">MIDA-family seats held by Harter</div></div>
+          <div class="stat"><div class="num">6</div><div class="label">MIDA-family seats held by Ostermiller</div></div>
+          <div class="stat"><div class="num">4</div><div class="label">Boards MIDA's own COO sits on</div></div>
+        </div>
+
+        <p style="font-size:13px;color:var(--ink-soft);margin-bottom:16px;"><b style="color:var(--ink);">What those three numbers mean, by name:</b> <b>Gary Harter</b> (Executive Director, Utah Dept. of Veterans &amp; Military Affairs) holds 6 seats &mdash; the main MIDA board plus all five PID boards (MMV, GAEC, MVP, JMARA, Cormont). <b>Mike Ostermiller</b> (KKOS law firm partner) holds the identical 6 &mdash; main board plus all five PIDs. <b>Derek Brenchley</b>, MIDA's own Chief Operating Officer, isn't on the main board at all, but sits on 4 of the 5 PID/DRC bodies: the Mountain Village PID, the Golf and Equestrian Center PID, the Cormont PID, and the Military Recreation Facility Development Review Committee.</p>
+
+        <div class="matrix-wrap">
+        <table class="matrix">
+          <tr><th>&nbsp;</th><th>Main Board</th><th>MMV PID<br>(Deer Valley)</th><th>GAEC PID</th><th>MVP PID</th><th>JMARA PID</th><th>Cormont PID</th><th>MRF DRC</th><th>Falcon Hill DRC</th></tr>
+          <tr class="highlight"><td class="name">Gary Harter</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td></td><td></td></tr>
+          <tr class="highlight"><td class="name">Mike Ostermiller</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td></td><td></td></tr>
+          <tr><td class="name">Erik Rowland</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td></td><td></td><td class="check">&#10003;</td><td></td><td></td></tr>
+          <tr class="highlight"><td class="name">Derek Brenchley (MIDA COO)</td><td></td><td class="check">&#10003;</td><td class="check">&#10003;</td><td></td><td></td><td class="check">&#10003;</td><td class="check">&#10003;</td><td></td></tr>
+          <tr><td class="name">Kurt Krieg (Extell employee)</td><td></td><td class="check">&#10003;</td><td></td><td></td><td class="check">&#10003;</td><td></td><td></td><td></td></tr>
+        </table>
+        </div>
+        <p style="font-size:13px;color:var(--ink-soft);margin-bottom:6px;"><b style="color:var(--ink);">Note on the Falcon Hill DRC column:</b> it shows no checkmarks here on purpose, not by omission &mdash; none of the five overlapping names in this table sit on that committee. Its seven members (Ariana Farber, Michael Eggett, Rick Grover, Brad McIlrath, Jeff Oyler, Steven Parkinson, Hope Thompson) are a fully separate roster with no overlap onto any other MIDA board, which is itself part of the picture: a body with real approval power, made up entirely of names that never show up anywhere else in this structure.</p>
+        <p style="font-size:13px;color:var(--ink-soft);margin-bottom:6px;"><b style="color:var(--ink);">What these are:</b> MMV PID = Mountain Village Public Infrastructure District (Deer Valley/Jordanelle expansion) &middot; GAEC PID = Golf and Equestrian Center Public Infrastructure District &middot; MVP PID = Mountain Veterans Program Public Infrastructure District (near Sundance) &middot; JMARA PID = Jordanelle Marina Recreation Area Public Infrastructure District &middot; Cormont PID = Cormont Public Infrastructure District &middot; MRF DRC = Military Recreation Facility Development Review Committee &middot; Falcon Hill DRC = Falcon Hill Development Review Committee (Hill Air Force Base-adjacent). A Public Infrastructure District (PID) can issue bonds and levy taxes to pay for infrastructure; a Development Review Committee (DRC) reviews and approves individual project applications.</p>
+        <p style="font-size:13px;color:var(--ink-soft);">Rows shown are the people who sit on more than one MIDA-family board. Each PID and DRC has additional single-seat members not shown here &mdash; the point isn't that everyone overlaps, it's that the people who do overlap sit at the center of nearly every board at once.</p>
+      </div></div>
+    </div>
+
+    <div class="acc-item open">
+      <div class="acc-head"><h2>Same Board, Different Disclosure</h2><div class="acc-toggle">+</div></div>
+      <div class="acc-body"><div class="acc-inner">
+        <p>Harter and Ostermiller hold the identical set of six seats. Their own signed 2026 disclosure forms describe that role two different ways.</p>
+
+        <div class="compare-strip">
+          <div class="compare-box unpaid">
+            <div class="cname">Gary Harter</div>
+            <div class="cstatus">Unpaid</div>
+            <p>His own words: "Board Member, Military Installation Development Authority and five Public Infrastructure Districts associated with MIDA (unpaid)."</p>
+          </div>
+          <div class="compare-box paid">
+            <div class="cname">Mike Ostermiller</div>
+            <div class="cstatus">Paid</div>
+            <p>His own form describes the same role as paid consulting work, with staff access &mdash; not the unpaid volunteer framing Harter uses for the identical seats.</p>
+          </div>
+        </div>
+
+        <p>Neither disclosure is hidden or incomplete &mdash; both are filed, both are on the record, both describe what appears to be the same structural role. What differs is compensation, disclosed honestly by both men, in their own words, on the same form, for the same board.</p>
+
+        <p>Harter's form also answers, in his own sworn words, the question of what the role actually does:</p>
+        <blockquote>
+          <p>"As a board member, for MIDA, its associated PIDs, the Utah Defense Alliance and the Timpanogos Valley Theater, I participate in oversight of the operations and in the case of MIDA and its five PIDS, I participate in the approval for issuing bonds."</p>
+          <cite>Gary Harter, MIDA 2026 Disclosure Statement, signed 1/26/2026</cite>
+        </blockquote>
+      </div></div>
+    </div>
+
+    <div class="acc-item open">
+      <div class="acc-head"><h2>Nine People, Nine Forms</h2><div class="acc-toggle">+</div></div>
+      <div class="acc-body"><div class="acc-inner">
+        <p>MIDA's board doesn't file through one shared process. Every one of the eight voting members plus the nonvoting seat has their own 2026 disclosure on record, and no two tell quite the same story.</p>
+
+        <div class="card-grid">
+
+          <div class="person-card">
+            <div class="pc-name">Gary Harter</div>
+            <div class="pc-role">Governor's appointee &middot; 6 MIDA-family seats</div>
+            <div class="pc-regime">MIDA's Own Form</div>
+            <div class="pc-finding">Explicitly <b>unpaid</b>. His own words: "I participate in the approval for issuing bonds" across MIDA and all 5 PIDs.</div>
+          </div>
+
+          <div class="person-card">
+            <div class="pc-name">Mike Ostermiller</div>
+            <div class="pc-role">Governor's appointee &middot; 6 MIDA-family seats</div>
+            <div class="pc-regime">MIDA's Own Form</div>
+            <div class="pc-finding">Same 6 seats as Harter, described as <b>paid</b> consulting work with staff access &mdash; a real, confirmed contrast on the identical role.</div>
+          </div>
+
+          <div class="person-card">
+            <div class="pc-name">Derek Brenchley</div>
+            <div class="pc-role">MIDA's own Chief Operating Officer</div>
+            <div class="pc-regime">MIDA's Own Form</div>
+            <div class="pc-finding">Not an outside appointee &mdash; MIDA staff, sitting on 4 of 5 subsidiary boards himself. Appears to have also been the staff contact who received Harter's and Ostermiller's disclosures.</div>
+          </div>
+
+          <div class="person-card">
+            <div class="pc-name">Sen. Stuart Adams</div>
+            <div class="pc-role">Senate President's appointee &middot; MIDA Chair</div>
+            <div class="pc-regime">State Legislator Form</div>
+            <div class="pc-finding">Lists "Military Installation Development Authority (MIDA)" directly. Also discloses 13 real-estate entities, including two in Roy City &mdash; the same city touching MIDA's Falcon Hill footprint.</div>
+          </div>
+
+          <div class="person-card">
+            <div class="pc-name">Sen. Jerry Stevenson</div>
+            <div class="pc-role">House Speaker's appointee (inferred) &middot; MIDA Vice Chair</div>
+            <div class="pc-regime">State Legislator Form</div>
+            <div class="pc-finding">Confirms, in his own words, he sits on <b>MIDA, UIPA, and Point of the Mountain</b> simultaneously. The Point of the Mountain seat is listed as an Adams appointment too.</div>
+          </div>
+
+          <div class="person-card">
+            <div class="pc-name">Gage Froerer</div>
+            <div class="pc-role">Governor's appointee &middot; Weber County Commissioner</div>
+            <div class="pc-regime">Weber County Form</div>
+            <div class="pc-finding">Lists Weber Basin Water and Central Weber Sewer only &mdash; the form itself has no field where a state authority like MIDA could go.</div>
+          </div>
+
+          <div class="person-card">
+            <div class="pc-name">Erik Rowland</div>
+            <div class="pc-role">Governor's appointee &middot; Wasatch County Council</div>
+            <div class="pc-regime">Wasatch County Form</div>
+            <div class="pc-finding">Checked "I have no conflict of interest to report" &mdash; despite sitting on the main board plus 3 of the 5 PID boards.</div>
+          </div>
+
+          <div class="person-card blank">
+            <div class="pc-name">Mark Shepherd</div>
+            <div class="pc-role">Governor's appointee &middot; Clearfield City Mayor</div>
+            <div class="pc-regime">Davis County Form</div>
+            <div class="pc-finding">Every substantive field left blank. His own bio, printed directly above the form, names a real estate business and three other board seats &mdash; none of it on the form itself.</div>
+          </div>
+
+          <div class="person-card">
+            <div class="pc-name">Jeff Moss</div>
+            <div class="pc-role">Nonvoting &middot; GOEO Executive Director</div>
+            <div class="pc-regime">MIDA's Own Form</div>
+            <div class="pc-finding">Confirms he's <b>CEO of the Nucleus Institute</b>, not just a board member. Also lists several other board seats, though the handwriting there isn't fully legible.</div>
+          </div>
+
+        </div>
+
+        <p>Five distinct disclosure regimes across nine people, governed by different local and state rules, applied to people who all sit on the same board. Whether Froerer's county form was legally required to list MIDA specifically hasn't been confirmed here &mdash; the honest reading is that his form may simply have had nowhere for it to go. Shepherd's blank form is read here from a document capture rather than the physical original; the source is a clean, non-scanned PDF, which makes a reading error less likely than on the scanned forms, but it hasn't been independently checked against the county's own posted copy. Moss's additional board seats (beyond GOEO and Nucleus) are read from handwriting that isn't fully legible and shouldn't be treated as confirmed without a clearer copy.</p>
+      </div></div>
+    </div>
+
+    <div class="acc-item open">
+      <div class="acc-head"><h2>The Governor's Own Reversal</h2><div class="acc-toggle">+</div></div>
+      <div class="acc-body"><div class="acc-inner">
+        <p>None of this happened without the Governor's knowledge. Gov. Spencer Cox's own public statements, tracked across eight months, form a complete arc from personally soliciting the project to disclaiming any role in it at all.</p>
+
+        <ul class="timeline">
+          <li class="tl-item"><span class="tl-date">Late 2025</span><div class="tl-text">Per Kevin O'Leary's own account, Cox met with him alongside Speaker Schultz and Senate President Adams. O'Leary's paraphrase of their side of the conversation: "We want to build this thing, can you do it?"</div></li>
+          <li class="tl-item"><span class="tl-date">Jan 2026</span><div class="tl-text">Reported as having "initially backed the project" from this meeting on.</div></li>
+          <li class="tl-item clash"><span class="tl-date">Late Apr 2026</span><div class="tl-text">At his monthly press conference, Cox fiercely defends the project and dismisses caution about it directly: "I'm so tired of our country taking years to get stuff done &mdash; it's the dumbest thing ever... We think that taking time makes things better or safer."</div></li>
+          <li class="tl-item"><span class="tl-date">May 4, 2026</span><div class="tl-text">Box Elder Commissioners approve; public backlash intensifies statewide.</div></li>
+          <li class="tl-item"><span class="tl-date">May 29, 2026</span><div class="tl-text">Cox signs an executive order in response to "statewide outrage" &mdash; after, as one critic publicly asked, he'd spent weeks "singing its praises."</div></li>
+          <li class="tl-item clash"><span class="tl-date">Aug 20, 2026</span><div class="tl-text">Full retreat: "not a decision made by me," years of claimed prior worry about MIDA, and &mdash; the same week &mdash; he says he'd require the exact kind of cautious, closed-loop cooling oversight he'd mocked in April, "if I felt I could do it with executive authority."</div></li>
+        </ul>
+
+        <p>Stated plainly: in January, his own side asked the investor "can you do it?" In April, he called caution about the project "the dumbest thing ever." By August, he says the decision "was not made by me," claims years of quiet concern about the very authority that made it, and wishes he had the power to impose the same caution he'd dismissed four months earlier.</p>
+      </div></div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-head"><h2>Still Open</h2><div class="acc-toggle">+</div></div>
+      <div class="acc-body"><div class="acc-inner">
+        <div class="caveat caveat--first"><b>What isn't confirmed yet:</b> the exact annual budget figures for each PID, which would confirm whether all five currently fall under the $10 million disclosure threshold or whether some have grown past it. Whether any PID or DRC member besides the five shown here holds outside business interests relevant to MIDA's project areas hasn't been checked person by person. Whether this same $10 million threshold and DRC exemption is unique to MIDA or appears in the enabling statute for other Utah land-use authorities (UIPA, the Beehive-style entities) hasn't been compared directly. Shepherd's blank form hasn't been independently checked against a second copy or the county's own posted record.</div>
+      </div></div>
+    </div>
+
+  </div>
+
+  <footer>
+    <span>The Weber County Hive</span>
+    <span>Built from midaut.org &amp; MIDA disclosure forms &mdash; no comment requested</span>
+  </footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('.acc-head').forEach(function(head){
+    head.addEventListener('click', function(){
+      head.parentElement.classList.toggle('open');
+    });
+  });
+</script>
+</body>
+</html>
