@@ -64,6 +64,16 @@ const COMMITTEES = [
     summary: "A body established in 2013 was rebuilt across three 2025 bills into something with real machinery: a university-housed institute tasked by statute with building a 50-state network, a PR contract that helped fund an actual lawsuit, and a pipeline that routes every federal guidance letter received by any state agency to its chairs. Its public record shows no engagement when the target moved from federal land to federal AI policy.",
     page: "weber-hive-committee-federalism.html",
     status: "live"
+  },
+  {
+    id: "wfrc-wfedd",
+    name: "Wasatch Front Regional Council / Economic Development District",
+    short: "WFRC",
+    chambers: "27-member Council · 25-seat WFEDD Strategy Committee",
+    controls: "Regional transportation planning, federal economic strategy (CEDS), CDBG and TLC grant funding across six counties",
+    summary: "A regional planning board of mostly sitting mayors and commissioners, and a second committee beside it with a formal seat for Zions Bank and an active real-estate broker who seconds its motions — the body that decides which local projects get written into the region's federal economic strategy, and where planning-grant money goes to write a city's own founding land-use plan.",
+    page: "weber-hive-committee-wfrc-wfedd.html",
+    status: "live"
   }
   // Next committee goes here, e.g.:
   // {
