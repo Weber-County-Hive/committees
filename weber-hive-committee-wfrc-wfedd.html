@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Two Councils, One Building: WFRC and WFEDD | The Weber County Hive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --maroon:#4a0e0e;
+    --maroon-deep:#390a0a;
+    --gold:#c9a227;
+    --gold-dim:#c9a22733;
+    --paper:#f4efe3;
+    --paper-2:#ece4d1;
+    --ink:#241a12;
+    --ink-soft:#5a4d3d;
+    --rule:#d8cdb4;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Source Serif 4', Georgia, serif;
+    line-height:1.65;
+  }
+  a{color:var(--maroon);}
+  .wrap{max-width:900px;margin:0 auto;padding:0 24px;}
+
+  .topbar{
+    background:var(--paper-2);
+    border-bottom:1px solid var(--rule);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+  }
+  .topbar .wrap{display:flex;gap:20px;padding:9px 24px;flex-wrap:wrap;}
+  .topbar a{color:var(--ink-soft);text-decoration:none;border-bottom:1px dotted var(--ink-soft);}
+
+  header.masthead{
+    background:var(--maroon);
+    background-image:linear-gradient(135deg, var(--maroon) 0%, var(--maroon-deep) 100%);
+    color:#f4efe3;
+    padding:44px 0 36px;
+  }
+  header.masthead .inner{display:flex;gap:22px;align-items:flex-start;}
+  .hex{
+    flex:0 0 auto;
+    width:64px;height:64px;
+    border:2px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Libre Caslon Text',serif;
+    font-size:22px;font-weight:700;
+    color:var(--gold);
+    clip-path:polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0% 50%);
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;
+    color:var(--gold);margin:0 0 10px;
+  }
+  h1.headline{
+    font-family:'Libre Caslon Text',serif;
+    font-weight:700;
+    font-size:clamp(26px,4.2vw,38px);
+    margin:0 0 12px;line-height:1.15;
+  }
+  .dek{font-size:16px;color:#e3d9c4;max-width:60ch;margin:0;}
+
+  section{padding:38px 0;}
+  section.tight{padding:22px 0;}
+  h2{
+    font-family:'Libre Caslon Text',serif;
+    font-size:23px;margin:0 0 16px;
+    padding-bottom:8px;border-bottom:2px solid var(--maroon);
+  }
+  h3{font-family:'Libre Caslon Text',serif;font-size:18px;margin:0 0 8px;}
+  p{margin:0 0 14px;max-width:72ch;}
+
+  .startbox{
+    background:var(--paper-2);border:1px solid var(--rule);
+    border-left:5px solid var(--gold);padding:20px 24px;
+  }
+  .startbox ol{margin:0;padding-left:20px;}
+  .startbox li{margin-bottom:8px;}
+
+  .twobox{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  @media (max-width:640px){.twobox{grid-template-columns:1fr;}}
+  .board{
+    background:#fbf8f0;border:1px solid var(--rule);
+    padding:18px 20px;
+  }
+  .board h3{color:var(--maroon);}
+  .board .tag{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);
+    display:block;margin-bottom:10px;
+  }
+  .rosterlist{margin:0;padding-left:0;list-style:none;font-size:14px;}
+  .rosterlist li{padding:5px 0;border-top:1px solid var(--rule);}
+  .rosterlist li:first-child{border-top:none;}
+  .rosterlist .role{color:var(--ink-soft);font-size:12.5px;}
+
+  .flagcard{
+    background:#fbf8f0;border:1px solid var(--gold);border-left:5px solid var(--maroon);
+    padding:18px 22px;margin-bottom:16px;
+  }
+  .flagcard h3{margin-bottom:6px;}
+  .flagcard .tag{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--maroon);
+    letter-spacing:0.05em;margin-bottom:8px;display:block;
+  }
+
+  table.funding{width:100%;border-collapse:collapse;font-size:14px;background:#fbf8f0;border:1px solid var(--rule);}
+  table.funding th{
+    background:var(--maroon);color:#f4efe3;text-align:left;padding:9px 11px;
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:500;
+  }
+  table.funding td{padding:10px 11px;border-top:1px solid var(--rule);vertical-align:top;}
+  table.funding tr:nth-child(odd) td{background:var(--paper-2);}
+
+  .connector{
+    display:flex;align-items:center;gap:14px;margin:22px 0;
+    font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink-soft);
+  }
+  .connector::before,.connector::after{content:"";flex:1;border-top:1px dashed var(--rule);}
+
+  .companions{
+    background:var(--paper-2);border:1px solid var(--rule);padding:16px 20px;
+    font-size:14px;
+  }
+  .companions a{font-weight:600;}
+
+  footer{
+    background:var(--maroon-deep);color:#c9bfa8;padding:26px 0;
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;
+  }
+  footer a{color:var(--gold);}
+
+  .glossary-intro{font-size:14px;color:var(--ink-soft);margin-bottom:18px;}
+  .glossary-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:14px;
+  }
+  .flipcard{
+    perspective:1000px;
+    height:130px;
+  }
+  .flipcard input{position:absolute;opacity:0;pointer-events:none;}
+  .flipcard label{
+    position:relative;display:block;width:100%;height:100%;cursor:pointer;
+  }
+  .flipcard .inner{
+    position:relative;width:100%;height:100%;
+    transition:transform 0.5s;
+    transform-style:preserve-3d;
+  }
+  .flipcard input:checked ~ .inner{transform:rotateY(180deg);}
+  .flipcard .face{
+    position:absolute;inset:0;
+    backface-visibility:hidden;
+    border:1px solid var(--rule);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:10px;
+  }
+  .flipcard .front{
+    background:var(--maroon);color:var(--gold);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:16px;font-weight:600;letter-spacing:0.04em;
+  }
+  .flipcard .front .tap{
+    font-size:10px;color:#e3d9c4;letter-spacing:0.03em;
+    margin-top:8px;font-family:'IBM Plex Mono',monospace;
+    text-transform:none;
+  }
+  .flipcard .back{
+    background:#fbf8f0;color:var(--ink);
+    transform:rotateY(180deg);
+    font-size:12.5px;line-height:1.4;
+  }
+  .flipcard .back b{
+    display:block;font-family:'Libre Caslon Text',serif;font-size:13.5px;
+    margin-bottom:4px;color:var(--maroon);
+  }
+
+  .rosterlist li.extra{display:none;}
+  .roster-toggle{
+    margin-top:10px;
+    background:none;border:1px solid var(--maroon);color:var(--maroon);
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;
+    padding:6px 12px;cursor:pointer;width:100%;
+  }
+  .roster-toggle:hover{background:var(--gold-dim);}
+  .board.expanded .rosterlist li.extra{display:block;}
+  .board.expanded .roster-toggle .more-label{display:none;}
+  .board:not(.expanded) .roster-toggle .less-label{display:none;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a href="index.html">&larr; Committees index</a>
+    <a href="https://weber-county-hive.github.io/-weber-county-hive-index/">Master index</a>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap inner">
+    <div class="hex">H</div>
+    <div>
+      <p class="eyebrow">Wasatch Front Regional Council &middot; Committee Structure</p>
+      <h1 class="headline">Two Councils, One Building</h1>
+      <p class="dek">Who sits on the Wasatch Front Regional Council and the Wasatch Front Economic Development District, how the private seats get filled, and where the money goes.</p>
+    </div>
+  </div>
+</header>
+
+<section class="tight">
+  <div class="wrap startbox">
+    <h3>How to read this</h3>
+    <ol>
+      <li><strong>WFRC</strong> is the region's transportation and growth-planning authority for six counties &mdash; almost entirely sitting mayors and county commissioners.</li>
+      <li><strong>WFEDD</strong> is a separate committee that operates "under the auspices of" WFRC. Federal rules require it to include private-sector seats &mdash; banking, real estate, construction &mdash; alongside the government members. That's the layer worth watching.</li>
+      <li>WFEDD's real power is narrow but specific: it decides which local projects get written into the region's federally-required economic strategy, the document that determines who can compete for EDA grant money.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap">
+    <h2>For beginners: the acronyms</h2>
+    <p class="glossary-intro">This page uses a lot of them. Tap a card to flip it.</p>
+    <div class="glossary-grid">
+
+      <div class="flipcard">
+        <input type="checkbox" id="ac-wfrc">
+        <label for="ac-wfrc">
+          <div class="inner">
+            <div class="face front">WFRC<span class="tap">tap to flip</span></div>
+            <div class="face back"><b>Wasatch Front Regional Council</b>The region's transportation and growth-planning authority for six counties. Mostly sitting mayors and county commissioners.</div>
+          </div>
+        </label>
+      </div>
+
+      <div class="flipcard">
+        <input type="checkbox" id="ac-wfedd">
+        <label for="ac-wfedd">
+          <div class="inner">
+            <div class="face front">WFEDD<span class="tap">tap to flip</span></div>
+            <div class="face back"><b>Wasatch Front Economic Development District</b>A separate committee under WFRC. Federal rules require private-sector seats alongside government members.</div>
+          </div>
+        </label>
+      </div>
+
+      <div class="flipcard">
+        <input type="checkbox" id="ac-ceds">
+        <label for="ac-ceds">
+          <div class="inner">
+            <div class="face front">CEDS<span class="tap">tap to flip</span></div>
+            <div class="face back"><b>Comprehensive Economic Development Strategy</b>The document WFEDD writes. Local projects have to be in it before they can compete for federal EDA grant money.</div>
+          </div>
+        </label>
+      </div>
+
+      <div class="flipcard">
+        <input type="checkbox" id="ac-eda">
+        <label for="ac-eda">
+          <div class="inner">
+            <div class="face front">EDA<span class="tap">tap to flip</span></div>
+            <div class="face back"><b>Economic Development Administration</b>A federal agency (U.S. Dept. of Commerce). Funds WFEDD's operations and the grant programs the CEDS unlocks.</div>
+          </div>
+        </label>
+      </div>
+
+      <div class="flipcard">
+        <input type="checkbox" id="ac-mpo">
+        <label for="ac-mpo">
+          <div class="inner">
+            <div class="face front">MPO<span class="tap">tap to flip</span></div>
+            <div class="face back"><b>Metropolitan Planning Organization</b>The federally-required role WFRC plays for the region's transportation planning.</div>
+          </div>
+        </label>
+      </div>
+
+      <div class="flipcard">
+        <input type="checkbox" id="ac-aog">
+        <label for="ac-aog">
+          <div class="inner">
+            <div class="face front">AOG<span class="tap">tap to flip</span></div>
+            <div class="face back"><b>Association of Governments</b>A group of local governments that voluntarily work together. WFRC is one for the Wasatch Front counties.</div>
+          </div>
+        </label>
+      </div>
+
+      <div class="flipcard">
+        <input type="checkbox" id="ac-tlc">
+        <label for="ac-tlc">
+          <div class="inner">
+            <div class="face front">TLC<span class="tap">tap to flip</span></div>
+            <div class="face back"><b>Transportation and Land Use Connection</b>A WFRC program that pays for city planning studies &mdash; general plans, zoning, land-use work.</div>
+          </div>
+        </label>
+      </div>
+
+      <div class="flipcard">
+        <input type="checkbox" id="ac-cdbg">
+        <label for="ac-cdbg">
+          <div class="inner">
+            <div class="face front">CDBG<span class="tap">tap to flip</span></div>
+            <div class="face back"><b>Community Development Block Grant</b>Federal HUD money for small-city infrastructure &mdash; water lines, sewer, roads. WFRC administers it regionally.</div>
+          </div>
+        </label>
+      </div>
+
+      <div class="flipcard">
+        <input type="checkbox" id="ac-sap">
+        <label for="ac-sap">
+          <div class="inner">
+            <div class="face front">SAP<span class="tap">tap to flip</span></div>
+            <div class="face back"><b>Station Area Planning</b>Required plans for any city with a rail or transit station, under state law HB462.</div>
+          </div>
+        </label>
+      </div>
+
+      <div class="flipcard">
+        <input type="checkbox" id="ac-tif">
+        <label for="ac-tif">
+          <div class="inner">
+            <div class="face front">TIF<span class="tap">tap to flip</span></div>
+            <div class="face back"><b>Tax Increment Financing</b>Future growth in property tax revenue gets diverted to pay for development infrastructure instead of going to schools, fire, and other services.</div>
+          </div>
+        </label>
+      </div>
+
+      <div class="flipcard">
+        <input type="checkbox" id="ac-pid">
+        <label for="ac-pid">
+          <div class="inner">
+            <div class="face front">PID<span class="tap">tap to flip</span></div>
+            <div class="face back"><b>Public Infrastructure District</b>A special district that can issue bonds and levy taxes to fund a developer's infrastructure, often with limited oversight.</div>
+          </div>
+        </label>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Who's on each board</h2>
+    <div class="twobox">
+      <div class="board" id="board-wfrc">
+        <h3>WFRC Council</h3>
+        <span class="tag">27 members &middot; 21 voting, 6 non-voting &middot; sets the Regional Transportation Plan</span>
+        <ul class="rosterlist">
+          <li>Dawn Ramsey <span class="role">Chair &middot; Mayor, South Jordan</span></li>
+          <li>Bob Stevenson <span class="role">Vice Chair &middot; Commissioner, Davis County</span></li>
+          <li>Gage Froerer <span class="role">Commissioner, Weber County</span></li>
+          <li>Jim Harvey <span class="role">Commissioner, Weber County</span></li>
+          <li>Sheri Bingham <span class="role">Mayor, Hooper</span></li>
+          <li>Carlos Braceras <span class="role">Executive Director, UDOT</span></li>
+          <li>Dirk Burton <span class="role">Mayor, West Jordan</span></li>
+          <li>Jay Fox <span class="role">Executive Director, UTA</span></li>
+          <li>Erin Mendenhall <span class="role">Mayor, Salt Lake City</span></li>
+          <li>Ben Nadolski <span class="role">Mayor, Ogden</span></li>
+          <li class="extra">Mike Newton <span class="role">Commissioner, Morgan County</span></li>
+          <li class="extra">Aimee Winder Newton <span class="role">Councilmember, Salt Lake County</span></li>
+          <li class="extra">Kristie Overson <span class="role">Mayor, Taylorsville</span></li>
+          <li class="extra">Lorin Palmer <span class="role">Mayor, Herriman</span></li>
+          <li class="extra">Lee Perry <span class="role">Commissioner, Box Elder County</span></li>
+          <li class="extra">Joy Petro <span class="role">Mayor, Layton</span></li>
+          <li class="extra">Mark Shepherd <span class="role">Mayor, Clearfield</span></li>
+          <li class="extra">Tamara Tran <span class="role">Mayor, Kaysville</span></li>
+          <li class="extra">Scott Wardle <span class="role">Councilmember, Tooele County</span></li>
+          <li class="extra">Jenny Wilson <span class="role">Mayor, Salt Lake County</span></li>
+          <li class="extra">Monica Zoltanski <span class="role">Mayor, Sandy</span></li>
+          <li class="extra">Jason Brown <span class="role">Non-voting &middot; CEO, Envision Utah</span></li>
+          <li class="extra">Ariel Defay <span class="role">Non-voting &middot; Rep., HD-15</span></li>
+          <li class="extra">Laura Hanson <span class="role">Non-voting &middot; Sr. Advisor, Gov's Office of Planning &amp; Budget</span></li>
+          <li class="extra">Wayne Harper <span class="role">Non-voting &middot; Senate President Pro Tem</span></li>
+          <li class="extra">Lorene Kamalu <span class="role">Non-voting &middot; Commissioner, Davis County</span></li>
+          <li class="extra">Troy Walker <span class="role">Non-voting &middot; Mayor, Draper</span></li>
+        </ul>
+        <button class="roster-toggle" onclick="this.closest('.board').classList.toggle('expanded')">
+          <span class="more-label">Show all 27 &darr;</span>
+          <span class="less-label">Show fewer &uarr;</span>
+        </button>
+      </div>
+
+      <div class="board" id="board-wfedd">
+        <h3>WFEDD Strategy Committee</h3>
+        <span class="tag">25 seats &middot; writes and updates the region's federal economic strategy (CEDS)</span>
+        <ul class="rosterlist">
+          <li>Gage Froerer <span class="role">Co-Chair &middot; Commissioner, Weber County</span></li>
+          <li>Mary Catherine Perry <span class="role">Co-Chair &middot; Salt Lake Chamber</span></li>
+          <li>Debbie Winn <span class="role">Vice Chair &middot; Mayor, Tooele City</span></li>
+          <li>Shaleane Gee <span class="role">Member &middot; Zions Bank</span></li>
+          <li>Chris Sloan <span class="role">Alternate, active voting &middot; Group 1 Real Estate</span></li>
+          <li>Shannon Ellsworth <span class="role">Alternate, active &middot; Rio Tinto, Real Estate Strategy</span></li>
+          <li>Stephanie Russell <span class="role">Member &middot; Weber County Economic Development</span></li>
+          <li>Nicolas Fritz <span class="role">Member &middot; Intermountain Healthcare</span></li>
+          <li>Dave Maughan <span class="role">Member &middot; Mayor, Syracuse</span></li>
+          <li>John Crofts <span class="role">Alternate, active voting &middot; Davis County Commission</span></li>
+          <li class="extra">Raelene Blocker <span class="role">Member &middot; Commissioner, Morgan County</span></li>
+          <li class="extra">Karen Lang <span class="role">Member &middot; Mayor, West Valley City</span></li>
+          <li class="extra">Kelly Bush <span class="role">Alternate &middot; Mayor, Kearns</span></li>
+          <li class="extra">Ryan Starks <span class="role">Member &middot; Governor's Office of Economic Opportunity</span></li>
+          <li class="extra">Benjamin Hart <span class="role">Alternate &middot; Utah Inland Port Authority</span></li>
+          <li class="extra">Scott Cuthbertson <span class="role">Alternate &middot; EDCUtah</span></li>
+          <li class="extra">Brad Mortensen <span class="role">Member &middot; Weber State University</span></li>
+          <li class="extra">Paul Hacking <span class="role">Alternate &middot; Tooele Technical College</span></li>
+          <li class="extra">Jimmy McDonough <span class="role">Member &middot; Talent Ready Utah</span></li>
+          <li class="extra">Darin Brush <span class="role">Alternate &middot; Davis Technical College</span></li>
+          <li class="extra">Bryce Wurtsbaugh <span class="role">Member &middot; Suazo Business Center</span></li>
+          <li class="extra">Julie Johnson <span class="role">Alternate &middot; United Way of Northern Utah</span></li>
+          <li class="extra">Kent Andersen <span class="role">Member &middot; Davis County</span></li>
+          <li class="extra">Chanel Flores <span class="role">Alternate &middot; Davis County</span></li>
+          <li class="extra">Dina Blaes <span class="role">Member &middot; Salt Lake County</span></li>
+          <li class="extra">Kersten Swinyard <span class="role">Alternate &middot; Salt Lake County</span></li>
+          <li class="extra">Rachelle Custer <span class="role">Member &middot; Tooele County</span></li>
+          <li class="extra">Chris Roybal <span class="role">Alternate &middot; Northern Utah Economic Alliance</span></li>
+          <li class="extra">Kate Becker <span class="role">Member &middot; Morgan County</span></li>
+          <li class="extra">Shawn Milne <span class="role">Alternate &middot; Cache County</span></li>
+          <li class="extra">Sara Toliver <span class="role">Member &middot; Visit Ogden</span></li>
+          <li class="extra">Gwendolyn Kervin <span class="role">Alternate &middot; Dept. of Workforce Services</span></li>
+          <li class="extra">Michael Moore <span class="role">Member &middot; Hill Air Force Base</span></li>
+          <li class="extra">Muriel Xochimitl <span class="role">Alternate &middot; XFactor Strategic Communications</span></li>
+        </ul>
+        <button class="roster-toggle" onclick="this.closest('.board').classList.toggle('expanded')">
+          <span class="more-label">Show all 25 &darr;</span>
+          <span class="less-label">Show fewer &uarr;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>What stands out</h2>
+
+    <div class="flagcard">
+      <span class="tag">SAME PERSON, BOTH SEATS</span>
+      <h3>Gage Froerer chairs both</h3>
+      <p>Froerer sits on the full WFRC Council as a Weber County Commissioner, and separately co-chairs the WFEDD Strategy Committee &mdash; the body that decides which projects make it into the region's federal economic strategy. Froerer's real estate holdings, including undisclosed interests connected to the Nordic Valley development, are documented elsewhere on this site.</p>
+    </div>
+
+    <div class="flagcard">
+      <span class="tag">A FORMAL SEAT, NOT JUST CONSULTING WORK</span>
+      <h3>Zions Bank sits on WFEDD directly</h3>
+      <p>Shaleane Gee holds a named Member seat on WFEDD for Zions Bank. Zions Public Finance is documented elsewhere on this site playing as many as seven different roles across Utah Public Infrastructure District deals &mdash; feasibility study author, financial advisor, bond underwriter, direct bond purchaser, trustee, compliance monitor, and special assessment administrator &mdash; and a separate Zions employee sits on the state commission that reviews PID bond issuances. Here, Zions has an institutional seat on the committee that decides which projects get access to federal development money.</p>
+    </div>
+
+    <div class="flagcard">
+      <span class="tag">REAL ESTATE, ACTIVELY VOTING</span>
+      <h3>Chris Sloan isn't a name on paper</h3>
+      <p>Sloan, a real estate broker and past president of the Utah Association of Realtors, is formally listed as an alternate &mdash; but committee minutes show him attending meetings and personally seconding motions, including the vote to ratify the committee's own membership for the year.</p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Where the money goes</h2>
+    <p>WFRC administers several funding programs. Most of the money is transportation-construction financing not yet examined here. The two programs reviewed in detail are smaller but tell different stories.</p>
+
+    <table class="funding">
+      <tr>
+        <th>Program</th>
+        <th>Scale</th>
+        <th>What it funds</th>
+      </tr>
+      <tr>
+        <td>CDBG Small Cities</td>
+        <td>~$1.17M (2026)</td>
+        <td>Small-town infrastructure &mdash; water lines, sewer rehab, main street reconstruction. Weber, Tooele, Morgan counties, population under 50,000.</td>
+      </tr>
+      <tr>
+        <td>Transportation &amp; Land Use Connection (TLC)</td>
+        <td>~$1.9M/year, 15 projects (2026)</td>
+        <td>Technical assistance for city general plans, zoning, and land-use studies &mdash; the planning work that shapes where development happens next.</td>
+      </tr>
+      <tr>
+        <td>Station Area Planning</td>
+        <td>$790K (first round, 2022)</td>
+        <td>Required plans for cities with a rail or transit station, under state law HB462.</td>
+      </tr>
+      <tr>
+        <td>EDA Partnership Planning Grant</td>
+        <td>$420,000 (2023-2026)</td>
+        <td>WFEDD's own core federal operating funds &mdash; not a project grant, the money that keeps the committee running.</td>
+      </tr>
+    </table>
+
+    <div class="connector">the TLC thread, followed to one city</div>
+
+    <div class="flagcard">
+      <span class="tag">CASE IN POINT</span>
+      <h3>Ogden Valley City's TLC-funded plan</h3>
+      <p>Ogden Valley City &mdash; already covered on this site for a 512.6% emergency property tax vote &mdash; received a 2026 TLC award to write its founding general plan, transportation master plan, and zoning roadmap. The plan is being written by JUB Engineering, an outside consulting firm with its own record of securing large WFRC grants for other client cities. The document itself is, almost word for word, the 2016 Weber County general plan &mdash; whose own credited consultant team included Zions Bank Public Finance, and whose planning commission included Steve Waldrip, now the Governor's senior housing adviser.</p>
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap companions">
+    Related on this site: <a href="weber-hive-committee-mida-disclosures.html">Below the Line</a> (MIDA's disclosure thresholds) &middot; the Nordic Village PID and Zions Public Finance's seven roles across Utah PID deals, covered in the Transparency and PIDS-Utah repos.
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    Sources: WFRC Council and WFEDD Strategy Committee rosters and meeting minutes (wfrc.utah.gov); Ogden Valley City general plan and planning records (utah.gov/pmn, ogdenvalley.gov); Utah Division of Corporations filings. This page states what the record shows; it does not characterize any finding as a legal violation.
+  </div>
+</footer>
+
+</body>
+</html>
