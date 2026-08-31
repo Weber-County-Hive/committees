@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Board Wave, 2023–2026 | The Weber County Hive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16232B;
+    --ink-soft:#3A4A54;
+    --paper:#E9E4D8;
+    --paper-card:#F4F0E6;
+    --rule:#C9C1AE;
+    --help:#3F6844;
+    --help-bg:#E3EBDE;
+    --harm:#8C2F2F;
+    --harm-bg:#F3E1DD;
+    --mixed:#966423;
+    --mixed-bg:#F0E5D1;
+    --unstarted:#6B675E;
+    --unstarted-bg:#E4DFD2;
+    --max:80ch;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  a{color:var(--ink);}
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px;}
+
+  header.band{
+    background:var(--ink);
+    color:var(--paper-card);
+    padding:64px 0 48px;
+    border-bottom:6px solid var(--mixed);
+  }
+  header.band .kicker{
+    font-size:0.95rem;
+    color:#C9B98A;
+    margin:0 0 14px;
+    font-weight:500;
+  }
+  header.band h1{
+    font-size:clamp(2.1rem,5vw,3.2rem);
+    line-height:1.06;
+    margin:0 0 20px;
+    color:#F6F2E7;
+  }
+  header.band p.dek{
+    font-size:1.15rem;
+    color:#D8D2C1;
+    max-width:62ch;
+    margin:0;
+  }
+
+  nav.crumbs{
+    font-size:0.9rem;
+    padding:14px 0;
+    color:var(--ink-soft);
+    border-bottom:1px solid var(--rule);
+  }
+  nav.crumbs a{text-decoration:none;border-bottom:1px solid var(--rule);}
+
+  section{padding:52px 0;}
+  section + section{border-top:1px solid var(--rule);}
+
+  section > h2{
+    font-size:1.7rem;
+    margin:0 0 8px;
+  }
+  section > p.lead{
+    max-width:var(--max);
+    color:var(--ink-soft);
+    font-size:1.02rem;
+    margin:0 0 32px;
+  }
+
+  /* Methodology strip */
+  .method-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:1px;
+    background:var(--rule);
+    border:1px solid var(--rule);
+  }
+  .method-grid div{
+    background:var(--paper-card);
+    padding:16px 18px;
+  }
+  .method-grid .num{
+    font-family:'Fraunces',serif;
+    font-size:1.5rem;
+    font-weight:600;
+    color:var(--mixed);
+    display:block;
+  }
+  .method-grid .label{
+    font-size:0.88rem;
+    color:var(--ink-soft);
+  }
+
+  /* Board status table */
+  .board-list{border-top:1px solid var(--rule);}
+  .board-row{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:16px;
+    align-items:start;
+    padding:20px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .board-row .name{
+    font-family:'Fraunces',serif;
+    font-size:1.15rem;
+    font-weight:600;
+    margin:0 0 4px;
+  }
+  .board-row .meta{
+    font-size:0.9rem;
+    color:var(--ink-soft);
+  }
+  .badge{
+    display:inline-block;
+    font-size:0.78rem;
+    font-weight:600;
+    padding:5px 11px;
+    border-radius:2px;
+    white-space:nowrap;
+    text-align:center;
+  }
+  .badge.scored{background:var(--harm-bg);color:var(--harm);}
+  .badge.partial{background:var(--mixed-bg);color:var(--mixed);}
+  .badge.unstarted{background:var(--unstarted-bg);color:var(--unstarted);}
+  .score-tag{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:0.95rem;
+    margin-top:6px;
+    display:block;
+  }
+  .score-tag.harm{color:var(--harm);}
+
+  /* Scored board detail cards */
+  .scorecard{
+    background:var(--paper-card);
+    border:1px solid var(--rule);
+    padding:26px 28px;
+    margin-bottom:24px;
+  }
+  .scorecard h3{
+    font-size:1.25rem;
+    margin:0 0 4px;
+  }
+  .scorecard .net{
+    font-size:0.95rem;
+    color:var(--harm);
+    font-weight:600;
+    margin:0 0 18px;
+  }
+  .dim-table{width:100%;border-collapse:collapse;font-size:0.92rem;}
+  .dim-table th{
+    text-align:left;
+    font-weight:600;
+    color:var(--ink-soft);
+    border-bottom:1px solid var(--rule);
+    padding:6px 8px 6px 0;
+    font-size:0.82rem;
+  }
+  .dim-table td{
+    padding:8px 8px 8px 0;
+    border-bottom:1px solid var(--rule);
+    vertical-align:top;
+  }
+  .dim-table td.numcell{white-space:nowrap;font-family:'Fraunces',serif;font-weight:600;}
+
+  /* Bill scoring section (environmental capture sequence) */
+  .bill-timeline{border-left:3px solid var(--mixed);margin-left:6px;}
+  .bill{
+    position:relative;
+    padding:4px 0 34px 28px;
+  }
+  .bill::before{
+    content:"";
+    position:absolute;
+    left:-9px;
+    top:6px;
+    width:14px;height:14px;
+    border-radius:50%;
+    background:var(--paper);
+    border:3px solid var(--mixed);
+  }
+  .bill.harm::before{border-color:var(--harm);}
+  .bill.help::before{border-color:var(--help);}
+  .bill .year{
+    font-family:'Fraunces',serif;
+    font-size:1.05rem;
+    font-weight:600;
+    color:var(--ink);
+  }
+  .bill .cite{
+    font-size:0.88rem;
+    color:var(--ink-soft);
+    margin:2px 0 10px;
+  }
+  .bill p{margin:0 0 10px;max-width:var(--max);font-size:0.98rem;}
+  .verdict-line{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:0.85rem;
+    font-weight:600;
+    padding:4px 10px;
+    border-radius:2px;
+  }
+  .verdict-line.harm{background:var(--harm-bg);color:var(--harm);}
+  .verdict-line.help{background:var(--help-bg);color:var(--help);}
+  .verdict-line.mixed{background:var(--mixed-bg);color:var(--mixed);}
+
+  footer{
+    padding:36px 0 60px;
+    font-size:0.85rem;
+    color:var(--ink-soft);
+  }
+  footer a{text-decoration:none;border-bottom:1px solid var(--rule);margin-right:16px;}
+
+  @media (max-width:640px){
+    header.band{padding:44px 0 36px;}
+    .board-row{grid-template-columns:1fr;}
+    .board-row .badge-wrap{text-align:left;margin-top:6px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="band">
+  <div class="wrap">
+    <p class="kicker">Committees &amp; Boards — The Weber County Hive</p>
+    <h1>The Board Wave, 2023–2026</h1>
+    <p class="dek">Utah created or restructured at least nine advisory boards and commissions in the last four legislative sessions. This page tracks each one against a seven-dimension accountability rubric, and follows one thread — air quality — through the specific bills that built and then narrowed its enforcement.</p>
+  </div>
+</header>
+
+<nav class="crumbs">
+  <div class="wrap">
+    <a href="index.html">Committees index</a>
+  </div>
+</nav>
+
+<section id="methodology">
+  <div class="wrap">
+    <h2>How boards are scored</h2>
+    <p class="lead">Every board is checked against seven dimensions — transparency, enforcement power, conflict-of-interest safeguards, appointment accountability, public participation, structural independence, and mandate specificity. Each dimension nets a help or harm score; the totals below are the sum across all seven.</p>
+    <div class="method-grid">
+      <div><span class="num">9</span><span class="label">boards tracked, 2023–2026</span></div>
+      <div><span class="num">2</span><span class="label">fully scored</span></div>
+      <div><span class="num">2</span><span class="label">partially mapped</span></div>
+      <div><span class="num">5</span><span class="label">not yet started</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="status">
+  <div class="wrap">
+    <h2>Status, board by board</h2>
+    <p class="lead">Ranked by how far the research has gone — fully scored first, then partially mapped, then unstarted.</p>
+
+    <div class="board-list">
+
+      <div class="board-row">
+        <div>
+          <p class="name">Prosecutor Conduct Commission</p>
+          <p class="meta">S.B. 318 (2025) — reviews misconduct allegations against county and municipal prosecutors</p>
+        </div>
+        <div class="badge-wrap">
+          <span class="badge scored">Scored</span>
+          <span class="score-tag harm">Net &minus;16</span>
+        </div>
+      </div>
+
+      <div class="board-row">
+        <div>
+          <p class="name">Utah Privacy Governing Board</p>
+          <p class="meta">S.B. 231 / H.B. 444 (2023–2025) — oversees the Office of Data Privacy and approves Privacy Commission agendas</p>
+        </div>
+        <div class="badge-wrap">
+          <span class="badge scored">Scored</span>
+          <span class="score-tag harm">Structural capture documented</span>
+        </div>
+      </div>
+
+      <div class="board-row">
+        <div>
+          <p class="name">Land Conservation Board</p>
+          <p class="meta">H.B. 62 (2024); membership appointed May 2026</p>
+        </div>
+        <div class="badge-wrap"><span class="badge partial">Partially mapped</span></div>
+      </div>
+
+      <div class="board-row">
+        <div>
+          <p class="name">Federalism Commission</p>
+          <p class="meta">H.B. 170 (2022), expanded 2023–2026 — HB379, HB488, SB198</p>
+        </div>
+        <div class="badge-wrap"><span class="badge partial">Partially mapped</span></div>
+      </div>
+
+      <div class="board-row">
+        <div>
+          <p class="name">Utah Energy Council</p>
+          <p class="meta">H.B. 514 (2026) — expanded scope, energy infrastructure financing powers</p>
+        </div>
+        <div class="badge-wrap"><span class="badge unstarted">Not started</span></div>
+      </div>
+
+      <div class="board-row">
+        <div>
+          <p class="name">Critical Minerals Council</p>
+          <p class="meta">S.B. 254 (2026) — state mineral-extraction strategy</p>
+        </div>
+        <div class="badge-wrap"><span class="badge unstarted">Not started</span></div>
+      </div>
+
+      <div class="board-row">
+        <div>
+          <p class="name">Economic Development Coordinating Council</p>
+          <p class="meta">H.B. 475 (2026) — statewide business recruitment and workforce alignment</p>
+        </div>
+        <div class="badge-wrap"><span class="badge unstarted">Not started</span></div>
+      </div>
+
+      <div class="board-row">
+        <div>
+          <p class="name">Medicaid Inspector General Advisory Board</p>
+          <p class="meta">S.B. 147 (2026)</p>
+        </div>
+        <div class="badge-wrap"><span class="badge unstarted">Not started</span></div>
+      </div>
+
+      <div class="board-row">
+        <div>
+          <p class="name">Cybersecurity Commission</p>
+          <p class="meta">S.B. 123 (2026) — expanded mandate</p>
+        </div>
+        <div class="badge-wrap"><span class="badge unstarted">Not started</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="scored-detail">
+  <div class="wrap">
+    <h2>The two full scores</h2>
+
+    <div class="scorecard">
+      <h3>Prosecutor Conduct Commission</h3>
+      <p class="net">Net score: &minus;16 of a possible +21 — verdict: harmful</p>
+      <table class="dim-table">
+        <thead><tr><th>Dimension</th><th>Net</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Transparency</td><td class="numcell">&minus;3</td><td>Complaint records and investigations are closed under a GRAMA exemption written into the bill itself.</td></tr>
+          <tr><td>Enforcement power</td><td class="numcell">&minus;3</td><td>No authority to discipline; findings are referred to the State Bar's own closed process.</td></tr>
+          <tr><td>Conflicts of interest</td><td class="numcell">&minus;3</td><td>Commission includes current and former prosecutors; the executive director spent two decades as a prosecutor before taking the role.</td></tr>
+          <tr><td>Appointment accountability</td><td class="numcell">&minus;1</td><td>Senate confirmation required, but no record of contested hearings.</td></tr>
+          <tr><td>Public participation</td><td class="numcell">&minus;3</td><td>Complaints must show a "clear and unambiguous" violation to be investigated at all.</td></tr>
+          <tr><td>Structural independence</td><td class="numcell">&minus;1</td><td>Housed inside the Commission on Criminal and Juvenile Justice, itself a criminal-justice coordinating body.</td></tr>
+          <tr><td>Mandate specificity</td><td class="numcell">&minus;2</td><td>No statutory examples of misconduct; investigation is discretionary.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="scorecard">
+      <h3>Utah Privacy Governing Board</h3>
+      <p class="net">Not run through the numeric rubric yet — documented as a structural capture pattern</p>
+      <p style="max-width:var(--max);font-size:0.95rem;color:var(--ink-soft);margin:0;">Five members oversee the Office of Data Privacy and approve every agenda item for the 14-member Privacy Commission below it. Sen. Kirk Cullimore — the law's own legislative sponsor — sits on the board that approves how his law is implemented. A full seven-dimension score hasn't been run yet; this is filed as ready to write once that scoring pass is done.</p>
+    </div>
+  </div>
+</section>
+
+<section id="air-quality">
+  <div class="wrap">
+    <h2>One thread followed bill by bill: air quality, 2017–2029</h2>
+    <p class="lead">Not a board itself, but the same four-part pattern — weaken enforcement, redirect funding, loosen standards, let the underlying law expire — that the board wave repeats elsewhere. Six pieces of legislation, one sponsor common to three of them.</p>
+
+    <div class="bill-timeline">
+
+      <div class="bill help">
+        <p class="year">2017 &middot; H.B. 392</p>
+        <p class="cite">Sponsors: Rep. Timothy Hawkes, Sen. Todd Weiler &middot; signed March 20, 2017</p>
+        <p>Created the Air Quality Policy Advisory Board — ten voting seats split between legislators, industry, an academic, and a non-industry NGO representative, tasked with recommending legislation based on "best available science." Passed 72&ndash;0&ndash;3 in the House.</p>
+        <span class="verdict-line help">Help — built a science-based, multi-stakeholder review body</span>
+      </div>
+
+      <div class="bill harm">
+        <p class="year">2024 &middot; H.B. 373</p>
+        <p class="cite">Sponsors: Rep. Casey Snider, Sen. Scott Sandall &middot; signed March 13, 2024</p>
+        <p>Repealed the board H.B. 392 created seven years earlier. Pollution-control rulemaking moved to the Board of Oil, Gas, and Mining. In its place: an "informal working group" whose industry members are picked jointly by the Senate President and Speaker. Passed 65&ndash;2&ndash;8 — tighter than 2017's near-unanimous vote.</p>
+        <span class="verdict-line harm">Harm — enforcement authority moved to an industry-facing board</span>
+      </div>
+
+      <div class="bill harm">
+        <p class="year">2024 &middot; Chapter 25 (same session)</p>
+        <p class="cite">Amends 51&#8209;9&#8209;306, deposit of severance tax revenue</p>
+        <p>Routes oil, gas, and mining severance tax revenue directly into segregated, nonlapsing restricted accounts that fund the agencies regulating those same industries — outside the General Fund's annual budget review.</p>
+        <span class="verdict-line harm">Harm — regulator funding decoupled from ordinary legislative oversight</span>
+      </div>
+
+      <div class="bill harm">
+        <p class="year">2025 &middot; Chapter 264</p>
+        <p class="cite">Amends 19&#8209;2a&#8209;107, halogen point-source emissions</p>
+        <p>Made the Division of Air Quality's authority over major halogen sources (magnesium smelting) discretionary throughout — "may," not "shall" — including the timeline for compliance and whether a proposed alternative counts as equivalent control. Reports annually to an interim committee rather than the full Legislature.</p>
+        <span class="verdict-line harm">Harm — mandatory standard rewritten as discretionary</span>
+      </div>
+
+      <div class="bill help">
+        <p class="year">2025 &middot; H.B. 420</p>
+        <p class="cite">Chief sponsor: Sen. Kirk Cullimore &middot; signed, effective 2025</p>
+        <p>Gave the Division of Air Quality new authority to regulate halogen emissions generally, citing their role in worsening winter inversions along the Wasatch Front by an estimated 10&ndash;25%. Sits one year after Chapter 264 narrowed halogen enforcement to a discretionary standard for the magnesium-smelting sector specifically.</p>
+        <span class="verdict-line mixed">Open question — genuine tightening, or a new grant of authority layered on the same discretionary "may" framework Chapter 264 built the year before</span>
+      </div>
+
+      <div class="bill harm">
+        <p class="year">2026 &middot; S.B. 12</p>
+        <p class="cite">Sponsor: Sen. Todd Weiler &middot; signed March 23, 2026</p>
+        <p>A comprehensive sunset-extension bill that reviewed and extended more than 30 unrelated programs by ten years apiece. Four foundational environmental statutes — the Air Conservation Act, the Safe Drinking Water Act, the Water Quality Act, and the Solid and Hazardous Waste Act — were reviewed in the same bill and left on their existing track to expire July 1, 2029.</p>
+        <span class="verdict-line harm">Harm — renewal considered and declined, without a repeal vote</span>
+      </div>
+
+    </div>
+
+    <p style="max-width:var(--max);font-size:0.95rem;color:var(--ink-soft);">Sen. Todd Weiler sponsored the board's creation in 2017, its repeal in 2024, and the sunset bill that left the underlying statutes unrenewed in 2026. The open item is H.B. 420 — whether Cullimore's 2025 tightening operates inside the same discretionary structure Chapter 264 built, or genuinely narrows it. That comparison hasn't been run yet.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a href="index.html">&larr; Back to committees index</a>
+    <a href="weber-hive-committee-nrae.html">Natural Resources, Agriculture &amp; Environment</a>
+    <p style="margin-top:18px;">The Weber County Hive &middot; accountability journalism for Weber County and Utah government</p>
+  </div>
+</footer>
+
+</body>
+</html>
