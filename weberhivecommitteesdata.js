@@ -28,7 +28,7 @@ const COMMITTEES = [
     summary: "An authority created to save an air force base now sends 46.8% of its proposed budget to a ski corridor and 0.13% to the two areas on an active installation. The same fifteen questions asked of all eight project areas, from MIDA's own budget, ordinances and agreements.",
     date: "2026-09-04",
     tags: ["mida", "tax increment", "data centers", "box elder", "land use", "water", "disclosure"],
-    page: "weber-hive-committee-mida-project-areas.html",
+    page: "weberhivecommitteemidaprojectareas.html",
     status: "live"
   },
   {
