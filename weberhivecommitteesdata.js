@@ -118,3 +118,23 @@ const COMMITTEES = [
     status: "live"
   }
 ];
+
+/* ------------------------------------------------------------
+   TEMPLATE — copy inside the array above to add a new case file.
+   Delete the leading slashes and fill it in.
+
+  {
+    id: "economic-development",
+    name: "Economic Development & Workforce Services",
+    short: "EDWS",
+    chambers: "House standing · Senate standing",
+    controls: "GOED/GOEO, business incentives, workforce programs",
+    summary: "…",
+    date: "",                                   // "YYYY-MM-DD" or "" if unknown
+    tags: ["legislature"],                      // lowercase, reuse existing tags where possible
+    tally: { help: 0, mixed: 0, harm: 0, dead: 0 },
+    page: "weber-hive-committee-economic-development.html",
+    status: "planned"                           // "live" makes the card clickable
+  },
+
+   ------------------------------------------------------------ */
