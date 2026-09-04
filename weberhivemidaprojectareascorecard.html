@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eight Project Areas — The Weber County Hive</title>
+<style>
+  /* Committees-repo palette. Sibling page "Below The Line" runs on --gold;
+     this page runs on --teal so the two read as a set but never as the same file. */
+  :root{
+    --paper:#f2ede2; --panel:#fbf8f1;
+    --ink:#20241f; --ink-soft:#4a4f45;
+    --line:#c9c0a8; --rule-strong:#8a8265;
+    --flag:#8a2e1f; --flag-soft:#f4e2dc;
+    --gold:#8a6a1f; --gold-soft:#f4ecdc;
+    --teal:#1f5a52; --teal-soft:#e3ece9;
+    /* local aliases */
+    --bg:var(--paper); --muted:var(--ink-soft); --rule:var(--line);
+    --accent:var(--teal); --soft:var(--teal-soft);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.6 "Iowan Old Style",Georgia,"Times New Roman",serif;}
+  .wrap{max-width:940px;margin:0 auto;padding:32px 20px 80px}
+  .sans{font-family:"Helvetica Neue",Arial,Helvetica,sans-serif}
+
+  header.masthead{border-bottom:3px double var(--rule);padding-bottom:18px;margin-bottom:26px}
+  .kicker{font:600 12px/1.4 "Helvetica Neue",Arial,Helvetica,sans-serif;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
+  h1{font-size:2.1rem;line-height:1.15;margin:0 0 10px;letter-spacing:-.01em}
+  .standfirst{font-size:1.12rem;color:var(--muted);margin:0}
+  .byline{font:12px/1.5 "Helvetica Neue",Arial,Helvetica,sans-serif;
+    color:var(--muted);margin-top:14px;letter-spacing:.03em}
+
+  h2{font-size:1.3rem;margin:44px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--rule)}
+  p{margin:0 0 14px}
+
+  .note{background:var(--soft);border-left:3px solid var(--accent);
+    padding:14px 16px;margin:22px 0;font-size:.95rem}
+  .note strong{display:block;font:600 11px/1.4 "Helvetica Neue",Arial,Helvetica,sans-serif;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+
+  .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:18px 0}
+  table{border-collapse:collapse;width:100%;min-width:520px;
+    font:14px/1.5 "Helvetica Neue",Arial,Helvetica,sans-serif}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
+  thead th{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+    border-bottom:2px solid var(--rule)}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  tr.total td{font-weight:700;border-top:2px solid var(--rule);border-bottom:none}
+
+  /* ---- project area card ---- */
+  .area{background:var(--panel);border:1px solid var(--rule);border-radius:5px;
+    margin:16px 0;overflow:hidden}
+  .area > .head{padding:18px 20px 14px;border-bottom:1px solid var(--rule)}
+  .area h3{font-size:1.15rem;margin:0 0 4px}
+  .area .loc{font:12px/1.45 "Helvetica Neue",Arial,Helvetica,sans-serif;
+    color:var(--muted);letter-spacing:.04em;text-transform:uppercase;margin:0}
+  .area .lede{margin:10px 0 0;font-size:.96rem;color:var(--muted)}
+
+  details.sect{border-bottom:1px solid var(--rule)}
+  details.sect:last-of-type{border-bottom:none}
+  details.sect > summary{
+    list-style:none;cursor:pointer;padding:12px 20px;
+    font:600 12px/1.5 "Helvetica Neue",Arial,Helvetica,sans-serif;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+    display:flex;align-items:center;gap:10px;transition:background .12s}
+  details.sect > summary::-webkit-details-marker{display:none}
+  details.sect > summary::before{
+    content:"";flex:none;width:7px;height:7px;
+    border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);
+    transform:rotate(-45deg);transition:transform .15s;margin-left:2px}
+  details.sect[open] > summary::before{transform:rotate(45deg)}
+  details.sect > summary:hover{background:var(--soft);color:var(--ink)}
+  details.sect > summary .count{margin-left:auto;font-weight:400;letter-spacing:.04em;
+    text-transform:none;font-size:11px;opacity:.75}
+  .sect-body{padding:2px 20px 18px}
+
+  dl{margin:0;font:14px/1.55 "Helvetica Neue",Arial,Helvetica,sans-serif}
+  dt{font-weight:600;color:var(--muted);font-size:11.5px;letter-spacing:.05em;
+    text-transform:uppercase;margin-top:14px}
+  dt:first-child{margin-top:2px}
+  dd{margin:4px 0 0}
+  .unk{color:var(--muted);font-style:italic}
+  .flag{color:var(--flag);font-weight:600}
+
+  blockquote{margin:16px 0;padding:12px 18px;border-left:3px solid var(--rule);
+    color:var(--ink);font-size:.98rem}
+  ol.src{font:13px/1.6 "Helvetica Neue",Arial,Helvetica,sans-serif;
+    color:var(--muted);padding-left:20px}
+  ol.src li{margin-bottom:7px}
+  footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--rule);
+    font:12px/1.6 "Helvetica Neue",Arial,Helvetica,sans-serif;color:var(--muted)}
+  /* ---- flip cards ---- */
+  .flip{margin:14px 0;perspective:1600px}
+  .flip > input{position:absolute;width:1px;height:1px;opacity:0;margin:0}
+  .flip-inner{display:grid;transform-style:preserve-3d;
+    transition:transform .55s cubic-bezier(.4,.15,.2,1);border-radius:6px}
+  .flip > input:checked + .flip-inner{transform:rotateY(180deg)}
+  .flip > input:focus-visible + .flip-inner{outline:2px solid var(--accent);outline-offset:3px}
+  .face{grid-area:1/1;-webkit-backface-visibility:hidden;backface-visibility:hidden;
+    display:block;cursor:pointer;border:1px solid var(--rule);border-radius:6px;
+    padding:26px 28px;background:var(--panel)}
+  .face.back{transform:rotateY(180deg);background:var(--soft)}
+  .face.front{display:flex;align-items:center;gap:22px;flex-wrap:wrap;min-height:132px}
+  .face.front .stat{flex:none;min-width:170px;
+    font:700 1.45rem/1.15 "Iowan Old Style",Georgia,serif;color:var(--accent);
+    font-variant-numeric:tabular-nums}
+  .face.front .stat small{display:block;margin-top:6px;
+    font:600 11px/1.4 "Helvetica Neue",Arial,Helvetica,sans-serif;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .face.front .lead{flex:1 1 300px}
+  .face.front h3{font-size:1.18rem;margin:0 0 6px}
+  .face.front .teaser{margin:0;font-size:.97rem;color:var(--muted)}
+  .face.front .cue{margin:10px 0 0;
+    font:600 11px/1.4 "Helvetica Neue",Arial,Helvetica,sans-serif;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+  .face.back h3{font-size:1.05rem;margin:0 0 10px}
+  .face.back p{font-size:.97rem}
+  .face.back p:last-child{margin-bottom:0}
+  .face.back .cue{margin:12px 0 0;
+    font:600 11px/1.4 "Helvetica Neue",Arial,Helvetica,sans-serif;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  @media (prefers-reduced-motion:reduce){ .flip-inner{transition:none} }
+
+  /* ---- timeline ---- */
+  ol.timeline{list-style:none;margin:20px 0;padding:0 0 0 22px;
+    border-left:2px solid var(--rule)}
+  ol.timeline li{position:relative;padding:0 0 22px 20px}
+  ol.timeline li:last-child{padding-bottom:0}
+  ol.timeline li::before{content:"";position:absolute;left:-29px;top:6px;
+    width:9px;height:9px;border-radius:50%;background:var(--accent);
+    border:2px solid var(--bg)}
+  ol.timeline .when{display:block;
+    font:600 11px/1.5 "Helvetica Neue",Arial,Helvetica,sans-serif;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
+  ol.timeline .what{font-size:.98rem}
+  ol.timeline q{font-style:italic}
+  ol.timeline li.pivot::before{background:var(--flag)}
+  ol.timeline li.pivot .when{color:var(--flag)}
+
+  details.sect.sources{background:var(--panel);border:1px solid var(--rule);
+    border-radius:5px;margin:16px 0}
+  details.sect.sources > summary{padding:14px 20px}
+  @media print{
+    details.sect{display:block}
+    details.sect > summary::before{display:none}
+    details.sect > .sect-body{display:block !important}
+    .flip-inner{transform:none !important;display:block}
+    .face{-webkit-backface-visibility:visible;backface-visibility:visible;
+      transform:none !important;border:none;padding:0 0 10px}
+    .face.front{display:none}
+    .face.back{background:transparent}
+    .face .cue{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="masthead">
+  <p class="kicker">The Weber County Hive · MIDA Series</p>
+  <h1>Eight Project Areas</h1>
+  <p class="standfirst">The Military Installation Development Authority runs eight project areas across five Utah counties. This is what the public record says about each one — who decided, who pays, who collects, and who was allowed to object.</p>
+  <p class="byline">Companion to “Below The Line” and “Point One Three Percent”</p>
+</header>
+
+<div class="note">
+  <strong>How to read this page</strong>
+  There are no ratings here, and no adjectives. Every entry is a fact drawn from a public document, or it says the record does not establish an answer. The same questions are asked of every project area, so the answers can be compared side by side. Sections below are collapsed — click any heading to open it.
+</div>
+
+<h2>Start here: what MIDA is</h2>
+
+<p class="sans" style="font-size:13px;color:var(--muted);letter-spacing:.04em">Click any card to turn it over.</p>
+
+<div class="flip">
+  <input type="checkbox" id="mida1">
+  <div class="flip-inner">
+    <label class="face front" for="mida1">
+      <span class="stat">1 of 8<small>project areas on an actual base</small></span>
+      <span class="lead">
+        <h3>It was created to save an air force base</h3>
+        <p class="teaser">MIDA began in 2007 with a narrow job and a single site on Hill Air Force Base land.</p>
+        <p class="cue">Click to read →</p>
+      </span>
+    </label>
+    <label class="face back" for="mida1">
+      <h3>It was created to save an air force base</h3>
+      <p>The Utah Legislature created the Military Installation Development Authority in 2007, during a period when federal base-closure rounds threatened installations across the country. The idea was narrow: give the state a vehicle that could develop land in a way that made Hill Air Force Base more valuable to the Pentagon and harder to close.</p>
+      <p>Its first project fit that description. Falcon Hill Aerospace Research Park is 525 acres, and it sits on Hill Air Force Base land. Of MIDA's eight current project areas, it is the only one on an actual military installation.</p>
+      <p class="cue">← Click to turn back</p>
+    </label>
+  </div>
+</div>
+
+<div class="flip">
+  <input type="checkbox" id="mida2">
+  <div class="flip-inner">
+    <label class="face front" for="mida2">
+      <span class="stat">7 + 1<small>appointed board members</small></span>
+      <span class="lead">
+        <h3>What MIDA can do that a city cannot</h3>
+        <p class="teaser">Create project areas outside any city's zoning, levy taxes inside them, capture school and county tax increment, issue debt, and create districts of its own.</p>
+        <p class="cue">Click to read →</p>
+      </span>
+    </label>
+    <label class="face back" for="mida2">
+      <h3>What MIDA can do that a city cannot</h3>
+      <p>MIDA is a state entity governed by an appointed board — seven voting members and one nonvoting. It can create project areas outside any city's zoning authority, levy taxes inside them, capture property tax increment that would otherwise go to counties and school districts, issue debt, and create subsidiary districts of its own.</p>
+      <p>It currently oversees five Public Infrastructure Districts and two Development Review Committees. Those subsidiary bodies make many of the granular development decisions, and most of their members are not required to file conflict-of-interest disclosures.</p>
+      <p class="cue">← Click to turn back</p>
+    </label>
+  </div>
+</div>
+
+<div class="flip">
+  <input type="checkbox" id="mida3">
+  <div class="flip-inner">
+    <label class="face front" for="mida3">
+      <span class="stat">One sponsor<small>on every expansion bill</small></span>
+      <span class="lead">
+        <h3>How the powers grew</h3>
+        <p class="teaser">Five bills between 2019 and 2025 widened what MIDA could levy, capture and review. The same senator carried each of them.</p>
+        <p class="cue">Click to read →</p>
+      </span>
+    </label>
+    <label class="face back" for="mida3">
+      <h3>How the powers grew</h3>
+      <p>A sequence of bills expanded what MIDA could do. S.B. 228 (2019) and S.B. 179 (2020) built the Public Infrastructure District framework. S.B. 233 (2021) gave those districts direct property-tax authority, along with a conflict-of-interest exception and exceptions to open-meetings and records requirements. S.B. 169 (2024) added an accommodations tax of up to 15% inside project areas, with no expiration date. S.B. 316 (2025) allowed MIDA to review its own environmental impact and to spend project revenue outside the project area that generated it.</p>
+      <p>Each of those bills had the same primary sponsor: Sen. Jerry Stevenson, who has served on MIDA's board since 2008 and is its vice chair. Senate President Stuart Adams has chaired the board since 2008.</p>
+      <p>In 2025, S.B. 337 would have folded MIDA into a coordinating body called the Beehive Development Agency. It died without a floor vote. Gov. Spencer Cox confirmed on August 20, 2026 that the bill had been his own reform push.</p>
+      <p class="cue">← Click to turn back</p>
+    </label>
+  </div>
+</div>
+
+<div class="flip">
+  <input type="checkbox" id="mida4">
+  <div class="flip-inner">
+    <label class="face front" for="mida4">
+      <span class="stat">$121,559,532<small>proposed, and not audited</small></span>
+      <span class="lead">
+        <h3>What it looks like now</h3>
+        <p class="teaser">A 40-acre footprint became eight square miles. The remaining military justification is about 100 discounted hotel rooms.</p>
+        <p class="cue">Click to read →</p>
+      </span>
+    </label>
+    <label class="face back" for="mida4">
+      <h3>What it looks like now</h3>
+      <p>The Deer Valley and Jordanelle project area began around 2012 at roughly 40 acres, created to replace discounted military hotel rooms lost in a 2002 Olympics land swap. Through eight amendments it grew to roughly eight square miles. The remaining military justification is about 100 discounted hotel rooms at the Grand Hyatt Deer Valley.</p>
+      <p>Next year MIDA proposes to spend $121,559,532. The Office of the Utah State Auditor does not audit it.</p>
+      <p class="cue">← Click to turn back</p>
+    </label>
+  </div>
+</div>
+
+<h2>Eighteen years, then four months</h2>
+
+<p>MIDA's powers did not grow steadily. They sat nearly still for a decade, were rebuilt quietly over four legislative sessions, and then were used at a scale the first sixteen years never approached.</p>
+
+<ol class="timeline">
+  <li>
+    <span class="when">2007 – 2018 · the slow years</span>
+    <span class="what">MIDA is created to help Hill Air Force Base survive federal base-closure rounds. Its first project, Falcon Hill Aerospace Research Park, is <strong>525 acres</strong>, on the base itself. Around 2012 a second project area is created at Deer Valley — roughly <strong>40 acres</strong>, to replace discounted military hotel rooms lost in an Olympics land swap. For eleven years, that is essentially what MIDA is.</span>
+  </li>
+  <li>
+    <span class="when">2019 – 2022 · the plumbing</span>
+    <span class="what">Four sessions build the machinery. S.B. 228 (2019) and S.B. 179 (2020) create the Public Infrastructure District framework. S.B. 192 (2020) extends tax increment fifteen years at Deer Valley. S.B. 233 (2021) gives those districts direct property-tax authority, plus a conflict-of-interest exception and exceptions to open-meetings and records requirements. S.B. 232 follows in 2022. Sen. Jerry Stevenson, MIDA's vice chair, is the primary sponsor of each.</span>
+  </li>
+  <li>
+    <span class="when">December 19, 2023</span>
+    <span class="what">MIDA adopts the Sundance project area plan and, the same day, passes Ordinance 2023-01 levying an accommodations tax, a resort communities tax and an energy tax inside it.</span>
+  </li>
+  <li>
+    <span class="when">2024 – 2025 · the powers widen</span>
+    <span class="what">S.B. 169 (2024) authorizes an accommodations tax of up to 15% inside project areas with no expiration date. S.B. 316 (2025) lets MIDA review its own environmental impact and spend project revenue outside the area that generated it. S.B. 337 (2025), which would have folded MIDA into a coordinating agency, dies without a floor vote — the only one of the six that fails.</span>
+  </li>
+  <li class="pivot">
+    <span class="when">December 16, 2025 · 43,228 acres</span>
+    <span class="what">MIDA adopts the Tooele Army Depot Project Area Plan — <strong>43,228.63 acres</strong> — at an electronic-only public meeting held at 11:30 on a Tuesday morning.</span>
+  </li>
+  <li class="pivot">
+    <span class="when">April 24, 2026 · 41,279 acres</span>
+    <span class="what">MIDA's board unanimously approves the Stratos Project Area — roughly <strong>40,000 acres of private land plus 1,279 acres of military and state land</strong> — across five items in a single meeting. The Governor's Office of Economic Opportunity had referred the project to MIDA in January. Box Elder County consents ten days later.</span>
+  </li>
+</ol>
+
+<div class="note">
+  <strong>The compression, in one comparison</strong>
+  Deer Valley went from roughly 40 acres to more than 5,000 acres over about thirteen years, through eight separate amendments to its project area plan.<br><br>
+  Between December 16, 2025 and April 24, 2026 — <strong>four months and eight days</strong> — MIDA adopted two project area plans covering roughly <strong>84,500 acres</strong>. Stratos alone is about eight times Deer Valley's current footprint, and it was created in one vote.<br><br>
+  Over the same span, MIDA's budget goes from $53,216,490 reported as actual to $121,559,532 proposed.
+</div>
+
+<h2>The governor's record on Stratos, by date</h2>
+
+<p>Gov. Cox has described the Stratos approval in sharply different terms at different points. Each entry below is dated and sourced.</p>
+
+<ol class="timeline">
+  <li>
+    <span class="when">Late 2025</span>
+    <span class="what">By Kevin O'Leary's own account, given on “Fox and Friends” on April 27, 2026, he met with Cox alongside Speaker Mike Schultz and Senate President Stuart Adams about the project. O'Leary's paraphrase of what he was asked: <q>We want to build this thing, can you do it?</q></span>
+  </li>
+  <li>
+    <span class="when">January 2026</span>
+    <span class="what">The Governor's Office of Economic Opportunity refers Stratos to MIDA, citing military use of hyperscale computing. The New Republic reports Cox <q>had initially backed the project when O'Leary met with him in January 2026.</q></span>
+  </li>
+  <li>
+    <span class="when">April 24, 2026</span>
+    <span class="what">MIDA's board approves the Stratos Project Area unanimously.</span>
+  </li>
+  <li>
+    <span class="when">Late April 2026 · monthly press conference</span>
+    <span class="what">Cox defends the project and dismisses calls for a slower process: <q>I'm so tired of our country taking years to get stuff done — it's the dumbest thing ever. We think that taking time makes things better or safer.</q></span>
+  </li>
+  <li>
+    <span class="when">May 4, 2026</span>
+    <span class="what">Box Elder County consents. MIDA's own press release quotes Cox: <q>The Stratos Project Area represents the kind of forward-thinking investment that strengthens our economy, supports national security, and creates meaningful opportunities for Utah families, while being done the right way — in partnership with local communities.</q></span>
+  </li>
+  <li class="pivot">
+    <span class="when">May 29, 2026 · 25 days after the county vote</span>
+    <span class="what">Cox signs Executive Order 2026-03, “Establishing a Higher Bar for Data Center Development in Utah.” It binds executive agencies but not MIDA, which is independent of the governor's directive. Cox acknowledged the order gives no additional authority. His tone that week: <q>People are concerned about data centers. They're concerned about the lake, they're concerned about resources, and they should be concerned.</q></span>
+  </li>
+  <li>
+    <span class="when">June 2026</span>
+    <span class="what">After a June 1 letter from Adams requesting a 75% reduction, O'Leary removes more than 20,000 acres from the footprint. Cox later reframes Phase One as topping out <q>at about 1 gigawatt.</q></span>
+  </li>
+  <li class="pivot">
+    <span class="when">August 20, 2026 · PBS Utah press conference</span>
+    <span class="what">Cox says the Stratos process <q>was not good, and the MIDA process especially,</q> that the approval was <q>not a decision made by me,</q> and that <q>I think we need major reform when it comes to MIDA, and I will be pushing for that reform again.</q> The same week he says he has <q>no problem whatsoever</q> requiring closed-loop cooling systems, and that <q>if I felt I could do it with executive authority, I would have done it already.</q></span>
+  </li>
+  <li>
+    <span class="when">What the reform actually is</span>
+    <span class="what">Asked the same day what he wants changed, Cox described seeking <q>more involvement from the governor's office</q> in MIDA, and said: <q>People need an opportunity to weigh in, local communities need a better opportunity, and we'll continue to work on those changes.</q> The reform he describes increases his own office's role in the authority rather than reducing what the authority can do. His previous reform proposal, S.B. 337 in 2025, was rejected by the Legislature. Speaker Mike Schultz said lawmakers expect data center legislation in the coming session: <q>One thing that I think we're united on is we do not want a state full of data centers.</q></span>
+  </li>
+</ol>
+
+<div class="note">
+  <strong>One more date worth holding alongside these</strong>
+  On November 3, 2022, Cox issued Proclamation 2022-01, suspending new appropriations of unappropriated water from sources tributary to the Great Salt Lake, including in Box Elder County. In 2026 he said Stratos would use less water than the area currently uses. The project's water applications to date have been change applications — transfers of existing agricultural rights rather than new appropriations. Both filed applications were withdrawn.
+</div>
+
+<h2>What MIDA proposes to spend, by project area</h2>
+
+<p>From MIDA's own budget filing for the fiscal year ended June 30, 2026. Figures combine each area's project line with any transfer to a Public Infrastructure District serving it.</p>
+
+<div class="scroll">
+<table>
+  <thead>
+    <tr><th>Project area</th><th class="num">FY25 actual</th><th class="num">Proposed</th><th class="num">Share</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Military Recreation — Deer Valley East Village &amp; Jordanelle</td><td class="num">$16,792,394</td><td class="num">$56,860,614</td><td class="num">46.8%</td></tr>
+    <tr><td>Falcon Hill — Hill Air Force Base</td><td class="num">$5,574,453</td><td class="num">$29,423,359</td><td class="num">24.2%</td></tr>
+    <tr><td>Mountain Veterans Program — Sundance</td><td class="num">$1,003,129</td><td class="num">$19,767,121</td><td class="num">16.3%</td></tr>
+    <tr><td>Utah National Guard — Camp Williams</td><td class="num">$4,694,464</td><td class="num">$90,502</td><td class="num">0.07%</td></tr>
+    <tr><td>Utah Data Center — Camp Williams</td><td class="num">$59,754</td><td class="num">$62,186</td><td class="num">0.05%</td></tr>
+    <tr><td>Stratos — Box Elder County</td><td class="num">—</td><td class="num">no line item</td><td class="num">—</td></tr>
+    <tr><td>Tooele Army Depot</td><td class="num">—</td><td class="num">no line item</td><td class="num">—</td></tr>
+    <tr><td>Dugway Proving Ground</td><td class="num">—</td><td class="num">no line item</td><td class="num">—</td></tr>
+    <tr><td>Debt service, administration, military assistance grants</td><td class="num">$12,200,213</td><td class="num">$15,355,750</td><td class="num">12.6%</td></tr>
+    <tr><td>Budgetary addition to fund balance</td><td class="num">$12,892,083</td><td class="num">$0</td><td class="num">—</td></tr>
+    <tr class="total"><td>Total</td><td class="num">$53,216,490</td><td class="num">$121,559,532</td><td class="num">100%</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p>Three of MIDA's eight listed project areas have no corresponding spending line in the budget document. Stratos was approved partway through the budget period, which may account for its absence.</p>
+
+<h2>Stratos is not the only one</h2>
+
+<p>Utah Physicians for a Healthy Environment counted <strong>21 data centers proposed across Utah</strong> as of spring 2026, and has tracked proposals in Box Elder, Iron, Millard and Tooele counties. Two of those counties have now used the same tool to respond, with different results.</p>
+
+<div class="scroll">
+<table>
+  <thead>
+    <tr><th>County</th><th>Project</th><th>County response</th><th>Effect</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Box Elder</td>
+      <td>Stratos — ~40,000 acres, inside a MIDA project area</td>
+      <td>180-day moratorium on data centers, Ordinance 654, adopted after consenting</td>
+      <td>Cannot reach Stratos. The development agreement excludes the project area from any moratorium.</td>
+    </tr>
+    <tr>
+      <td>Iron</td>
+      <td>Red Butte Data Center and natural gas plant — 2,564 acres, ordinary county application</td>
+      <td>180-day ban on data center applications, May 2026</td>
+      <td>Paused the project.</td>
+    </tr>
+    <tr>
+      <td>Iron</td>
+      <td>Pronghorn Development — 640 acres, unincorporated land near Cedar City</td>
+      <td>Planning Commission discussed mitigation and possible zoning changes; commission vote scheduled June 4, 2026</td>
+      <td>Proceeding. No decisions made at the planning meeting, and no public comment taken.</td>
+    </tr>
+    <tr>
+      <td>Millard</td>
+      <td>Proposal near Delta</td>
+      <td class="unk">Not established here</td>
+      <td class="unk">Not established here</td>
+    </tr>
+    <tr>
+      <td>Tooele</td>
+      <td>1,200-acre industrial development — data centers, warehouses, light manufacturing and a truck stop — served by the Tooele Valley Public Infrastructure District, financed through the Utah Inland Port Authority</td>
+      <td>Draft UPDES discharge permit UT0026409; public hearing held July 27, 2026 after conservation groups requested one</td>
+      <td>Construction already underway under a separate DEQ construction permit. Discharge targeted to begin January 15, 2027.</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="note">
+  <strong>The Tooele project is the closest structural parallel to Stratos — through a different authority</strong>
+  It uses the Utah Inland Port Authority rather than MIDA, and a Public Infrastructure District — the Tooele Valley PID — as the financing vehicle, backed by more than $240 million in public infrastructure financing. Same pattern: a state authority, a subsidiary district, land outside ordinary municipal control, and a data center at the end of it.<br><br>
+  One difference matters. Gov. Cox's Executive Order 2026-03, signed May 29, 2026, requires state agencies to follow a Data Center Framework protecting Great Salt Lake water resources, and §5(d) specifically directs agencies to coordinate with UIPA. The order binds executive agencies. <strong>MIDA is independent of it.</strong> The same executive order that reaches the Tooele project does not reach Stratos.
+</div>
+
+<p>The pattern worth noting is not that counties object — several have. It is that a county's objection reaches an ordinary application and does not reach a project placed inside a MIDA project area. That difference is written into the agreements, not into the zoning.</p>
+
+<p>The other pattern is public comment. Iron County's Planning Commission took none. Box Elder County's Commission took none, at either of the two meetings where it considered Stratos.</p>
+
+<h2>The three zones, in the Standards' own words</h2>
+
+<p>The Stratos Development Standards divide the project area into three kinds of zone. Nothing in the rest of this page makes sense without them, and none of them exists on the ground yet — the zones are created only inside a Master Development Plan, and no plan has been approved.</p>
+
+<div class="scroll">
+<table>
+  <thead>
+    <tr><th>Zone</th><th>The Standards' definition</th><th>What it means in practice</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>ET Zone</strong><br>Energy and Technology</td>
+      <td>“A designated area or areas within the Project Area, as depicted in the Master Development Plan that is developed for large scale energy, and technology uses in accordance with these Standards.”</td>
+      <td>The industrial core. Power plants, data centers, substations, manufacturing — and, as a permitted use, small modular reactors. Housing, schools and hospitals are prohibited here.</td>
+    </tr>
+    <tr>
+      <td><strong>MU Zone</strong><br>Mixed Use</td>
+      <td>“A designated area or areas of property within a Master Development Plan that is primarily used for both residential and light commercial uses.”</td>
+      <td>The only zone where people could live. Restaurants, small retail, employee lodging, training facilities, RV parks and residential dwellings are permitted; hotels are conditional. The interlocal agreement with the county bars residential development anywhere in the project area, which is the unresolved conflict.</td>
+    </tr>
+    <tr>
+      <td><strong>A Zone</strong><br>Agricultural</td>
+      <td>Agricultural uses are “the same ranching, farming, and grazing uses allowed by Box Elder County in their agricultural zone.”</td>
+      <td>What the land is now. Permitted throughout the project area, in every zone, and the Standards state that greenbelt tax status is unaffected unless a change of use triggers a change under state law.</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>The Development Review Committee decides which acres become which, phase by phase, as each Master Development Plan is approved.</p>
+
+<h2>Box Elder County</h2>
+
+<div class="area">
+  <div class="head">
+    <h3>Stratos Project Area</h3>
+    <p class="loc">Hansel Valley, unincorporated western Box Elder County</p>
+    <p class="lede">Approved by MIDA's board April 24, 2026; the county consented ten days later. Roughly 40,000 acres of privately held vacant land for a data and energy campus.</p>
+  </div>
+
+  <details class="sect">
+    <summary>Who decided <span class="count">4 entries</span></summary>
+    <div class="sect-body"><dl>
+      <dt>Who approved it</dt>
+      <dd>The MIDA board, an appointed body, on April 24, 2026 — unanimously, across five items: Resolutions 2026-06, 2026-07, 2026-08 and 2026-09, and Ordinance 2026-01.</dd>
+      <dt>Did the elected local body set the terms</dt>
+      <dd>No. The Box Elder County Commission voted to consent ten days later, on May 4, to terms MIDA had already approved.</dd>
+      <dt>Public comment taken by the elected body</dt>
+      <dd class="flag">Not at either meeting. The Box Elder County Commission met in late April 2026 with the room full of residents and took no public comment; it voted to revisit the issue, and took no public comment on May 4 either, when it consented. The county's own release states it received more than 2,500 written submissions through a feedback form, of which 300 were from Box Elder County residents.</dd>
+      <dt>What happened afterward</dt>
+      <dd>On May 14, 2026 several hundred people rallied at the Utah State Capitol and delivered an open letter to Gov. Cox opposing the project, reported as carrying more than 7,000 signatures. Some residents and organizations publicly called for MIDA itself to be dissolved. A referendum effort was submitted; whether it may proceed was unresolved in the reporting reviewed here, and MIDA cites “the current referendum process” as its reason for leaving three of the project's governing documents unsigned.</dd>
+      <dt>Can residents refer it to a vote</dt>
+      <dd class="flag">Contested. Litigation was filed over denied referendum rights.</dd>
+    </dl></div>
+  </details>
+
+  <details class="sect">
+    <summary>What it pays, and to whom <span class="count">7 entries</span></summary>
+    <div class="sect-body">
+    <div class="note" style="margin-top:8px"><strong>Read this first</strong>
+      The financial terms below are quoted from Box Elder County/MIDA Stratos Agreement 26-15. MIDA's own document page states that the Interlocal Cooperation Agreement, the Development Agreement and the Development Standards were “reviewed and approved in substantial form and remain as a draft and unsigned out of respect for the current referendum process.” These are therefore the approved terms of an <em>unexecuted draft</em>, not an operative signed contract.</div>
+    <dl>
+      <dt>Energy tax the project pays</dt>
+      <dd>0.5% — “at least 0.5% on Data Center Campuses,” §6(a)(i) of the interlocal agreement.</dd>
+      <dt>Energy tax other users in the area pay</dt>
+      <dd>6% — “6% on all energy users except Data Center Campuses,” §6(a)(ii). Twelve times the data center rate.</dd>
+      <dt>County share of property tax on the main facility</dt>
+      <dd class="flag">None. §6(a)(vi) gives the county a 25% dedicated tax collection “from all of the Private Land, except any Compute Complex (which pays the LOC Payments).”</dd>
+      <dt>Where the main facility's payments go instead — the exact split</dt>
+      <dd>The Master Development Agreement, §13(a), sets it out arithmetically. A Compute Complex receives a Letter of Completion rather than a Certificate of Occupancy, which triggers annual in-lieu payments under §63H-1-501(4) of <strong>1.2% of taxable value on all real and personal property</strong>. Then:
+      <br><br>• <strong>All</strong> payments on <strong>personal property</strong> — the servers and chips — “shall be reimbursed to the Taxpayer within thirty (30) days.”
+      <br>• Box Elder's total real property tax rate is stated as <strong>0.927%</strong>. Because 1.2% is 0.273% higher, MIDA reimburses that 0.273% to the taxpayer as well.
+      <br>• What remains is “divided 80%-20%.” The <strong>80% is paid to the Master Developer</strong> within thirty days. The <strong>20% is retained by MIDA</strong>, a portion of which goes to the State under §63H-1-201(3)(z), with MIDA using the rest “for military purposes within the Project Area and for development of the Military Land.”
+      <br><br>Box Elder County does not appear in that division.</dd>
+      <dt>What the 80% can be used for</dt>
+      <dd>“The Master Developer may request that MIDA create one or more public infrastructure districts that could use some or all of this 80% portion as security to issue bonds.” A Stratos-area PID is contemplated in the agreement, though none has been chartered in the records reviewed.</dd>
+      <dt>Non-compute property</dt>
+      <dd>Once a facility other than a Compute Complex receives a Certificate of Occupancy it pays regular property taxes — and “MIDA may collect 75% of the property taxes for up to forty (40) years, as determined by MIDA” (§13(b)).</dd>
+      <dt>Whether the county's energy tax can be redirected</dt>
+      <dd>Under §14(b), the municipal energy tax on Data Center Campuses “may be increased to assist in the vertical construction of Energy Generation Facilities” if the Master Developer requests it — with the stated first priority being that the county still receives its minimum.</dd>
+      <dt>Headline revenue figure</dt>
+      <dd>$30 million annually at Phase One. §6(b) sets a minimum guarantee of “$10,000.00 annually for each megawatt of nameplate capacity.” At the committed 3GW that is exactly $30,000,000 — the figure presented as a projection is the contractual floor.</dd>
+      <dt>Up-front payment</dt>
+      <dd>“Three annual Upfront Payments of $5,400,000.00 per year,” §6(e), the first due within 30 days of the first building permit. The interlocal agreement describes them as offsetting impacts that arrive “prior to the start of County Revenue cashflow”; Box Elder County's own FAQ earmarks the money for hiring police and fire personnel.</dd>
+      <dt>What $5.4 million a year is, in county terms — and when it stops</dt>
+      <dd class="flag">Box Elder County's entire general fund property tax revenue is <strong>$11,362,400</strong> for 2026, per the county's own tentative budget. A single $5,400,000 payment is roughly <strong>48% of that</strong> — close to half the county's annual property tax base.<br><br>
+      There are three of them. Then they stop.<br><br>
+      The obligation is three payments, not an ongoing revenue share. The police officers and firefighters they are earmarked to hire, and the project those personnel are hired to serve, both continue after year three. The agreement identifies no ongoing county revenue stream to replace the payments — and the county's 25% dedicated property tax collection excludes the Compute Complex, which is the part of the project with the taxable value.<br><br>
+      The recurring fire truck, owed “at least once every ten years,” is itself an acknowledgment that the service burden continues indefinitely.</dd>
+    </dl></div>
+  </details>
+
+  <details class="sect">
+    <summary>What was promised, and what was studied <span class="count">3 entries</span></summary>
+    <div class="sect-body"><dl>
+      <dt>Jobs tied to a committed use</dt>
+      <dd>No. Box Elder County's own release places the “estimated 2,000+ jobs” on the two sites “planned for future uses that may include manufacturing, retail, restaurants, hotels.”</dd>
+      <dt>How that compares to data centers that exist</dt>
+      <dd>Meta's data center campus in Lebanon, Indiana — a $10 billion project — is expected to support more than 4,000 jobs at peak construction and <strong>about 300 once operational</strong>. That ratio is typical of the industry: very large capital, very few permanent staff.<br><br>
+      On arithmetic alone, Stratos is not an outlier. At Meta's rate, a $100 billion project would support roughly 3,000 permanent jobs, so a claim of 2,000 is not impossible if the full amount is ever spent.<br><br>
+      The difficulty is that the 2,000 are not claimed for the data center. By the county's own description they sit on the two parcels with no committed use — retail, restaurants, hotels, manufacturing. Those are businesses that need nearby customers. Permanent housing is prohibited in the project area, and hotel rooms are capped at 150 across all 40,000 acres.<br><br>
+      The construction figure has also been reported inconsistently by official sources: Forbes reported 10,000; the developer's own representative told the Salt Lake Tribune roughly 4,000. As of the reporting reviewed here, no tenant for the data center had been announced.</dd>
+      <dt>Housing for those workers</dt>
+      <dd class="flag">Three documents adopted within eleven days of each other do not agree.<br><br>
+      The <strong>Stratos Project Area Plan</strong>, adopted May 4, 2026, states the project “will also include residential and mixed-use commercial development intended to accommodate the workforce supporting the energy and technology industries within the Project Area.”<br><br>
+      The <strong>Master Development Agreement</strong>, dated April 24, 2026, describes the purpose as developing energy and data centers “as well as promoting high quality residential and commercial development.”<br><br>
+      The <strong>Interlocal Cooperation Agreement</strong>, §5(b): “Residential uses shall be prohibited in the Project Area. MIDA shall not allow any residential development within the Project Area, except temporary housing for construction workers near an active construction site.”<br><br>
+      The agreement between MIDA and the county prohibits the housing the project area plan promises.</dd>
+      <dt>What the workforce is actually allowed to have there</dt>
+      <dd>Under the interlocal agreement, permanent housing is prohibited. Temporary housing is permitted only for construction workers, and only “near an active construction site.” Hotel rooms are capped at <strong>150 in the entire project area</strong>, “regardless of the number of hotels,” and a hotel room is defined as accommodation for stays “of less than thirty (30) consecutive days” (§5(c)).<br><br>
+      So the documents contemplate a workforce of roughly two thousand permanent employees in an unincorporated area where they cannot live, served by at most 150 short-stay hotel rooms. The nearest towns — Tremonton and Brigham City — are more than thirty miles east.</dd>
+      <dt>Schools and hospitals</dt>
+      <dd class="flag">Prohibited in the ET Zone, where the power plant and data centers go. Stratos Project Area Development Standards §3.02(C) lists prohibited uses, item 2: <strong>“Schools, hospitals, or other sensitive land uses that may conflict with industrial safety zones.”</strong> Item 1 prohibits “residential dwelling units not directly associated with operational or security functions,” and item 4 prohibits “large regional retail centers or entertainment venues.”<br><br>
+      Under §3.06(K), “The MIDA Board may not grant use variances” — so that prohibition cannot be varied by the board. Under §3.05, the Development Review Committee “may allow minor use exceptions.”</dd>
+      <dt>Where housing is allowed — and the contradiction</dt>
+      <dd class="flag">The Standards, §3.03(A), list permitted uses in the MU (mixed use) Zone. Item 10 is <strong>“Residential dwellings.”</strong> Also permitted there: restaurants and cafés, convenience and small service retail, personal services, training and education facilities, lodging for employees, vehicle fueling stations, and recreational vehicle parks. Hotels serving contractors or visitors are a conditional use.<br><br>
+      So the Standards permit housing in the MU Zone. The interlocal agreement, approved within a day of them, states that “MIDA shall not allow <em>any</em> residential development within the Project Area” except temporary construction housing.<br><br>
+      The Standards define the zone this way: “Mixed Use Zone (‘MU Zone’) — A designated area or areas of property within a Master Development Plan that is primarily used for both residential and light commercial uses.” So the Standards define a zone whose <em>primary</em> stated purpose is residential, inside a project area where the agreement with the county bars residential entirely.</dd>
+      <dt>How much land is zoned MU today</dt>
+      <dd class="flag">None — and none is zoned ET either. The Standards state that “the MDP is intended to establish the overall development framework for ET Zones, MU Zones, and A Zones,” and define the MU Zone as an area “within a Master Development Plan.” The zones exist only inside an approved Master Development Plan, and no Master Development Plan has been approved. Under the development agreement the developer has five years from April 24, 2026 to submit the Phase 1 plan.<br><br>
+      So there is at present no zoning map for the project area. The zones are categories in a rulebook, and every acre's designation remains to be decided — phase by phase, by the Development Review Committee.</dd>
+      <dt>What the DRC can prohibit on its own</dt>
+      <dd>§3.02(C)(6): uses “not directly supportive of the energy, data center, manufacturing, research, or workforce functions of the Zone may also be determined to be incompatible and prohibited by the DRC.”</dd>
+      <dt>Nuclear, mining and hazardous materials</dt>
+      <dd>The Standards list as <strong>permitted</strong> uses in the ET Zone: “Small Modular Reactor (SMR) or other nuclear energy facilities where authorized by applicable federal and state regulatory agencies,” “Resource extraction operations,” “Strategic Mineral extraction facilities and uses,” and gravel pit operations for material used within the project area. Listed as <strong>conditional</strong> uses: hydrogen production and storage, carbon capture and storage, large-scale fuel storage, “hazardous material processing or storage facilities,” and gravel pits for material transported outside the project area.<br><br>
+      The Master Development Agreement, §8(e), adds that “the Standards do not regulate the construction of energy production installations or nuclear facilities.” Once federal and state approvals are obtained, the developer “may develop, install and construct such facilities in the Project Area without additional permitting approval from MIDA.”</dd>
+      <dt>Who the power is for</dt>
+      <dd class="flag">Not the grid. MIDA's own project materials describe “dedicated on-site power generation, allowing the campus to meet its own energy needs without placing additional demand on the existing electrical grid.”<br><br>
+      That is presented as a protection for ratepayers — the campus will not compete with households for grid power. It also means the reverse: electricity generated inside the project area, including from any reactor permitted under the Standards, is generated for the campus. No household is served by it, and no residential rate is affected by it. Arguments about the long-run cost of nuclear power for consumers do not apply to generation that never reaches a consumer.<br><br>
+      The records reviewed do not establish whether any surplus power would be sold to the grid, at what price, or under what conditions.</dd>
+      <dt>Who provides services, and who pays</dt>
+      <dd>Under §4(a) of the interlocal agreement, the county “shall provide only the municipal services set forth in Exhibit B,” and “shall bear no operational or financial responsibility for any services or utilities provided to the Development Project beyond the County Municipal Services.” Everything else is MIDA's, “or such special districts as may be created.” §4(d) provides for Service Districts under Title 17B or public infrastructure districts under Title 17D Chapter 4. Exhibit B itself was not among the records reviewed.</dd>
+      <dt>Agriculture</dt>
+      <dd>Agricultural uses permitted by Box Elder County ordinance at the time the Standards were adopted remain permitted throughout the project area, and the Standards state that nothing in them “shall affect the greenbelt tax status of any agricultural property use,” except where a change of use would trigger a change under state law.</dd>
+      <dt>Whether the jobs numbers will be public</dt>
+      <dd>Under §5(i), MIDA must report to the county each year the energy generated, energy used, the number of temporary construction employees, the number of permanent employees, and square footage — the reporting required by H.B. 76 (2026), the Data Center Water Transparency Amendments. The same section states that all such data “may be marked or otherwise identified as ‘Confidential’ under Utah Code Ann. §63G-2-309 and shall be classified as such by the County.”</dd>
+      <dt>Environmental study before approval</dt>
+      <dd>None published. Independent and developer water estimates differ by roughly 28 times.</dd>
+      <dt>Water secured</dt>
+      <dd>No. Two change applications have been filed and both were withdrawn.<br><br>
+      <strong>Bar H Ranch</strong> sought to convert about 1,900 acre-feet of irrigation water to industrial use. It drew roughly 4,000 protests and was withdrawn around May 7, 2026 — one day after H.B. 60 took effect on May 6. H.B. 60 narrowed the standard the State Engineer applies, removing ecological, environmental and community-health considerations from the “public welfare” test. The applicant signaled an intent to refile under the narrowed standard; the status of any refiling is not established here.<br><br>
+      <strong>Murray Hollow L.C.</strong> filed a much smaller alternate — application a54536, about 11 acre-feet — on April 28, 2026, converting a stockwatering and domestic right to industrial use for the gas plant and data center. It drew roughly 700 protests and was withdrawn on May 27, 2026, the same day the protest window closed.<br><br>
+      Neither withdrawal was an approval and neither was a denial. As of the records reviewed, the project has not secured water through the change-application route.</dd>
+      <dt>Why the route is a transfer rather than a new appropriation</dt>
+      <dd>Proclamation 2022-01, issued by Gov. Cox on November 3, 2022, suspended new appropriations of unappropriated water from sources tributary to the Great Salt Lake, including in Box Elder County. Existing rights can still be changed and moved. Separately, the state's own 1971 hydrologic reconnaissance of Hansel Valley (Technical Publication 33) concluded that “the estimated perennial yield of ground water in Hansel Valley is negligible.”</dd>
+    </dl></div>
+  </details>
+
+  <details class="sect">
+    <summary>Control and disclosure <span class="count">2 entries</span></summary>
+    <div class="sect-body"><dl>
+      <dt>Local zoning control</dt>
+      <dd>The Master Development Agreement states MIDA has “exclusive police power within a project area to the same extent as though the authority were a municipality,” and that neither MIDA nor land in a project area is subject to the County Land Use, Development and Management Act or to “ordinances or regulations of a county or municipality including those relating to land use, health, business license, or franchise.”</dd>
+      <dt>Whether the county's moratorium reaches it</dt>
+      <dd class="flag">No. Master Development Agreement §3(f): “The Project Area shall be excluded from any moratorium adopted pursuant to Applicable Law unless such moratorium is found on the record by the MIDA Board to be necessary to avoid jeopardizing a compelling, countervailing public interest.” Box Elder County adopted a 180-day data center moratorium (Ordinance 654) after the approvals.<br><br>
+      <strong>The comparison that shows what that means.</strong> In May 2026 Iron County adopted its own 180-day ban on data center applications, and it worked as intended — it paused the proposed 2,564-acre Red Butte Data Center and natural gas plant. Red Butte is an ordinary county land-use application. Stratos is not: it sits inside a MIDA project area, outside county land-use authority, and its development agreement excludes it from any moratorium the county passes.<br><br>
+      Two counties, the same tool, the same six-month duration. In one it stopped a project. In the other it can only stop the competitors.</dd>
+      <dt>How long the developer's rights run</dt>
+      <dd>The Master Development Agreement term is thirty years; the county interlocal agreement runs fifty years “as mandated by Utah Code §11-13-216.” Within five years the developer must submit the Phase 1 plan and build an energy facility in Hansel Valley “capable of producing at least three (3) Gigawatts.” On completing Phase 1 the developer holds “exclusive rights” to develop energy, data center and advanced manufacturing facilities in the project area.</dd>
+      <dt>What happens if either side breaches</dt>
+      <dd>The “sole and exclusive remedy” is a suit to enforce the agreement. Neither party may terminate it, and neither may “pursue, claim or collect money damages.”</dd>
+      <dt>Who sits on the Development Review Committee</dt>
+      <dd class="flag">Eight members, per §3(b). One is the MIDA Executive Director or a designee, who chairs it. The other seven “shall be recommended to the MIDA Board by the County,” plus one non-voting member who is a landowner. If the county does not recommend a name within thirty days, “the MIDA Board may appoint someone else.” Members “serve at the pleasure of the MIDA Board.” The DRC is “delegated the authority to provide all land use administrative approvals, including site plans and subdivisions” — and under the rule MIDA states on its own website, DRC members are never required to file a conflict-of-interest disclosure at any budget size.</dd>
+      <dt>Are decision-makers required to disclose</dt>
+      <dd>MIDA board members, yes. PID board members, only if the district's budget exceeds $10 million. Development Review Committee members, never.</dd>
+    </dl></div>
+  </details>
+</div>
+
+<div class="area">
+  <div class="head">
+    <h3>Who holds land and water near the project area</h3>
+    <p class="loc">Box Elder County · public records</p>
+    <p class="lede">Two sitting legislators hold land near the Stratos site. One of them appoints a member of the board that approved it.</p>
+  </div>
+
+  <details class="sect">
+    <summary>The Speaker's land <span class="count">3 entries</span></summary>
+    <div class="sect-body"><dl>
+      <dt>What he holds, and where</dt>
+      <dd>Entities controlled by House Speaker Mike Schultz hold more than 25,000 acres roughly ten miles from the Stratos Project Area, per reporting by KSL and the Salt Lake Tribune: Keller Cattle Corporation at about 23,575 acres, Sawmill Ranch LLC at about 1,300 acres, and Mike Schultz Inc. at about 640 acres. Most was acquired in 2022.</dd>
+      <dt>How Keller Cattle was acquired</dt>
+      <dd>Keller Cattle Corporation is not a new entity. Utah's business registry shows it registered on April 29, 1959 and still active, at 1877 West 4000 South, Roy. Acquiring an existing corporation carries over what the corporation already held, including its water rights, and the transaction does not appear in a deed search under the buyer's own name.</dd>
+      <dt>What his disclosure says</dt>
+      <dd>Schultz's conflict-of-interest disclosure lists 25 entities, including Sawmill Ranch LLC as his current employer. Items 6A and 6B — real property that may constitute a conflict — are blank. <strong>Those fields are optional under the form, so a blank is a permitted choice and not a violation.</strong> He voted on H.B. 60 in February 2026, the bill narrowing the State Engineer's public-welfare standard, without disclosing land near the project area.</dd>
+    </dl></div>
+  </details>
+
+  <details class="sect">
+    <summary>The Speaker's water <span class="count">4 entries</span></summary>
+    <div class="sect-body"><dl>
+      <dt>What was approved</dt>
+      <dd>On July 18, 2024 the State Engineer approved two applications by Keller Cattle Corporation — 13-4099 and 13-4100, filed August 25, 2023 — totaling <strong>556.70 acre-feet</strong> in the Promontory Mountains of Box Elder County. Together they authorize 160 acres of irrigation, 2,000 equivalent livestock units of year-round stock water, eight wells and fifteen spring diversions.</dd>
+      <dt>Where it sits relative to the lake</dt>
+      <dd>The Utah Rivers Council's protest places the withdrawal points on the northwest slope of the Promontory Mountains, about seven miles from the shore of the Great Salt Lake, and states the area falls just <em>outside</em> the boundary of Proclamation 2022-01 — the same proclamation that suspended new appropriations elsewhere in the basin. The State Engineer's Order confirms the applications are “not included within the Governor's Proclamation area.”</dd>
+      <dt>What the Order says about impairment</dt>
+      <dd class="flag">The Order's operative reasoning, in its own words, is that unappropriated water exists and that “even though approval may impair existing water rights, the applicant holds those water rights.”</dd>
+      <dt>Who else holds rights there</dt>
+      <dd>Farmland Reserve Inc., the LDS Church's farmland arm, wrote to the State Engineer during the process. It <strong>did not oppose</strong> the applications; it asked that senior rights in the area be considered and that supplemental uses not be misidentified as sole supply. Farmland Reserve's own Promontory rights run back to 1940 and are certificated. Both Keller Cattle applications were approved with sole-supply designations on every use. Schultz's 2023 rights are junior, unperfected — proof of beneficial use is not due until July 31, 2031 — and expressly subject to prior rights.</dd>
+    </dl></div>
+  </details>
+
+  <details class="sect">
+    <summary>Appointment power and the timeline <span class="count">3 entries</span></summary>
+    <div class="sect-body"><dl>
+      <dt>Who appoints whom</dt>
+      <dd class="flag">The Speaker of the Utah House appoints one member of the MIDA board. That appointee is Jeff Moss, the Governor's Office of Economic Opportunity director who sits as MIDA's nonvoting member — and whose office referred Stratos to MIDA in January 2026.</dd>
+      <dt>What the Speaker says about the timeline</dt>
+      <dd>Schultz has said he learned the project was serious in early April 2026 and was “blindsided,” and has described the ranch land as remote and unsuitable for development. Kevin O'Leary said on “Fox and Friends” on April 27, 2026 that he met with Cox, Schultz and Adams about the project in late 2025. Asked about that account, Schultz said he “wasn't a part of that” and was “too busy.” The two accounts have not been reconciled in the public record.</dd>
+      <dt>The other legislator</dt>
+      <dd>Sen. Scott Sandall, whose district covers Box Elder County, was the primary sponsor of S.B. 132 (2025), which created the legal framework the project uses. Land held by the Sandall Farm &amp; Ranch Family Partnership sits about four miles from the site. Asked whether anyone had approached him about selling, he said no, but that he “would not be opposed to it, for the right price.”</dd>
+    </dl></div>
+  </details>
+</div>
+
+<div class="note">
+  <strong>What these records do and do not establish</strong>
+  They establish land ownership, water rights, sponsorship, appointment power and a sequence of dates, all from public documents. They do not establish that any official acted in order to benefit personally, and nothing here should be read as making that claim. Where two accounts conflict — as with the late-2025 meeting — both are stated and neither is resolved.
+</div>
+
+<div class="area">
+  <div class="head">
+    <h3>The ground itself</h3>
+    <p class="loc">Hansel Valley · seismic history, hydrology, heat and dust</p>
+    <p class="lede">What the state's own science says about the valley, and what the project's documents say back.</p>
+  </div>
+
+  <details class="sect" open>
+    <summary>Earthquakes <span class="count">3 entries</span></summary>
+    <div class="sect-body"><dl>
+      <dt>What happened here</dt>
+      <dd class="flag">On March 12, 1934, a magnitude <strong>6.6</strong> earthquake struck Hansel Valley. It remains the largest earthquake in Utah's recorded history, and <strong>the only known surface-faulting earthquake in Utah's historic period</strong>. Two aftershocks above magnitude 5.0 followed the same morning. Nine earthquakes above magnitude 3.0 are documented on the Hansel Valley fault between 1880 and 1949.<br><br>
+      The Utah Geological Survey's own fault record (Hansel Valley fault, structure 2358) documents <strong>11 kilometres of surface rupture</strong> with maximum vertical displacement of 0.5 metres, and characterises the structure as a left-lateral, high-angle strike-slip fault — movement “mostly strike-slip at depth and mostly dip-slip near the surface.”<br><br>
+      For comparison, the 2020 Magna earthquake that damaged more than 160 historic buildings along the Wasatch Front was magnitude 5.7.</dd>
+
+      <dt>What the project's Development Standards say about it</dt>
+      <dd class="flag">Nothing. Across 106 pages, the words “seismic,” “earthquake” and “liquefaction” do not appear. The Standards require a geotechnical report at the permit and site-plan stage — four references in total — but establish no seismic design standard, no fault setback, and no requirement that the 1934 rupture be mapped or avoided.</dd>
+
+      <dt>Why it matters here specifically</dt>
+      <dd>The project area is planned for gas-fired generation at multi-gigawatt scale, and the Standards list small modular reactors as a permitted use. Utah's own federal nuclear-hub application addresses seismic risk for the Tooele site. No equivalent analysis for Hansel Valley appears in any Stratos document reviewed here.</dd>
+    </dl></div>
+  </details>
+
+  <details class="sect">
+    <summary>Whether the aquifer can support it <span class="count">3 entries</span></summary>
+    <div class="sect-body"><dl>
+      <dt>The state's own baseline</dt>
+      <dd>The governing study is <em>Hydrologic Reconnaissance of Hansel Valley and Northern Rozel Flat, Box Elder County, Utah</em> — Technical Publication 33, published in 1971 by the Utah Division of Water Rights with the U.S. Geological Survey. Its conclusion, verbatim: “<strong>The estimated perennial yield of ground water in Hansel Valley is negligible.</strong>”<br><br>
+      It found the basin receives roughly 160,000 acre-feet of precipitation a year, of which about 2,500 acre-feet runs off, “all of which are intermittent.” The only irrigation it recorded was one supplemental well and saline spring water applied to saltgrass meadows.</dd>
+
+      <dt>What has been done since</dt>
+      <dd>A targeted search returns no newer basin-specific hydrologic study for Hansel Valley; the 1971 reconnaissance remains the document cited. That is not proof none exists, but nothing newer surfaced. No environmental impact study or water model for the project has been published, and no modeler has been named.<br><br>
+      The 1971 report describes itself as a reconnaissance — a preliminary study — and notes that “a detailed study of the area is not immediately needed,” because the development then foreseen was small.</dd>
+
+      <dt>The estimates that do exist</dt>
+      <dd>Developer figures put water use at roughly 500 to 1,800 acre-feet a year. Utah Clean Energy's May 2026 analysis put it at 6,137 to 50,950 acre-feet depending on the generation technology — a gap of up to twenty-eight times. Utah Clean Energy states its range covers <strong>the on-site power generation only</strong>, and excludes cooling water for the data center itself.<br><br>
+      Two change applications seeking to move existing agricultural water to industrial use have been filed and withdrawn. The Standards contain no mention of an aquifer.</dd>
+    </dl></div>
+  </details>
+
+  <details class="sect">
+    <summary>Cooling ponds and dust <span class="count">2 entries</span></summary>
+    <div class="sect-body"><dl>
+      <dt>What the Standards permit</dt>
+      <dd>§4.16 provides that uses in the ET Zone “may require large-scale cooling infrastructure,” and lists what that may include: cooling towers, cooling water pipelines, <strong>cooling ponds</strong>, and heat rejection systems. The section requires only that such infrastructure “avoid conflicts with utility corridors and transportation infrastructure.” It sets no size limit, no lining requirement, and no water-quality standard.</dd>
+
+      <dt>The question that raises, stated carefully</dt>
+      <dd>Box Elder County's northwest boundary is one of three locations Utah State University researchers have identified as most likely to source hazardous dust from the drying Great Salt Lake. Lakebed dust in this region has been measured to contain arsenic, cadmium, lead, copper, mercury and antimony, and 2026 research from USU and the University of Utah found leafy vegetables grown in soil exposed to that dust absorbed elevated arsenic and uranium even after washing.<br><br>
+      Whether industrial cooling ponds in the same area would concentrate minerals and produce a comparable dust source when drawn down or decommissioned is <strong>not addressed in any project document reviewed here</strong>. No pond design, size, lining or closure plan has been published. For Stratos this remains an open question raised by what the Standards permit — not a finding.</dd>
+
+      <dt>Which arm of the lake this is</dt>
+      <dd>Hansel Valley drains toward the Great Salt Lake's <strong>North Arm</strong> — the shallower half, separated from the South Arm by the railroad causeway. Both arms have sat mostly below the 4,198-foot minimum healthy level since 2000.<br><br>
+      <em>Downwind</em>, a 2025 report by the Utah Rivers Council's Great Salt Lake Waterkeeper and Utah Physicians for a Healthy Environment — 18 months of work citing 577 published references — states that upstream diversions have cut inflows by roughly 39%, producing a 64% decline in the lake's water volume, and that the surface area needed to prevent toxic dust storms is about 1,660 square miles against a current area of roughly 950. Its authors write: “<strong>It appears that Utah's current plan is to dry up the North Arm of the Great Salt Lake.</strong>”<br><br>
+      That is an advocacy report and should be cited as one. But the arm it describes is the one this project sits above.</dd>
+
+      <dt>It is not hypothetical elsewhere in Utah</dt>
+      <dd class="flag">A comparable question is already before a state regulator on a different data center project. Draft UPDES Permit <strong>UT0026409</strong> would authorize the Tooele Valley Public Infrastructure District — serving a 1,200-acre development that includes data centers — to discharge up to <strong>260,000 gallons per day of concentrated reverse osmosis brine</strong> into a seasonally dry channel about 1.6 miles from Great Salt Lake transitional wetlands.<br><br>
+      According to the formal hearing request filed by six conservation and public health organizations, the draft permit provides for zero dilution, no pre-existing water quality baseline for the receiving channel, and <strong>no enforceable limits on total dissolved solids, chloride, sodium or arsenic</strong>. The Division of Water Quality held a public hearing on July 27, 2026.<br><br>
+      That is the mechanism — concentrating dissolved solids out of cooling water and putting them somewhere — arriving in permit form. What Stratos will do with its own concentrate has not been published.</dd>
+    </dl></div>
+  </details>
+
+  <details class="sect">
+    <summary>What the regulators have and have not done <span class="count">3 entries</span></summary>
+    <div class="sect-body"><dl>
+      <dt>Air quality — the state's own position</dt>
+      <dd>Tim Davis, Commissioner of the Utah Department of Environmental Quality, described the sequence in May 2026: “There will have to be <strong>a year of background air monitoring</strong> before they can even apply for an air quality permit.” As of that date he said the developers “haven't even approached the department with plans yet” and “we haven't started our process.”<br><br>
+      The monitoring must show that emissions from the data center and power plant do not reach the Wasatch Front airshed, which is already out of compliance with the Clean Air Act. Davis said a 30-day public comment period would follow for both air and water quality evaluations.</dd>
+
+      <dt>Why the site sits where it does</dt>
+      <dd>MIDA's communications director stated publicly that the location was chosen partly because it falls <strong>outside</strong> the Wasatch Front air quality non-attainment zone, where policies are stricter, and that a site outside that boundary “may be able to see approval more easily.” Box Elder County qualifies as an attainment area in part because it has few existing industrial emitters.</dd>
+
+      <dt>What has not been produced</dt>
+      <dd>No air quality permit application. No environmental impact study. No published water model, and no named modeler. MIDA has published no emissions estimate of its own — a review of its April 22 and April 27, 2026 meeting recordings found no quantified carbon, nitrogen oxide or particulate figures presented. The project area was approved before any of these existed.</dd>
+
+      <dt>The only published emissions estimates are outside ones</dt>
+      <dd>Utah Clean Energy's analysis, based on full buildout at 9 GW, gives ranges that depend on which generation technology is used — combined-cycle combustion turbines or reciprocating internal combustion engines:<br><br>
+      <strong>Nitrogen oxides: 1,857 – 12,000 tons a year.</strong> Utah Clean Energy puts the low end at roughly five times Box Elder County's entire industrial NOx output, and the high end at about the annual NOx emissions of Utah's whole oil and gas industry.<br><br>
+      <strong>Carbon dioxide: 30.2 – 41 million tons a year</strong> — an increase in Utah's total CO₂ emissions of about 55% at the low end.<br><br>
+      <strong>Water: 2 – 16.6 billion gallons a year</strong>, which Utah Clean Energy states covers the gas turbines only and excludes cooling for the data center itself.</dd>
+
+      <dt>A federal rule change that would affect the sequence</dt>
+      <dd>The Environmental Protection Agency has proposed a rule that would allow developers to begin construction <strong>before</strong> receiving their air quality permits. Public comment on the proposal ran until June 29, 2026. If adopted, it would remove the practical effect of the Utah sequence described above, in which a year of background monitoring must precede an application.</dd>
+    </dl></div>
+  </details>
+
+  <details class="sect">
+    <summary>Noise, heat and the ranching that continues <span class="count">3 entries</span></summary>
+    <div class="sect-body"><dl>
+      <dt>Who the noise limit protects</dt>
+      <dd>The interlocal agreement sets 55 dB(A) daytime and 45 dB(A) nighttime — measured “at any residential home <strong>outside</strong> the boundary of the Project Area.” Because permanent residential use inside the project area is prohibited, the standard by its terms protects neighbours and not the site. Agricultural operations continuing inside the project area under leaseback are not a “residential home,” and the Standards set no separate limit for them.</dd>
+
+      <dt>Heat</dt>
+      <dd>Estimates of the project's waste heat have been published but not by the state or the developer. A university estimate cited in a May 2026 Deseret News opinion column put the potential effect at an 8 to 28 degree Fahrenheit rise in local nighttime temperatures, with the loss of nightly condensation as the stated agricultural concern. These are outside estimates in an opinion piece, not agency findings, and should be attributed that way. MIDA has published no waste-heat figure of its own.</dd>
+
+      <dt>What is promised to agriculture</dt>
+      <dd>The Standards permit all agricultural uses throughout the project area and state that greenbelt tax status is unaffected except where a change of use triggers a change under state law. The developer has committed to leasebacks allowing grazing, ranching and farming to continue on undeveloped land, and the interlocal agreement preserves the county's “fence out” rule. Cattle were photographed grazing on the site in May 2026.<br><br>
+      Parcels that are developed lose greenbelt status and become subject to rollback taxes, which MIDA states the developer will pay and which go to the county — one of the few revenue streams in this structure that reaches Box Elder directly, though a one-time one.</dd>
+    </dl></div>
+  </details>
+</div>
+
+<h2>Wasatch County</h2>
+
+<div class="area">
+  <div class="head">
+    <h3>Military Recreation Project Area</h3>
+    <p class="loc">Deer Valley East Village &amp; Jordanelle Reservoir</p>
+    <p class="lede">Created around 2012 at roughly 40 acres. Now roughly eight square miles, and 46.8% of MIDA's proposed budget.</p>
+  </div>
+
+  <details class="sect">
+    <summary>How it grew <span class="count">4 entries</span></summary>
+    <div class="sect-body"><dl>
+      <dt>Original footprint</dt>
+      <dd>Roughly 40 acres, created to replace discounted military hotel rooms lost in a 2002 Olympics land swap.</dd>
+      <dt>Current footprint</dt>
+      <dd>Roughly eight square miles — more than 5,000 acres — reached through eight amendments to the project area plan.</dd>
+      <dt>Remaining military justification</dt>
+      <dd>Approximately 100 discounted hotel rooms at the Grand Hyatt Deer Valley for active, reserve and retired military and Department of Defense civilians.</dd>
+      <dt>Local government leverage</dt>
+      <dd>Wasatch County's own administrator has stated the county had no real ability to resist the expansion once MIDA was established.</dd>
+    </dl></div>
+  </details>
+
+  <details class="sect">
+    <summary>The money <span class="count">2 entries</span></summary>
+    <div class="sect-body"><dl>
+      <dt>MIDA proposed spending</dt>
+      <dd>$56,860,614 — 46.8% of MIDA's proposed budget. That is the project line ($32,949,376) plus transfers to the MMV PID ($1,128,000) and the GAEC PID ($22,783,238).</dd>
+      <dt>What the PID collects</dt>
+      <dd>The MIDA Mountain Village PID reports total revenues and sources of $27,372,083 actual, $71,972,929 estimated and $54,050,489 proposed, with special assessment revenue reaching $40,279,574 and debt-related expenditures climbing from $7,516,713 to $10,716,913.</dd>
+    </dl></div>
+  </details>
+
+  <details class="sect">
+    <summary>Legislation and contributions <span class="count">2 entries</span></summary>
+    <div class="sect-body"><dl>
+      <dt>Legislation extending its terms</dt>
+      <dd>S.B. 192 (2020), primary sponsor Sen. Jerry Stevenson, extended tax increment for fifteen years. Stevenson has served as MIDA's vice chair since 2008.</dd>
+      <dt>Contributions from the area's developer</dt>
+      <dd>Public records show Extell and its owner Gary Barnett contributed $11,000 to Stevenson over two years. The Salt Lake Tribune counted $100,000 from that developer to Utah lawmakers who approved the resort development. These records establish a financial relationship, not causation.</dd>
+    </dl></div>
+  </details>
+
+  <details class="sect">
+    <summary>Control and disclosure <span class="count">2 entries</span></summary>
+    <div class="sect-body"><dl>
+      <dt>Are PID decision-makers required to disclose</dt>
+      <dd>The MMV PID's budget exceeds $10 million, so its board members do file. Gary Harter and Mike Ostermiller each hold six MIDA-family seats — the main board plus all five PIDs.</dd>
+      <dt>Public vote on the expansion</dt>
+      <dd class="unk">Not established in the records reviewed.</dd>
+    </dl></div>
+  </details>
+</div>
+
+<h2>Utah County</h2>
+
+<div class="area">
+  <div class="head">
+    <h3>Mountain Veterans Program Project Area</h3>
+    <p class="loc">Sundance Resort · plan adopted December 19, 2023</p>
+    <p class="lede">Budgeted at $19.8 million next year, up from $1.0 million reported as actual.</p>
+  </div>
+
+  <details class="sect">
+    <summary>Purpose and partners <span class="count">2 entries</span></summary>
+    <div class="sect-body"><dl>
+      <dt>Stated purpose</dt>
+      <dd>MIDA's own project area plan describes building “an accessible inn at the Sundance Mountain Resort that will be essential to providing a specialty wounded veterans assistance program.”</dd>
+      <dt>Partners</dt>
+      <dd>Utah County and the private developer Storyteller Canyon Property Owner, LP.</dd>
+    </dl></div>
+  </details>
+
+  <details class="sect">
+    <summary>Taxes and spending <span class="count">3 entries</span></summary>
+    <div class="sect-body"><dl>
+      <dt>Taxes levied</dt>
+      <dd class="flag">On December 19, 2023 — the same day the board adopted the project area plan — MIDA passed Ordinance 2023-01 levying an accommodations tax, a resort communities tax and an energy tax inside the new area.</dd>
+      <dt>Later tax authority</dt>
+      <dd>S.B. 169 (2024), primary sponsor Sen. Jerry Stevenson, authorized an accommodations tax of up to 15% inside MIDA project areas with no expiration date. Asked in committee whether the tax would ever come off, Stevenson said: “I don't see that tax being taken off.”</dd>
+      <dt>MIDA proposed spending</dt>
+      <dd>$19,767,121 — the project line ($17,576,586) plus the MVP PID transfer ($2,190,535). The project line was $120,341 in FY25 actual.</dd>
+    </dl></div>
+  </details>
+
+  <details class="sect">
+    <summary>Public participation <span class="count">1 entry</span></summary>
+    <div class="sect-body"><dl>
+      <dt>Public vote</dt>
+      <dd class="unk">Not established in the records reviewed.</dd>
+    </dl></div>
+  </details>
+</div>
+
+<div class="area">
+  <div class="head">
+    <h3>Utah National Guard Project Area</h3>
+    <p class="loc">Camp Williams</p>
+    <p class="lede">On an active installation. Budgeted at $90,502 next year, down from $4,694,464 reported as actual.</p>
+  </div>
+  <details class="sect">
+    <summary>What the record shows <span class="count">3 entries</span></summary>
+    <div class="sect-body"><dl>
+      <dt>MIDA proposed spending</dt>
+      <dd class="flag">$90,502, down from $4,694,464 reported as FY25 actual.</dd>
+      <dt>Note on the decline</dt>
+      <dd>Capital projects are lumpy, and a completed construction project would explain a single-line decline of this kind on its own.</dd>
+      <dt>Approval record, taxes levied, local participation</dt>
+      <dd class="unk">Not established in the records reviewed.</dd>
+    </dl></div>
+  </details>
+</div>
+
+<div class="area">
+  <div class="head">
+    <h3>Utah Data Center Project Area</h3>
+    <p class="loc">Camp Williams</p>
+    <p class="lede">On an active installation. Budgeted at $62,186 next year, essentially flat.</p>
+  </div>
+  <details class="sect">
+    <summary>What the record shows <span class="count">2 entries</span></summary>
+    <div class="sect-body"><dl>
+      <dt>MIDA proposed spending</dt>
+      <dd>$62,186. It was $59,754 in FY25 actual.</dd>
+      <dt>Approval record, taxes levied, local participation</dt>
+      <dd class="unk">Not established in the records reviewed.</dd>
+    </dl></div>
+  </details>
+</div>
+
+<h2>Davis and Weber counties</h2>
+
+<div class="area">
+  <div class="head">
+    <h3>Falcon Hill Project Area</h3>
+    <p class="loc">Hill Air Force Base · MIDA's first project</p>
+    <p class="lede">525 acres on Hill Air Force Base land — the only one of MIDA's eight project areas on an actual military installation.</p>
+  </div>
+
+  <details class="sect">
+    <summary>Footprint and spending <span class="count">3 entries</span></summary>
+    <div class="sect-body"><dl>
+      <dt>On an active installation</dt>
+      <dd>Yes — 525 acres on Hill Air Force Base land.</dd>
+      <dt>MIDA proposed spending</dt>
+      <dd>$29,423,359 — 24.2% of the proposed budget, up from $5,574,453 reported as FY25 actual.</dd>
+      <dt>Local tax context</dt>
+      <dd>The Falcon Hill footprint touches Roy City, which sought a 27.96% property tax increase in 2025 — the largest on that year's Weber County tandem-increase list.</dd>
+    </dl></div>
+  </details>
+
+  <details class="sect">
+    <summary>Control and disclosure <span class="count">2 entries</span></summary>
+    <div class="sect-body"><dl>
+      <dt>Are decision-makers required to disclose</dt>
+      <dd class="flag">The Falcon Hill Development Review Committee has its own seven-person roster with no overlap onto any other MIDA board — Ariana Farber, Michael Eggett, Rick Grover, Brad McIlrath, Jeff Oyler, Steven Parkinson and Hope Thompson. DRC members are not required to file a disclosure at any budget size.</dd>
+      <dt>Public vote</dt>
+      <dd class="unk">Not established in the records reviewed.</dd>
+    </dl></div>
+  </details>
+</div>
+
+<h2>Tooele County</h2>
+
+<div class="area">
+  <div class="head">
+    <h3>Tooele Army Depot Project Area</h3>
+    <p class="loc">Tooele County · project area plan dated December 2025</p>
+    <p class="lede">43,228.63 acres, all of it military land. The one project area whose plan describes only base modernization.</p>
+  </div>
+  <details class="sect">
+    <summary>What the record shows <span class="count">5 entries</span></summary>
+    <div class="sect-body"><dl>
+      <dt>Size and composition</dt>
+      <dd>“Approximately 43,228.63 acres of military land located entirely within the boundaries of Tooele County” — a north parcel of 23,651.23 acres and a south parcel of 19,577.40 acres. No private land.</dd>
+      <dt>Stated purpose</dt>
+      <dd>To “create revenue for and modernize the Army base facilities.” The plan states much of the depot's infrastructure “was built decades ago and requires modernization to meet current mission demands and safety standards.”</dd>
+      <dt>How it will be done</dt>
+      <dd>“Tooele Army Depot will rely on MIDA to contract with developers to perform its obligations under the contract to plan, design, and install the infrastructure and improvements.”</dd>
+      <dt>The public meeting</dt>
+      <dd>Held December 16, 2025 at 11:30 a.m. The plan states it “was an electronic meeting,” with the public able to attend by Zoom webinar registration. Notice went to each taxing entity and any municipality within a half mile.</dd>
+      <dt>MIDA proposed spending</dt>
+      <dd>No line item appears in MIDA's budget filing for the fiscal year ended June 30, 2026.</dd>
+    </dl></div>
+  </details>
+</div>
+
+<div class="area">
+  <div class="head">
+    <h3>Dugway Proving Ground Project Area</h3>
+    <p class="loc">Tooele County</p>
+    <p class="lede">Listed as a MIDA project area. No line item appears in MIDA's budget filing.</p>
+  </div>
+  <details class="sect">
+    <summary>What the record shows <span class="count">2 entries</span></summary>
+    <div class="sect-body"><dl>
+      <dt>MIDA proposed spending</dt>
+      <dd>No line item appears in MIDA's budget filing.</dd>
+      <dt>Approval record, taxes levied, local participation</dt>
+      <dd class="unk">Not established in the records reviewed.</dd>
+    </dl></div>
+  </details>
+</div>
+
+<h2>The rules that apply to all eight</h2>
+
+<p>MIDA states two disclosure rules on its own website, citing Utah Code §67-16-3(16):</p>
+
+<blockquote>“Board members of public infrastructure districts are not required to file a disclosure if a district's annual budget is less than $10 million. Board members of development review committees are not required to file a disclosure.”</blockquote>
+
+<p>MIDA oversees five Public Infrastructure Districts and two Development Review Committees. Its budget proposes transferring $26,101,773 into three of those PIDs next year, up from $1,001,788 reported as actual.</p>
+
+<p>And on the authority as a whole, the Utah State Auditor's own MIDA information page states that the office of the Utah State Auditor does not audit MIDA.</p>
+
+<h2>What the documents add up to</h2>
+
+<p>MIDA was created in 2007 to help keep an air force base open. Nineteen years later it proposes to spend $121,559,532, and about one-eighth of one percent of that goes to the two project areas that sit on an active installation. Nearly half goes to a ski corridor in Wasatch County that began as forty acres of replacement hotel rooms.</p>
+
+<p>The eight project areas were approved under the same statute but not on the same terms. Falcon Hill sits on Hill Air Force Base. Tooele Army Depot is entirely military land, and its plan describes only modernizing the base. Deer Valley grew through eight amendments while the county that hosts it has said on the record it had no ability to resist. Sundance levied three taxes on the day its plan was adopted. Stratos is 40,000 acres of private ranchland attached to 1,279 acres of state and military land, and that 3 percent is what brought the whole thing under an authority whose board no voter elects.</p>
+
+<p>What the Stratos documents show, read together, is a set of terms the affected county did not write. The county consented ten days after the fact, without taking comment from the residents who came. Its share of property tax excludes the data center itself. The figure presented as a revenue projection is the contractual minimum. The up-front payment depends on a building permit being issued. The moratorium the county later passed cannot reach the project. The committee that will approve every site plan and subdivision is appointed by MIDA and files no disclosures. The employment figures that would show whether the jobs arrived can be classified confidential. And the documents disagree with each other about whether anyone is allowed to live there.</p>
+
+<p>None of that establishes that anyone broke a law. Every step described here was taken under authority the Legislature granted, by people exercising powers they hold. That is the point worth sitting with: this is what the statute permits when it is used fully.</p>
+
+<p>The Office of the Utah State Auditor does not audit MIDA.</p>
+
+<h2>Questions the documents already answer</h2>
+
+<p>These come up constantly. The records settle them.</p>
+
+<div class="area">
+  <details class="sect" open>
+    <summary>Answered <span class="count">11 questions</span></summary>
+    <div class="sect-body"><dl>
+      <dt>How much of the project area is zoned for housing?</dt>
+      <dd><strong>None of it — and none is zoned for anything else either.</strong> The Standards create the three zones (ET for energy and technology, MU for mixed use, A for agricultural) only inside an approved Master Development Plan, and no plan has been approved. There is no zoning map for the project area yet.</dd>
+
+      <dt>Can schools or a clinic be built there?</dt>
+      <dd><strong>Not in the ET Zone.</strong> The Standards prohibit “schools, hospitals, or other sensitive land uses that may conflict with industrial safety zones,” and the MIDA Board may not grant use variances.</dd>
+
+      <dt>Does Box Elder County share in the property tax from the data center?</dt>
+      <dd><strong>No.</strong> The county's 25% dedicated collection is taken from all private land “except any Compute Complex.” The data center's in-lieu payments go to the developer, MIDA and the State.</dd>
+
+      <dt>Is the $30 million a year a projection?</dt>
+      <dd><strong>No, it is the contractual floor.</strong> The agreement guarantees $10,000 per megawatt of nameplate capacity. At the committed 3GW that is exactly $30,000,000.</dd>
+
+      <dt>How long does the $16.2 million last?</dt>
+      <dd><strong>Three years.</strong> Three payments of $5,400,000, the first due 30 days after the first building permit. Then they end. The project does not.</dd>
+
+      <dt>Does the county's data center moratorium apply to Stratos?</dt>
+      <dd><strong>No.</strong> The development agreement excludes the project area from any moratorium unless MIDA's own board finds on the record that one is necessary.</dd>
+
+      <dt>Who approves the site plans and subdivisions?</dt>
+      <dd><strong>An eight-member committee MIDA appoints.</strong> The county recommends seven names; MIDA appoints them and they serve at the MIDA Board's pleasure. If the county misses a 30-day window, MIDA may appoint anyone.</dd>
+
+      <dt>Do those committee members file conflict-of-interest disclosures?</dt>
+      <dd><strong>No — never, at any budget size.</strong> MIDA states that rule on its own website.</dd>
+
+      <dt>Can a nuclear reactor be built there?</dt>
+      <dd><strong>Yes.</strong> Small modular reactors are a permitted use in the ET Zone, and once federal and state approvals are obtained the developer may build “without additional permitting approval from MIDA.”</dd>
+
+      <dt>Will the power lower anyone's electric bill?</dt>
+      <dd><strong>No household is served by it.</strong> The generation is described as meeting the campus's own needs “without placing additional demand on the existing electrical grid.”</dd>
+
+      <dt>Who audits MIDA?</dt>
+      <dd><strong>Not the state auditor.</strong> That office's own MIDA page says it does not audit MIDA.</dd>
+    </dl></div>
+  </details>
+</div>
+
+<h2>Questions still to ask</h2>
+
+<p>These are not answered anywhere in the records reviewed. They are answerable — by the officials and agencies that hold the documents.</p>
+
+<div class="area">
+  <details class="sect">
+    <summary>Of MIDA <span class="count">4 questions</span></summary>
+    <div class="sect-body"><dl>
+      <dt>1</dt>
+      <dd>When will the first Master Development Plan be submitted, will the zoning map be published before it is approved, and may the public comment on it?</dd>
+      <dt>2</dt>
+      <dd>Which document controls — the interlocal agreement, which bars any residential development in the project area, or the Development Standards, which define the MU Zone as land “primarily used for both residential and light commercial uses”? If the agreement controls, can an MU Zone lawfully exist at all?</dd>
+      <dt>3</dt>
+      <dd>The interlocal agreement, the development agreement and the development standards remain unsigned pending the referendum. If they are executed, will the terms be identical to the versions approved in April, and will any changes be published?</dd>
+      <dt>4</dt>
+      <dd>The adopted ordinance levies 0.5% on all taxable energy in the project area. The draft agreement contemplates 6% for users other than data centers. Which will apply, and when?</dd>
+    </dl></div>
+  </details>
+
+  <details class="sect">
+    <summary>Of Box Elder County <span class="count">4 questions</span></summary>
+    <div class="sect-body"><dl>
+      <dt>5</dt>
+      <dd>What is in Exhibit B — which municipal services will the county actually provide, and which fall to MIDA or to a service district?</dd>
+      <dt>6</dt>
+      <dd>The three payments are worth roughly half the county's annual property tax base while they last. What ongoing revenue replaces them in year four, and who then pays for the police and fire personnel hired with them?</dd>
+      <dt>7</dt>
+      <dd>Who are the seven Development Review Committee members the county will recommend, when will their names be public, and will any of them file a disclosure voluntarily given that none is required to?</dd>
+      <dt>8</dt>
+      <dd>Will the annual reports on energy generated, energy used and employment be classified confidential under §63G-2-309, as the agreement permits — and if so, what will residents be able to verify?</dd>
+    </dl></div>
+  </details>
+
+  <details class="sect">
+    <summary>Of the developer <span class="count">3 questions</span></summary>
+    <div class="sect-body"><dl>
+      <dt>9</dt>
+      <dd>If roughly two thousand permanent employees cannot live in the project area and hotel rooms are capped at 150, where are they expected to live?</dd>
+      <dt>10</dt>
+      <dd>Is any electricity generated in the project area obligated to be sold to the public grid — at what price, and under what conditions?</dd>
+      <dt>11</dt>
+      <dd>Has an agreement with Tallgrass Energy for the Ruby Pipeline connection been executed, and on what terms? The development agreement contemplates one but does not create it.</dd>
+    </dl></div>
+  </details>
+
+  <details class="sect">
+    <summary>Of the Legislature <span class="count">3 questions</span></summary>
+    <div class="sect-body"><dl>
+      <dt>12</dt>
+      <dd>What are the annual budgets of the GAEC, MVP, JMARA and Cormont public infrastructure districts? Whether their board members must disclose their conflicts turns entirely on whether each budget exceeds $10 million.</dd>
+      <dt>13</dt>
+      <dd>Three of MIDA's eight project areas have no line item in its budget filing, and the Utah National Guard area is budgeted at $90,502 next year against $4,694,464 reported as actual. What accounts for both?</dd>
+      <dt>14</dt>
+      <dd>Should MIDA be audited by the Office of the Utah State Auditor — and if the Legislature does not require it, who does?</dd>
+    </dl></div>
+  </details>
+</div>
+
+<h2>Sources</h2>
+
+<details class="sect sources">
+<summary>Documents this page is built from <span class="count">37 sources</span></summary>
+<div class="sect-body">
+<ol class="src">
+  <li>Military Installation Development Authority budget filing, fiscal year ended 6/30/2026 — utah.gov/pmn/files/1453631.pdf</li>
+  <li>MIDA Mountain Village Public Infrastructure District budget, Part III Special Revenue Fund, fiscal year ended 6/30/2025</li>
+  <li>Box Elder County / MIDA Stratos Agreement 26-15 — boxeldercountyut.gov, Document Center View/2189</li>
+  <li>Box Elder County press release, “Box Elder County Authorizes MIDA to Initiate Stratos Project,” May 4, 2026</li>
+  <li>MIDA press release, “MIDA Board, Box Elder Commission Approve Stratos Project Area,” May 4, 2026</li>
+  <li>MIDA project areas pages and board members page, midaut.org, citing Utah Code §67-16-3(16)</li>
+  <li>MIDA Public Timeline, Office of the Utah State Auditor, transparent.utah.gov/mida</li>
+  <li>S.B. 169 (2024) and its Legislative Fiscal Analyst fiscal note; S.B. 192 (2020)</li>
+  <li>Utah Division of Water Rights records for change applications a54536 (Murray Hollow L.C.) and the Bar H Ranch change</li>
+  <li>Utah Clean Energy analysis, May 7, 2026</li>
+  <li>Salt Lake Tribune, “Utah lawmakers who approved luxury ski resort took $100k in donations from developer,” December 29, 2023, and May 8, 2026 reporting</li>
+  <li>KPCW coverage of the S.B. 169 committee hearing, February 9, 2024</li>
+  <li>Stratos Project Area Plan, effective May 4, 2026; MIDA Resolution 2026-06 adopting it, April 24, 2026; MIDA Ordinance 2026-01 levying the Stratos Project Area Municipal Energy Sales and Use Tax at 0.5%, effective October 1, 2026 — all midaut.org</li>
+  <li>Interlocal Cooperation Agreement between MIDA and Box Elder County, effective May 4, 2026 (draft, unsigned)</li>
+  <li>Stratos Project Area Master Development Agreement between O'Leary Digital Utah Development Company, LLC and MIDA, April 24, 2026 (draft, unsigned)</li>
+  <li>Stratos Project Area Development Standards, April 23, 2026 (draft, unsigned) — Chapter One definitions, Chapter Two review process, Chapter Three land use regulations</li>
+  <li>Box Elder County tentative budget, 2026 — general fund property tax revenue</li>
+  <li>Quartz, “AI data centers employ very few people: What the numbers show,” May 15, 2026 — Meta Lebanon, Indiana campus employment figures</li>
+  <li>Forbes, June 9, 2026 and Salt Lake Tribune, May 8, 2026 — conflicting construction employment figures</li>
+  <li>Utah State Historic Preservation Office, “Utah's Biggest Earthquake In History”; Utah Geological Survey Hansel Valley fault documentation; 1934 Hansel Valley earthquake, magnitude 6.6, March 12, 1934</li>
+  <li>Utah State University and University of Utah research on Great Salt Lake dust composition and uptake in leafy vegetables, 2026</li>
+  <li>Utah Geological Survey, Hansel Valley fault record (structure 2358), citing Shenon (1936) and Doser (1989)</li>
+  <li>KSL, “Experts worry state regulations won't do enough to protect public from data center pollution,” May 20, 2026 — statements of Tim Davis, Commissioner, Utah Department of Environmental Quality</li>
+  <li>Utah Clean Energy, “Estimated Emissions and Water Consumption from the Proposed Stratos Data Center,” May 2026</li>
+  <li>Draft UPDES Permit UT0026409, Tooele Valley Public Infrastructure District; hearing request filed by Utah Sierra Club, Great Salt Lake Audubon, Center for Biological Diversity, Making Waves Artist Collaborative, Utah Physicians for a Healthy Environment and Stop the Polluting Ports; Division of Water Quality hearing July 27, 2026</li>
+  <li>Executive Order 2026-03, “Establishing a Higher Bar for Data Center Development in Utah,” May 29, 2026</li>
+  <li><em>Downwind: How Failed Great Salt Lake Water Policy and Toxic Dust Create Generational Debt and Jeopardize Utah's Future</em> — Utah Rivers Council and Utah Physicians for a Healthy Environment, 2025 (advocacy report; cited as such)</li>
+  <li>Salt Lake Tribune, May 26, 2026 — Iron County data center moratorium</li>
+  <li>Tooele Army Depot Project Area Plan, December 2025</li>
+  <li>Utah Division of Water Rights: applications 13-4099 and 13-4100 (Keller Cattle Corporation); Order of the State Engineer, July 18, 2024; Utah Rivers Council protest, October 10, 2023; Farmland Reserve Inc. letter, January 2024</li>
+  <li>Utah Division of Corporations registry: Keller Cattle Corporation, registered April 29, 1959</li>
+  <li>Mike Schultz conflict-of-interest disclosure, Utah House of Representatives</li>
+  <li>Governor's Proclamation 2022-01, November 3, 2022</li>
+  <li>Hood, J.W., “Hydrologic Reconnaissance of Hansel Valley and Northern Rozel Flat, Box Elder County, Utah,” Technical Publication 33, Utah Division of Water Rights with USGS, 1971</li>
+  <li>Fox 13, “Cox pushes MIDA reforms after data center blowup,” August 20, 2026; Utah News Dispatch and KSL coverage of the same remarks</li>
+  <li>KSL and Salt Lake Tribune reporting on land holdings near the project area; ABC4 reporting on S.B. 132 and Sen. Scott Sandall</li>
+</ol>
+</div>
+</details>
+
+<footer>
+  <p>Entries marked “not established in the records reviewed” mean exactly that — the question was asked of every project area, and the public record consulted for this page does not answer it. They are not findings of absence.</p>
+  <p>The Weber County Hive · webercountyhive.substack.com</p>
+</footer>
+
+</div>
+</body>
+</html>
