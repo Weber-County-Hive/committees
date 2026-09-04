@@ -29,7 +29,6 @@
   h1,h2{font-family:'Bitter',serif;margin:0 0 .4em;line-height:1.15;}
   .mono{font-family:'IBM Plex Mono',monospace;}
   .eyebrow{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.12em;font-size:.72rem;color:var(--ink-soft);opacity:.75;}
-
   header.hero{
     background:linear-gradient(180deg, rgba(30,42,34,.94), rgba(30,42,34,.86)),
       repeating-linear-gradient(0deg, transparent 0 38px, rgba(236,229,209,.05) 38px 39px);
@@ -40,11 +39,54 @@
   header.hero .eyebrow{color:#e9cd8e;opacity:.85;}
   header.hero h1{font-size:clamp(1.8rem,4.6vw,2.7rem);font-weight:900;margin-top:.3em;max-width:16ch;}
   header.hero p{max-width:56ch;color:#dfe6da;margin-top:1em;font-size:1.05rem;}
-
   main{padding:44px 0 60px;}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:1.6em;}
-  @media (max-width:680px){.grid{grid-template-columns:1fr;}}
 
+  /* ---- controls ---- */
+  .controls-bar{
+    background:var(--paper-card);
+    border:1.5px solid var(--paper-line);
+    border-radius:6px;
+    padding:18px 20px 16px;
+  }
+  .search-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+  .search-label{
+    font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;
+    letter-spacing:.09em;color:var(--ink-soft);opacity:.8;flex:none;
+  }
+  #search{
+    flex:1 1 260px;
+    font-family:'Spectral',serif;
+    font-size:1rem;
+    padding:9px 12px;
+    border:1.5px solid var(--paper-line);
+    border-radius:4px;
+    background:#fffdf6;
+    color:var(--ink);
+  }
+  #search:focus{outline:2px solid var(--water);outline-offset:1px;border-color:var(--water);}
+  .btn-clear{
+    font-family:'IBM Plex Mono',monospace;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;
+    background:none;border:1.5px solid var(--paper-line);border-radius:4px;
+    padding:8px 12px;color:var(--ink-soft);cursor:pointer;
+  }
+  .btn-clear:hover{border-color:var(--mineral);color:var(--mineral);}
+  .tag-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px;padding-top:13px;border-top:1px solid var(--paper-line);}
+  .tag-chip{
+    font-family:'IBM Plex Mono',monospace;font-size:.68rem;
+    padding:4px 10px;border-radius:12px;cursor:pointer;
+    background:transparent;border:1.5px solid var(--paper-line);color:var(--ink-soft);
+    transition:background .12s, border-color .12s, color .12s;
+  }
+  .tag-chip:hover{border-color:var(--water);color:var(--water);}
+  .tag-chip[aria-pressed="true"]{background:var(--water);border-color:var(--water);color:#fff;}
+  .result-count{
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;
+    color:var(--ink-soft);opacity:.8;margin-top:20px;
+  }
+  .sort-note{float:right;opacity:.7;text-transform:none;letter-spacing:.03em;}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:1em;}
+  @media (max-width:680px){.grid{grid-template-columns:1fr;}}
   .card{
     background:var(--paper-card);
     border:1.5px solid var(--paper-line);
@@ -73,6 +115,15 @@
     border-radius:3px;
     flex-shrink:0;
   }
+  .date{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.66rem;
+    color:var(--ink-soft);
+    opacity:.7;
+    flex-shrink:0;
+    padding-top:4px;
+    white-space:nowrap;
+  }
   .card h3{font-family:'Bitter',serif;font-size:1.15rem;margin:.5em 0 .2em;}
   .chambers{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--ink-soft);opacity:.8;}
   .controls{font-size:.86rem;color:var(--mineral);margin-top:.5em;font-weight:600;}
@@ -89,6 +140,12 @@
   .pill.mixed{background:var(--mixed-soft);color:var(--mixed);}
   .pill.harm{background:var(--harm-soft);color:var(--harm);}
   .pill.dead{background:var(--dead-soft);color:var(--dead);}
+  .card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;}
+  .card-tag{
+    font-family:'IBM Plex Mono',monospace;font-size:.63rem;
+    color:var(--ink-soft);opacity:.72;
+    border:1px solid var(--paper-line);border-radius:10px;padding:2px 7px;
+  }
   .status-planned{
     font-family:'IBM Plex Mono',monospace;
     font-size:.7rem;
@@ -97,69 +154,187 @@
     color:var(--planned);
     margin-top:14px;
   }
-
+  .empty{
+    background:var(--paper-card);border:1.5px dashed var(--paper-line);border-radius:6px;
+    padding:30px 24px;text-align:center;color:var(--ink-soft);grid-column:1/-1;
+  }
+  mark{background:var(--mixed-soft);color:inherit;padding:0 2px;border-radius:2px;}
   footer{background:var(--ink);color:#c9d6c3;padding:30px 0 40px;font-size:.84rem;}
   footer .brand{font-family:'Bitter',serif;font-weight:700;color:var(--paper-card);font-size:1.02rem;}
   footer .fine{opacity:.75;margin-top:1em;line-height:1.6;}
 </style>
 </head>
 <body>
-
 <header class="hero">
   <div class="wrap">
     <span class="eyebrow">The Weber County Hive</span>
     <h1>Committees Board</h1>
-    <p>Utah's legislative committees are where bills actually get shaped, before most of the public ever sees a floor vote. Each entry below is a full case-file page: who sits on the committee, what it changed, and whether it helped or hurt the public — scored against our own stated rubric, sourced entirely from the public record.</p>
+    <p>Utah's legislative committees and state authorities are where decisions actually get shaped, before most of the public ever sees a floor vote. Each entry below is a full case-file page: who sits on the body, what it changed, and whether it helped or hurt the public — scored against our own stated rubric, sourced entirely from the public record.</p>
   </div>
 </header>
-
 <main>
   <div class="wrap">
+
+    <div class="controls-bar">
+      <div class="search-row">
+        <label class="search-label" for="search">Search</label>
+        <input type="search" id="search" placeholder="Name, subject, or keyword — try “MIDA”, “water”, “disclosure”" autocomplete="off">
+        <button type="button" class="btn-clear" id="clear">Clear</button>
+      </div>
+      <div class="tag-row" id="tagRow"></div>
+    </div>
+
+    <p class="result-count" id="count" aria-live="polite"></p>
     <div id="board" class="grid"></div>
   </div>
 </main>
-
 <footer>
   <div class="wrap">
     <div class="brand">THE WEBER COUNTY HIVE</div>
-    <p class="fine">Every committee page here is built from bill text, floor votes, and committee minutes obtained from the Utah State Legislature's public website (le.utah.gov). New committees are added as they're researched.</p>
+    <p class="fine">Every page here is built from primary records — bill text, floor votes, committee minutes, budget filings, ordinances and agreements — obtained from the Utah State Legislature's public website (le.utah.gov) and the agencies' own published documents. New entries are added as they're researched.</p>
   </div>
 </footer>
 
-<script src="weber-hive-committees-data.js?v=7"></script>
+<script src="weber-hive-committees-data.js?v=8"></script>
 <script>
-  const board = document.getElementById('board');
+(function () {
+  const board    = document.getElementById('board');
+  const tagRow   = document.getElementById('tagRow');
+  const countEl  = document.getElementById('count');
+  const searchEl = document.getElementById('search');
+  const clearBtn = document.getElementById('clear');
+
   const pillLabel = { help:'Help', mixed:'Mixed', harm:'Harm', dead:'Killed' };
+  const activeTags = new Set();
 
-  COMMITTEES.forEach(c => {
-    const isLive = c.status === 'live';
-    const el = document.createElement(isLive ? 'a' : 'div');
-    el.className = 'card' + (isLive ? '' : ' disabled');
-    if (isLive) el.href = c.page;
+  /* ---- helpers ---- */
+  const esc = s => String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 
-    let tallyHtml = '';
-    if (c.tally) {
-      tallyHtml = '<div class="tally-row">' +
-        Object.entries(c.tally)
-          .filter(([,n]) => n > 0)
-          .map(([k,n]) => `<span class="pill ${k}">${n} ${pillLabel[k]}</span>`)
-          .join('') +
-        '</div>';
+  function fmtDate(iso) {
+    if (!iso) return '';
+    const parts = String(iso).split('-');
+    if (parts.length !== 3) return '';
+    const d = new Date(Date.UTC(+parts[0], +parts[1] - 1, +parts[2]));
+    if (isNaN(d)) return '';
+    return d.toLocaleDateString('en-US',
+      { year:'numeric', month:'short', day:'numeric', timeZone:'UTC' });
+  }
+
+  // Newest first; undated entries last, alphabetical among themselves.
+  const sorted = COMMITTEES.slice().sort((a, b) => {
+    const ad = a.date || '', bd = b.date || '';
+    if (ad && bd) return bd.localeCompare(ad);
+    if (ad) return -1;
+    if (bd) return 1;
+    return a.name.localeCompare(b.name);
+  });
+
+  /* ---- tag chips, ordered by frequency then alphabetically ---- */
+  const tagCounts = {};
+  sorted.forEach(c => (c.tags || []).forEach(t => { tagCounts[t] = (tagCounts[t] || 0) + 1; }));
+  const allTags = Object.keys(tagCounts).sort((a, b) =>
+    tagCounts[b] - tagCounts[a] || a.localeCompare(b));
+
+  allTags.forEach(tag => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'tag-chip';
+    b.textContent = tag + ' · ' + tagCounts[tag];
+    b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('click', () => {
+      if (activeTags.has(tag)) { activeTags.delete(tag); b.setAttribute('aria-pressed','false'); }
+      else { activeTags.add(tag); b.setAttribute('aria-pressed','true'); }
+      render();
+    });
+    tagRow.appendChild(b);
+  });
+
+  /* ---- filtering ---- */
+  function haystack(c) {
+    return [c.name, c.short, c.chambers, c.controls, c.summary, (c.tags || []).join(' ')]
+      .join(' ').toLowerCase();
+  }
+
+  function matches(c, q) {
+    if (q && !haystack(c).includes(q)) return false;
+    for (const t of activeTags) {
+      if (!(c.tags || []).includes(t)) return false;
+    }
+    return true;
+  }
+
+  function highlight(text, q) {
+    const safe = esc(text);
+    if (!q) return safe;
+    const re = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+    return safe.replace(re, '<mark>$1</mark>');
+  }
+
+  /* ---- render ---- */
+  function render() {
+    const q = searchEl.value.trim().toLowerCase();
+    const list = sorted.filter(c => matches(c, q));
+    board.innerHTML = '';
+
+    if (!list.length) {
+      board.innerHTML = '<div class="empty">No case files match that search. Try a broader term, or clear the filters.</div>';
+      countEl.textContent = 'No results';
+      return;
     }
 
-    el.innerHTML = `
-      <div class="card-top">
-        <span class="short">${c.short}</span>
-      </div>
-      <h3>${c.name}</h3>
-      <div class="chambers">${c.chambers}</div>
-      <div class="controls">${c.controls}</div>
-      <div class="summary">${c.summary}</div>
-      ${isLive ? tallyHtml : '<div class="status-planned">Coming soon</div>'}
-    `;
-    board.appendChild(el);
-  });
-</script>
+    list.forEach(c => {
+      const isLive = c.status === 'live';
+      const el = document.createElement(isLive ? 'a' : 'div');
+      el.className = 'card' + (isLive ? '' : ' disabled');
+      if (isLive) el.href = c.page;
 
+      let tallyHtml = '';
+      if (c.tally) {
+        const pills = Object.entries(c.tally)
+          .filter(([, n]) => n > 0)
+          .map(([k, n]) => '<span class="pill ' + k + '">' + n + ' ' + pillLabel[k] + '</span>')
+          .join('');
+        if (pills) tallyHtml = '<div class="tally-row">' + pills + '</div>';
+      }
+
+      const tagsHtml = (c.tags && c.tags.length)
+        ? '<div class="card-tags">' +
+            c.tags.map(t => '<span class="card-tag">' + esc(t) + '</span>').join('') +
+          '</div>'
+        : '';
+
+      const dateHtml = c.date ? '<span class="date">' + esc(fmtDate(c.date)) + '</span>' : '';
+
+      el.innerHTML =
+        '<div class="card-top"><span class="short">' + esc(c.short) + '</span>' + dateHtml + '</div>' +
+        '<h3>' + highlight(c.name, q) + '</h3>' +
+        '<div class="chambers">' + highlight(c.chambers, q) + '</div>' +
+        '<div class="controls">' + highlight(c.controls, q) + '</div>' +
+        '<div class="summary">' + highlight(c.summary, q) + '</div>' +
+        (isLive ? tallyHtml : '<div class="status-planned">Coming soon</div>') +
+        tagsHtml;
+
+      board.appendChild(el);
+    });
+
+    const n = list.length, total = sorted.length;
+    countEl.innerHTML = (n === total ? total + ' case files' : n + ' of ' + total + ' case files') +
+      '<span class="sort-note">Newest first</span>';
+  }
+
+  searchEl.addEventListener('input', render);
+  clearBtn.addEventListener('click', () => {
+    searchEl.value = '';
+    activeTags.clear();
+    tagRow.querySelectorAll('.tag-chip').forEach(b => b.setAttribute('aria-pressed', 'false'));
+    render();
+    searchEl.focus();
+  });
+
+  render();
+})();
+</script>
 </body>
 </html>
